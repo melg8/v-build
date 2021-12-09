@@ -1,13 +1,24 @@
 TEMPLATE = app
+
 CONFIG += console
 CONFIG -= app_bundle
 CONFIG -= qt
 
-INCLUDEPATH += \
+VPATH += \
         $$PWD/src \
-        $$PWD/includes
+        $$PWD/src/shell \
+        $$PWD/src/text_processor \
+        $$PWD/headers \
+        $$PWD/headers/shell \
+        $$PWD/headers/text_processor
 
 SOURCES += \
-        main.c
+        main.c \
+        text_processor.c \
+        shell.c
+
+HEADERS += \
+        text_processor.h \
+        shell.h
 
 
