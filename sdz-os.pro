@@ -4,21 +4,24 @@ CONFIG += console
 CONFIG -= app_bundle
 CONFIG -= qt
 
-VPATH += \
+CCFLAG += -g
+
+INCLUDEPATH += \
         $$PWD/src \
         $$PWD/src/shell \
-        $$PWD/src/text_processor \
+        $$PWD/src/text_processing \
         $$PWD/headers \
         $$PWD/headers/shell \
-        $$PWD/headers/text_processor
+        $$PWD/headers/text_processing
 
 SOURCES += \
-        main.c \
-        text_processor.c \
-        shell.c
+        src/main.c \
+        src/text_processing/text_processor.c \
+        src/shell/shell.c
 
 HEADERS += \
-        text_processor.h \
-        shell.h
+        headers/os_global.h \
+        headers/text_processing/text_processor.h \
+        headers/shell/shell.h
 
 

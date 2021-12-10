@@ -1,3 +1,8 @@
-#include <stdio.h>
+#include "shell.h"
 
-int main(void) { return 0; }
+int main(void) {
+
+  run_shell();
+
+  return 0;
+}
