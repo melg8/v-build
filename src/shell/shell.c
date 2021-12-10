@@ -2,14 +2,15 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+#include "os_global.h"
 #include "shell.h"
 #include "text_processor.h"
 
 void run_shell() {
-  system("clear");
+  CLEAR_SCREEN;
 
   char *command = NULL;
-  command = get_shell_string();
+  command = get_command_from_user();
 
   free(command);
 }
