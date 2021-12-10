@@ -3,6 +3,8 @@
 
 #define SHELL_NAME "shell: "
 
+#define USER_COMMAND_LEN 64
+
 // colors for output
 #define OS_COLOR_RED "\x1b[31m"
 #define OS_COLOR_GREEN "\x1b[32m"
@@ -12,5 +14,6 @@
 
 // common functions
 #define CLEAR_SCREEN system("clear")
+#define RUN_SHELL_LOOP for (;;)
 
 #endif // OS_GLOBAL_H

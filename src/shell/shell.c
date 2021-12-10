@@ -10,7 +10,7 @@ void run_shell() {
   CLEAR_SCREEN;
 
   char *command = NULL;
-  command = get_command_from_user();
+  RUN_SHELL_LOOP { command = get_command_from_user(); }
 
   free(command);
 }
