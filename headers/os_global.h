@@ -1,9 +1,11 @@
 #ifndef OS_GLOBAL_H
 #define OS_GLOBAL_H
 
+// main definitions
 #define SHELL_NAME "shell: "
-
 #define USER_COMMAND_LEN 64
+#define SHELL_CMD_COUNT 512
+#define SLEEP_MSEC 8000
 
 // colors for output
 #define OS_COLOR_RED "\x1b[31m"
