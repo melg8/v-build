@@ -1,6 +1,8 @@
 #ifndef OS_GLOBAL_H
 #define OS_GLOBAL_H
 
+#include <stdlib.h>
+
 // main definitions
 #define SHELL_NAME "shell: "
 #define USER_COMMAND_LEN 128
@@ -18,6 +20,7 @@
 
 // common functions
 #define CLEAR_SCREEN system("clear")
+#define EXIT exit(0)
 #define RUN_SHELL_LOOP for (;;)
 
 // commands
