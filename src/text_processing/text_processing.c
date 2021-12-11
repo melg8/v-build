@@ -19,22 +19,22 @@ char *get_command_from_user() {
 
 void print_help_msg() {
   char *help_text = generate_help_string();
-  write_msg(help_text);
+  write_msg(help_text, SLEEP_MSEC_HELP);
   free(help_text);
 }
 
 void error_msg(const char *msg) {
   char *text = generate_error_string(msg);
-  write_msg(text);
+  write_msg(text, SLEEP_MSEC_COMMON);
   free(text);
 }
 
-void write_msg(const char *msg) {
+void write_msg(const char *msg, size_t sleep_msec) {
   size_t msg_len = strlen(msg);
 
   for (size_t i = 0; i < msg_len; ++i) {
     putchar(msg[i]);
     fflush(stdout);
-    usleep(SLEEP_MSEC);
+    usleep(sleep_msec);
   }
 }
