@@ -22,7 +22,7 @@ char *generate_error_string(const char *text) {
 char *generate_help_string() {
   size_t help_string_count = sizeof(help_cmds) / sizeof(help_cmds[0]);
   size_t biggest_space = get_biggest_help_length(), current_length = 0;
-  char string[1024];
+  char string[HELP_STRING_LENGTH];
 
   memset(string, 0, 1024);
 

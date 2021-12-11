@@ -7,6 +7,7 @@
 #define ERROR_TEXT_LEN 256
 #define SLEEP_MSEC_COMMON 7000
 #define SLEEP_MSEC_HELP 500
+#define HELP_STRING_LENGTH 1024 * 1024
 
 // colors for output
 #define OS_COLOR_RED "\x1B[31m"
