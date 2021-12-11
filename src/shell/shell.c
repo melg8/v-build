@@ -13,7 +13,7 @@ void run_shell() {
   RUN_SHELL_LOOP {
     command = get_command_from_user();
     if (is_command_exist(command)) {
-      // try to exec
+      print_help_msg();
     } else {
       error_msg(INVALID_COMMAND);
     }

@@ -17,19 +17,10 @@ char *get_command_from_user() {
   return strdup(user_command);
 }
 
-void print_help_msg(const struct cmd_triplet *instance) {
-  char string[256];
-
-  strcpy(string, "\t\t");
-  strcpy(string, OS_COLOR_YELLOW);
-  strcpy(string, instance->full_name);
-  strcpy(string, ", ");
-  strcpy(string, instance->short_name);
-  strcpy(string, " - ");
-  strcpy(string, instance->desc);
-  strcpy(string, "\n");
-
-  printf("%s", string);
+void print_help_msg() {
+  char *help_text = generate_help_string();
+  write_msg(help_text);
+  free(help_text);
 }
 
 void error_msg(const char *msg) {
