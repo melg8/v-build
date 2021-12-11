@@ -13,7 +13,10 @@ bool is_command_exist(const char *cmd) { return _is_command_exist(cmd); }
 char *get_command_from_user() {
   char user_command[USER_COMMAND_LEN];
   printf(OS_COLOR_GREEN SHELL_NAME OS_NO_COLOR);
-  scanf("%s", user_command);
+  fgets(user_command, USER_COMMAND_LEN, stdin);
+
+  // remove new line symbol '\n' and place 0
+  user_command[strcspn(user_command, "\n")] = 0;
   return strdup(user_command);
 }
 

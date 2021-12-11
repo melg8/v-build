@@ -9,15 +9,13 @@
 void run_shell() {
   CLEAR_SCREEN;
 
-  char *command = NULL;
   RUN_SHELL_LOOP {
-    command = get_command_from_user();
+    char *command = get_command_from_user();
     if (is_command_exist(command)) {
       print_help_msg();
     } else {
       error_msg(INVALID_COMMAND);
     }
+    free(command);
   }
-
-  free(command);
 }
