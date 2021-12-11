@@ -12,7 +12,7 @@ void run_shell() {
   char *command = NULL;
   RUN_SHELL_LOOP {
     command = get_command_from_user();
-    if (is_command_valid(command)) {
+    if (is_command_exist(command)) {
       // try to exec
     } else {
       error_msg("invalid command, run \"help\" to view list of commands");

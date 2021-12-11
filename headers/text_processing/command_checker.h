@@ -15,6 +15,4 @@ typedef struct cmd_triplet {
 
 static cmd_triplet cmds[SHELL_CMD_COUNT] = {{"help", "h", "help message"}};
 
-int check_command(const char *cmd);
-
 #endif // COMMAND_CHECKER_H

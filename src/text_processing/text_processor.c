@@ -6,7 +6,7 @@
 #include "os_global.h"
 #include "text_processor.h"
 
-bool is_command_valid(const char *p) {
+bool is_command_exist(const char *p) {
   for (size_t i = 0; i < SHELL_CMD_COUNT; ++i) {
     if (strcmp(p, cmds[i].full_name) != 0) {
       if (strcmp(p, cmds[i].short_name) != 0) {
@@ -53,10 +53,14 @@ void error_msg(const char *msg) {
   strcat(string, OS_NO_COLOR);
   strcat(string, "\n\0");
 
-  size_t len = strlen(string);
+  write_msg(string);
+}
 
-  for (size_t i = 0; i < len; ++i) {
-    putchar(string[i]);
+void write_msg(const char *msg) {
+  size_t msg_len = strlen(msg);
+
+  for (size_t i = 0; i < msg_len; ++i) {
+    putchar(msg[i]);
     fflush(stdout);
     usleep(SLEEP_MSEC);
   }
