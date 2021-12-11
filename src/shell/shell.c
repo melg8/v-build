@@ -15,7 +15,7 @@ void run_shell() {
     if (is_command_exist(command)) {
       // try to exec
     } else {
-      error_msg("invalid command, run \"help\" to view list of commands");
+      error_msg(INVALID_COMMAND);
     }
   }
 

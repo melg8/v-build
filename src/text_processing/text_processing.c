@@ -4,6 +4,7 @@
 #include <unistd.h>
 
 #include "os_global.h"
+#include "text_creation.h"
 #include "text_processing.h"
 
 bool is_command_exist(const char *cmd) { return _is_command_exist(cmd); }
@@ -32,15 +33,9 @@ void print_help_msg(const struct cmd_triplet *instance) {
 }
 
 void error_msg(const char *msg) {
-  char string[256];
-
-  strcpy(string, OS_COLOR_RED);
-  strcat(string, "Error: ");
-  strcat(string, msg);
-  strcat(string, OS_NO_COLOR);
-  strcat(string, "\n\0");
-
-  write_msg(string);
+  char *text = generate_error_string(msg);
+  write_msg(text);
+  free(text);
 }
 
 void write_msg(const char *msg) {

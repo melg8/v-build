@@ -4,6 +4,7 @@
 // main definitions
 #define SHELL_NAME "shell: "
 #define USER_COMMAND_LEN 64
+#define ERROR_TEXT_LEN 256
 #define SHELL_CMD_COUNT 512
 #define SLEEP_MSEC 8000
 
@@ -17,5 +18,9 @@
 // common functions
 #define CLEAR_SCREEN system("clear")
 #define RUN_SHELL_LOOP for (;;)
+
+// commands
+#define INVALID_COMMAND                                                        \
+  "invalid command, run \"help\" to view list of commands."
 
 #endif // OS_GLOBAL_H
