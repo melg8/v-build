@@ -18,6 +18,7 @@ INCLUDEPATH += \
 
 SOURCES += \
         src/main.c \
+        src/shell/sce.c \
         src/text_processing/command_checks.c \
         src/shell/shell.c \
         src/text_processing/text_creation.c \
@@ -25,6 +26,7 @@ SOURCES += \
 
 HEADERS += \
         headers/os_global.h \
+        headers/shell/sce.h \
         headers/text_processing/command_checks.h \
         headers/text_processing/text_creation.h \
         headers/shell/shell.h \

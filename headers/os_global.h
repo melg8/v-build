@@ -3,7 +3,7 @@
 
 // main definitions
 #define SHELL_NAME "shell: "
-#define USER_COMMAND_LEN 64
+#define USER_COMMAND_LEN 128
 #define ERROR_TEXT_LEN 256
 #define SLEEP_MSEC_COMMON 7000
 #define SLEEP_MSEC_HELP 500
