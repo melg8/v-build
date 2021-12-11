@@ -1,0 +1,4 @@
+#ifndef TEXT_CREATION_H
+#define TEXT_CREATION_H
+
+#endif // TEXT_CREATION_H

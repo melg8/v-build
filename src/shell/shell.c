@@ -4,7 +4,7 @@
 
 #include "os_global.h"
 #include "shell.h"
-#include "text_processor.h"
+#include "text_processing.h"
 
 void run_shell() {
   CLEAR_SCREEN;

@@ -1,6 +1,7 @@
-#ifndef COMMAND_CHECKER_H
-#define COMMAND_CHECKER_H
+#ifndef COMMAND_CHECKS_H
+#define COMMAND_CHECKS_H
 
+#include <stdbool.h>
 #include <stddef.h>
 
 #include "os_global.h"
@@ -15,4 +16,6 @@ typedef struct cmd_triplet {
 
 static cmd_triplet cmds[SHELL_CMD_COUNT] = {{"help", "h", "help message"}};
 
-#endif // COMMAND_CHECKER_H
+bool _is_command_exist(const char *cmd);
+
+#endif // COMMAND_CHECKS_H

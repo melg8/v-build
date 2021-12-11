@@ -4,22 +4,9 @@
 #include <unistd.h>
 
 #include "os_global.h"
-#include "text_processor.h"
+#include "text_processing.h"
 
-bool is_command_exist(const char *p) {
-  for (size_t i = 0; i < SHELL_CMD_COUNT; ++i) {
-    if (strcmp(p, cmds[i].full_name) != 0) {
-      if (strcmp(p, cmds[i].short_name) != 0) {
-        return false;
-      } else {
-        return true;
-      }
-    } else {
-      return true;
-    }
-  }
-  return true;
-}
+bool is_command_exist(const char *cmd) { return _is_command_exist(cmd); }
 
 // release the string after use
 char *get_command_from_user() {
