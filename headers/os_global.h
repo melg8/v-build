@@ -10,6 +10,12 @@
 #define SLEEP_MSEC_COMMON 7000
 #define SLEEP_MSEC_HELP 500
 #define HELP_STRING_LENGTH 1024 * 1024
+#define MSG_LENGTH 512
+
+// msg titles
+#define INFO_MSG "info: "
+#define ERROR_MSG "err: "
+#define COMPLETE "complete: "
 
 // colors for output
 #define OS_COLOR_RED "\x1B[31m"
@@ -26,5 +32,6 @@
 // commands
 #define INVALID_COMMAND                                                        \
   "invalid command, run \"help\" to view list of commands."
+#define NOT_IMPLEMENTED "command is simple, but not implemented yet."
 
 #endif // OS_GLOBAL_H

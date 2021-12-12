@@ -31,12 +31,6 @@ void print_help_msg() {
   free(help_text);
 }
 
-void print_error_msg(const char *msg) {
-  char *text = generate_error_string(msg);
-  print_msg(text, SLEEP_MSEC_COMMON);
-  free(text);
-}
-
 void print_msg(const char *msg, size_t sleep_msec) {
   size_t msg_len = strlen(msg);
 
@@ -64,4 +58,17 @@ size_t find_command(const char *cmd) {
     }
   }
   return res;
+}
+
+void print_info_msg(const char *title, const char *color, const char *msg) {
+  char string[MSG_LENGTH];
+  memset(string, 0, MSG_LENGTH);
+
+  strcpy(string, color);
+  strcat(string, title);
+  strcat(string, OS_NO_COLOR);
+  strcat(string, msg);
+  strcat(string, "\n");
+
+  print_msg(string, SLEEP_MSEC_COMMON);
 }

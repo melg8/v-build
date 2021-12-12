@@ -7,24 +7,12 @@
 
 size_t get_biggest_help_length();
 
-char *generate_error_string(const char *text) {
-  char string[ERROR_TEXT_LEN];
-  memset(string, 0, ERROR_TEXT_LEN);
-
-  strcpy(string, OS_COLOR_RED);
-  strcat(string, "Error: ");
-  strcat(string, OS_NO_COLOR);
-  strcat(string, text);
-  strcat(string, "\n\0");
-  return strdup(string);
-}
-
 char *generate_help_string() {
   size_t help_string_count = sizeof(help_cmds) / sizeof(help_cmds[0]);
   size_t biggest_space = get_biggest_help_length(), current_length = 0;
   char string[HELP_STRING_LENGTH];
 
-  memset(string, 0, 1024);
+  memset(string, 0, HELP_STRING_LENGTH);
 
   for (size_t i = 0; i < help_string_count; ++i) {
     if (i == 0) {

@@ -20,7 +20,7 @@ void run_sc(const char *cmd) {
   }
 
   else {
-    printf("command is simple, but not implemented yet.\n");
+    print_info_msg(INFO_MSG, OS_COLOR_BLUE, NOT_IMPLEMENTED);
   }
 }
 

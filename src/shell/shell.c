@@ -15,7 +15,7 @@ void run_shell() {
     if (is_command_exist(command)) {
       try_to_exec(command);
     } else {
-      print_error_msg(INVALID_COMMAND);
+      print_info_msg(ERROR_MSG, OS_COLOR_RED, INVALID_COMMAND);
     }
     free(command);
   }
