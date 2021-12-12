@@ -13,10 +13,9 @@ bool is_command_exist(const char *cmd) { return _is_command_exist(cmd); }
 char *get_command_from_user() {
   char user_command[USER_COMMAND_LEN];
   printf(OS_COLOR_GREEN SHELL_NAME OS_NO_COLOR);
-  char *res = fgets(user_command, USER_COMMAND_LEN, stdin);
 
   // check for the CTRL-D
-  if (res == NULL) {
+  if (fgets(user_command, USER_COMMAND_LEN, stdin) == NULL) {
     printf("\n");
     EXIT(EXIT_SUCCESS);
   }
