@@ -13,7 +13,13 @@ bool is_command_exist(const char *cmd) { return _is_command_exist(cmd); }
 char *get_command_from_user() {
   char user_command[USER_COMMAND_LEN];
   printf(OS_COLOR_GREEN SHELL_NAME OS_NO_COLOR);
-  fgets(user_command, USER_COMMAND_LEN, stdin);
+  char *res = fgets(user_command, USER_COMMAND_LEN, stdin);
+
+  // check for the CTRL-D
+  if (res == NULL) {
+    printf("\n");
+    EXIT(EXIT_SUCCESS);
+  }
 
   // remove new line symbol '\n' and place 0
   user_command[strcspn(user_command, "\n")] = 0;
@@ -44,7 +50,7 @@ void print_msg(const char *msg, size_t sleep_msec) {
 
 bool is_command_simple(const char *cmd) {
   size_t i = find_command(cmd);
-  return help_cmds[i].property == SIMPLE_CMD;
+  return help_cmds[i].property == SIMPLE;
 }
 
 size_t find_command(const char *cmd) {

@@ -14,7 +14,7 @@ void run_sc(const char *cmd) {
   if (is_help()) {
     print_help_msg();
   } else if (is_quit()) {
-    EXIT;
+    EXIT(EXIT_SUCCESS);
   } else if (is_clear()) {
     CLEAR_SCREEN;
   }

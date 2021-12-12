@@ -3,8 +3,8 @@
 
 #include "os_global.h"
 
-#define SIMPLE_CMD 0
-#define COMPOSITE_CMD 1
+#define SIMPLE 0
+#define COMPOSITE 1
 
 // commands list:
 typedef struct cmd_triplet {
@@ -15,44 +15,33 @@ typedef struct cmd_triplet {
 } cmd_triplet;
 
 static const cmd_triplet help_cmds[] = {
-    {"help", "h", "help message", SIMPLE_CMD},
-    {"status", "s", "builder status", COMPOSITE_CMD},
-    {"build", "b", "build os", COMPOSITE_CMD},
-    {"configure", "cfg", "edit preparation file", COMPOSITE_CMD},
-    {"quit", "q", "exit program", SIMPLE_CMD},
-    {"view_config", "vc", "view configuration file", SIMPLE_CMD},
-    {"clear", "c", "clear screen", SIMPLE_CMD},
-    {"empty", "empty", "empty", SIMPLE_CMD},
-    {"empty", "empty", "empty", SIMPLE_CMD},
-    {"empty", "empty", "empty", SIMPLE_CMD},
-    {"empty", "empty", "empty", SIMPLE_CMD},
-    {"empty", "empty", "empty", SIMPLE_CMD},
-    {"empty", "empty", "empty", SIMPLE_CMD},
-    {"empty", "empty", "empty", SIMPLE_CMD},
-    {"empty", "empty", "empty", SIMPLE_CMD},
-    {"empty", "empty", "empty", SIMPLE_CMD},
-    {"empty", "empty", "empty", SIMPLE_CMD},
-    {"empty", "empty", "empty", SIMPLE_CMD},
-    {"empty", "empty", "empty", SIMPLE_CMD},
-    {"empty", "empty", "empty", SIMPLE_CMD},
-    {"empty", "empty", "empty", SIMPLE_CMD},
-    {"empty", "empty", "empty", SIMPLE_CMD},
-    {"empty", "empty", "empty", SIMPLE_CMD},
-    {"empty", "empty", "empty", SIMPLE_CMD},
-    {"empty", "empty", "empty", SIMPLE_CMD},
-    {"empty", "empty", "empty", SIMPLE_CMD},
-    {"empty", "empty", "empty", SIMPLE_CMD},
-    {"empty", "empty", "empty", SIMPLE_CMD},
-    {"empty", "empty", "empty", SIMPLE_CMD},
-    {"empty", "empty", "empty", SIMPLE_CMD},
-    {"empty", "empty", "empty", SIMPLE_CMD},
-    {"empty", "empty", "empty", SIMPLE_CMD},
-    {"empty", "empty", "empty", SIMPLE_CMD},
-    {"empty", "empty", "empty", SIMPLE_CMD},
-    {"empty", "empty", "empty", SIMPLE_CMD},
-    {"empty", "empty", "empty", SIMPLE_CMD},
-    {"empty", "empty", "empty", SIMPLE_CMD},
-    {"empty", "empty", "empty", SIMPLE_CMD}};
+    {"help", "h", "help message", SIMPLE},
+    {"status", "s", "builder status", COMPOSITE},
+    {"build", "b", "build os", COMPOSITE},
+    {"configure", "cfg", "edit preparation file", COMPOSITE},
+    {"view_config", "vc", "view configuration file", SIMPLE},
+    {"quit", "q", "exit program", SIMPLE},
+    {"clear", "c", "clear screen", SIMPLE},
+    {"empty", "empty", "empty", SIMPLE},
+    {"empty", "empty", "empty", SIMPLE},
+    {"empty", "empty", "empty", SIMPLE},
+    {"empty", "empty", "empty", SIMPLE},
+    {"empty", "empty", "empty", SIMPLE},
+    {"empty", "empty", "empty", SIMPLE},
+    {"empty", "empty", "empty", SIMPLE},
+    {"empty", "empty", "empty", SIMPLE},
+    {"empty", "empty", "empty", SIMPLE},
+    {"empty", "empty", "empty", SIMPLE},
+    {"empty", "empty", "empty", SIMPLE},
+    {"empty", "empty", "empty", SIMPLE},
+    {"empty", "empty", "empty", SIMPLE},
+    {"empty", "empty", "empty", SIMPLE},
+    {"empty", "empty", "empty", SIMPLE},
+    {"empty", "empty", "empty", SIMPLE},
+    {"empty", "empty", "empty", SIMPLE},
+    {"empty", "empty", "empty", SIMPLE},
+    {"empty", "empty", "empty", SIMPLE},
+    {"empty", "empty", "empty", SIMPLE}};
 
 // generate full error message, need to be freed.
 char *generate_error_string(const char *text);
