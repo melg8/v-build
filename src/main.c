@@ -7,7 +7,9 @@ int main(int argc, char *argv[]) {
   (void)argv;
 
   check_common_plugin();
-  run_shell();
+  if (load_common_plugin() == 0) {
+    run_shell();
+  }
 
   return 0;
 }

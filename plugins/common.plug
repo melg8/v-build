@@ -1,0 +1,20 @@
+# common build plugin, must be loaded everytime
+
+# example
+# BEGIN:
+# COMMAND = your_command_name ( 1 word )
+# EXEC_PATH = path to executable from "scripts" dir
+# EXEC = name of executable file
+# ARGS = arguments for launch
+# DESC = description, what does it do?
+# END
+
+PLUGIN_NAME = common plugin
+
+BEGIN
+COMMAND = check_export_vars
+EXEC_PATH = scripts/common
+EXEC = check_export_vars.sh
+ARGS = V_BUILD_DIR="/home/user"
+DESC = view v-build export vars
+END

@@ -1,0 +1,4 @@
+#ifndef PLUGIN_PARSER_H
+#define PLUGIN_PARSER_H
+
+#endif // PLUGIN_PARSER_H

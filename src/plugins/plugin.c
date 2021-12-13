@@ -41,3 +41,5 @@ void check_common_plugin() {
     EXIT(EXIT_FAILURE);
   }
 }
+
+int load_common_plugin() {}

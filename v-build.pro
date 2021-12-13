@@ -11,14 +11,17 @@ CCFLAG += -g
 INCLUDEPATH += \
         $$PWD/src \
         $$PWD/src/shell \
+        $$PWD/src/plugins \
         $$PWD/src/text_processing \
         $$PWD/headers \
         $$PWD/headers/shell \
-        $$PWD/headers/text_processing
+        $$PWD/headers/text_processing \
+        $$PWD/headers/plugins
 
 SOURCES += \
         src/main.c \
-        src/plugin.c \
+        src/plugins/plugin.c \
+        src/plugins/plugin_parser.c \
         src/shell/sce.c \
         src/text_processing/command_checks.c \
         src/shell/shell.c \
@@ -27,11 +30,15 @@ SOURCES += \
 
 HEADERS += \
         headers/os_global.h \
-        headers/plugin.h \
+        headers/plugins/plugin.h \
+        headers/plugins/plugin_parser.h \
         headers/shell/sce.h \
         headers/text_processing/command_checks.h \
         headers/text_processing/text_creation.h \
         headers/shell/shell.h \
         headers/text_processing/text_processing.h
+
+DISTFILES += \
+        plugins/common.plug
 
 
