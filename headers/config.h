@@ -3,8 +3,8 @@
 
 #include "os_global.h"
 
-void check_config();
+void check_config(void);
 
-void create_config();
+void create_config(void);
 
 #endif // CONFIG_H
