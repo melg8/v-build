@@ -1,4 +1,5 @@
 #include "shell.h"
+#include "config.h"
 
 int main(void) {
 
