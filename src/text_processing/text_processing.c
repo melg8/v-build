@@ -76,7 +76,7 @@ void print_info_msg(const char *title, const char *msg, int newline_symbol) {
 
 int ask_yes_no(const char *question_text) {
   bool answer_received = 0;
-  char *yes_no = "(yes/no):";
+  char *yes_no = " (yes/no): ";
   char question[strlen(question_text) + strlen(yes_no)];
   strcpy(question, question_text);
   strcat(question, yes_no);
@@ -87,6 +87,7 @@ int ask_yes_no(const char *question_text) {
     if (strcmp(user_string, "Y") == 0 || strcmp(user_string, "y") == 0 ||
         strcmp(user_string, "YES") == 0 || strcmp(user_string, "yes") == 0) {
       answer_received = true;
+      answer = YES;
     } else if (strcmp(user_string, "N") == 0 || strcmp(user_string, "n") == 0 ||
                strcmp(user_string, "NO") == 0 ||
                strcmp(user_string, "no") == 0) {
