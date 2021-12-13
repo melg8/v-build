@@ -14,7 +14,7 @@
 #define YES 1
 #define NO 0
 
-// file names
+// main config
 #define CONFIG_FILE ".v-build.config"
 
 // colors for output
@@ -41,6 +41,6 @@
 #define INVALID_COMMAND                                                        \
   "invalid command, run \"help\" to view list of commands."
 #define NOT_IMPLEMENTED "command is simple, but not implemented yet."
-#define YES_NO_INCORRECT_INPUT "please enter Y,YES,y,yes or N,NO,n,no."
+#define YES_NO_INCORRECT_INPUT "please enter (Y,YES,y,yes) || (N,NO,n,no)."
 
 #endif // OS_GLOBAL_H

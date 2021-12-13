@@ -5,6 +5,4 @@
 
 void check_config(void);
 
-void create_config(void);
-
 #endif // CONFIG_H

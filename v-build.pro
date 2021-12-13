@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-TARGET = os-builder
+TARGET = v-build
 
 CONFIG += console
 CONFIG -= app_bundle
