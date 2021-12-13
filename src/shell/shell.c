@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+
 // work with files
 #include <fcntl.h>
 
@@ -31,7 +32,11 @@ void try_to_exec(const char *command) {
 
 void check_config() {
   if (open(CONFIG_FILE, O_RDWR) == -1) {
-    print_info_msg(INFO_MSG, "file do not exist.", YES);
-    ask_yes_no("Do you want to create it?");
+    print_info_msg(INFO_MSG, "main config file do not exist.", YES);
+    if (ask_yes_no("do you want to create it?") == YES) {
+      // create config file
+    } else {
+      print_info_msg(INFO_MSG, "entering to shell.", YES);
+    }
   }
 }
