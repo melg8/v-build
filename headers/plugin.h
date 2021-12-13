@@ -3,6 +3,6 @@
 
 #include "os_global.h"
 
-void check_plugins(void);
+void check_common_plugin();
 
 #endif // PLUGIN_H

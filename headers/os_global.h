@@ -15,7 +15,8 @@
 #define NO 0
 
 // main config
-#define CONFIG_FILE ".v-build.config"
+#define PLUGINS_DIR "plugins"
+#define COMMON_PLUGIN "plugins/common.plug"
 
 // colors for output
 #define OS_COLOR_RED "\x1B[31m"
@@ -42,5 +43,8 @@
   "invalid command, run \"help\" to view list of commands."
 #define NOT_IMPLEMENTED "command is simple, but not implemented yet."
 #define YES_NO_INCORRECT_INPUT "please enter (Y,YES,y,yes) || (N,NO,n,no)."
+
+// common sizes
+#define COMMON_TEXT_SIZE 256
 
 #endif // OS_GLOBAL_H

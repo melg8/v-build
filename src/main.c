@@ -1,9 +1,12 @@
-#include "shell.h"
 #include "plugin.h"
+#include "shell.h"
 
-int main(void) {
+int main(int argc, char *argv[]) {
 
-  check_plugins();
+  (void)argc;
+  (void)argv;
+
+  check_common_plugin();
   run_shell();
 
   return 0;
