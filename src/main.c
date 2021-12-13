@@ -1,9 +1,9 @@
 #include "shell.h"
-#include "config.h"
+#include "plugin.h"
 
 int main(void) {
 
-  check_config();
+  check_plugins();
   run_shell();
 
   return 0;

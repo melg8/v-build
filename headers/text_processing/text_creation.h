@@ -42,20 +42,4 @@ static const cmd_triplet help_cmds[] = {
 
 char *generate_help_string();
 
-// static const char config_file_skeleton[] = {
-//     "# the root of build dir\n"
-//     "V_BUILD_DIR=\n"
-//     "\n"
-//     "# directory for package source codes\n"
-//     "V_BUILD_PKG_DIR=\n"
-//     "\n"
-//     "# plugin directory root\n"
-//     "V_BUILD_PLUGIN=\n"
-//     "\n"
-//     "# directory for package builds\n"
-//     "V_BUILD_BUILD_DIR=\n"
-//     "\n"
-//     "# archive directory\n"
-//     "V_BUILD_ARCHIVE_DIR=\n"};
-
 #endif // TEXT_CREATION_H

@@ -17,8 +17,8 @@ INCLUDEPATH += \
         $$PWD/headers/text_processing
 
 SOURCES += \
-        src/config.c \
         src/main.c \
+        src/plugin.c \
         src/shell/sce.c \
         src/text_processing/command_checks.c \
         src/shell/shell.c \
@@ -26,8 +26,8 @@ SOURCES += \
         src/text_processing/text_processing.c
 
 HEADERS += \
-        headers/config.h \
         headers/os_global.h \
+        headers/plugin.h \
         headers/shell/sce.h \
         headers/text_processing/command_checks.h \
         headers/text_processing/text_creation.h \
