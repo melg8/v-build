@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+// work with files
+#include <fcntl.h>
 
 #include "os_global.h"
 #include "sce.h"
@@ -8,14 +10,13 @@
 #include "text_processing.h"
 
 void run_shell() {
-  CLEAR_SCREEN;
-
   RUN_SHELL_LOOP {
-    char *command = get_command_from_user();
+    char *command = get_command_from_user(SHELL_TITILE);
+
     if (is_command_exist(command)) {
       try_to_exec(command);
     } else {
-      print_info_msg(ERROR_MSG, OS_COLOR_RED, INVALID_COMMAND);
+      print_info_msg(ERROR_MSG, INVALID_COMMAND, YES);
     }
     free(command);
   }
@@ -25,5 +26,12 @@ void run_shell() {
 void try_to_exec(const char *command) {
   if (is_command_simple(command)) {
     run_sc(command);
+  }
+}
+
+void check_config() {
+  if (open(CONFIG_FILE, O_RDWR) == -1) {
+    print_info_msg(INFO_MSG, "file do not exist.", YES);
+    ask_yes_no("Do you want to create it?");
   }
 }

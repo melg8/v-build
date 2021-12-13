@@ -1,11 +1,8 @@
 #include "shell.h"
 
-void get_process_info();
-
 int main(void) {
 
-  // get main process info
-
+  check_config();
   run_shell();
 
   return 0;

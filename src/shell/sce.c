@@ -20,7 +20,7 @@ void run_sc(const char *cmd) {
   }
 
   else {
-    print_info_msg(INFO_MSG, OS_COLOR_BLUE, NOT_IMPLEMENTED);
+    print_info_msg(INFO_MSG, NOT_IMPLEMENTED, YES);
   }
 }
 

@@ -10,9 +10,9 @@
 bool is_command_exist(const char *cmd) { return _is_command_exist(cmd); }
 
 // release the string after use ( free )
-char *get_command_from_user() {
+char *get_command_from_user(const char *text_before) {
   char user_command[USER_COMMAND_LEN];
-  printf(OS_COLOR_GREEN SHELL_NAME OS_NO_COLOR);
+  printf("%s", text_before);
 
   // check for the CTRL-D
   if (fgets(user_command, USER_COMMAND_LEN, stdin) == NULL) {
@@ -60,15 +60,40 @@ size_t find_command(const char *cmd) {
   return res;
 }
 
-void print_info_msg(const char *title, const char *color, const char *msg) {
+void print_info_msg(const char *title, const char *msg, int newline_symbol) {
   char string[MSG_LENGTH];
   memset(string, 0, MSG_LENGTH);
 
-  strcpy(string, color);
   strcat(string, title);
-  strcat(string, OS_NO_COLOR);
   strcat(string, msg);
-  strcat(string, "\n");
+
+  if (newline_symbol == YES) {
+    strcat(string, "\n");
+  }
 
   print_msg(string, SLEEP_MSEC_COMMON);
+}
+
+int ask_yes_no(const char *question_text) {
+  bool answer_received = 0;
+  char *yes_no = "(yes/no):";
+  char question[strlen(question_text) + strlen(yes_no)];
+  strcpy(question, question_text);
+  strcat(question, yes_no);
+  int answer = NO;
+  while (!answer_received) {
+    print_info_msg(QUESTION, question, NO);
+    char *user_string = get_command_from_user("");
+    if (strcmp(user_string, "Y") == 0 || strcmp(user_string, "y") == 0 ||
+        strcmp(user_string, "YES") == 0 || strcmp(user_string, "yes") == 0) {
+      answer_received = true;
+    } else if (strcmp(user_string, "N") == 0 || strcmp(user_string, "n") == 0 ||
+               strcmp(user_string, "NO") == 0 ||
+               strcmp(user_string, "no") == 0) {
+      answer_received = true;
+    } else {
+      print_info_msg(ERROR_MSG, YES_NO_INCORRECT_INPUT, YES);
+    }
+  }
+  return answer;
 }
