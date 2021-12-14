@@ -11,8 +11,14 @@
 
 --begin
 plugin_name = common plugin
+
 alias = check_export_vars
 dir = plugins/scripts/common
 exec = check_export_vars.sh
 desc = view v-build export vars
+
+# alias = check_host
+# dir = plugins/scripts/common
+# exec = check_host.sh
+# desc = check host environment
 --end

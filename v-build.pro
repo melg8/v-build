@@ -6,7 +6,7 @@ CONFIG += console
 CONFIG -= app_bundle
 CONFIG -= qt
 
-CCFLAG += -g
+QMAKE_CFLAGS += -ggdb3 -O0
 
 INCLUDEPATH += \
         $$PWD/src \
