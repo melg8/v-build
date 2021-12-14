@@ -3,7 +3,7 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "os_global.h"
+#include "v_build_global.h"
 #include "text_creation.h"
 #include "text_processing.h"
 

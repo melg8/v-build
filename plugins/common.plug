@@ -2,16 +2,16 @@
 
 # example
 # --begin
-# name = your_command_name ( 1 word )
+# plugin = plugin_name
+# alias = your_command_name ( 1 word )
 # dir = path to executable from "plugins" dir
-# exec = name of executable file
+# exec = real name of executable file
 # desc = description, what does it do?
 # --end
 
-PLUGIN_NAME = common plugin
-
 --begin
-name = check_export_vars
+plugin_name = common plugin
+alias = check_export_vars
 dir = plugins/scripts/common
 exec = check_export_vars.sh
 desc = view v-build export vars

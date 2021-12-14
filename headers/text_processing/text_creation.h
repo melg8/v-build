@@ -1,7 +1,7 @@
 #ifndef TEXT_CREATION_H
 #define TEXT_CREATION_H
 
-#include "os_global.h"
+#include "v_build_global.h"
 
 #define SIMPLE 0
 #define COMPOSITE 1
@@ -20,7 +20,7 @@ static const cmd_bunch help_cmds[] = {
     {"clear", "c", "clear screen", SIMPLE},
     {"quit", "q", "exit program", SIMPLE},
     {"view plugins", "vp", "view available plugins", SIMPLE},
-    {"load plugin", "lp", "load you plugin", SIMPLE},
+    {"load plugin", "lp", "load your plugin", SIMPLE},
     {"reload plugins", "rp", "reload plugins dir", SIMPLE},
     {"empty", "empty", "empty", SIMPLE}};
 

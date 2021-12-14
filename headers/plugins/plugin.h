@@ -1,7 +1,7 @@
 #ifndef PLUGIN_H
 #define PLUGIN_H
 
-#include "os_global.h"
+#include "v_build_global.h"
 
 void load_common_plugin();
 

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#include "os_global.h"
+#include "v_build_global.h"
 #include "sce.h"
 #include "shell.h"
 #include "text_processing.h"

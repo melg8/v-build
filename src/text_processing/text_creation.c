@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "os_global.h"
+#include "v_build_global.h"
 
 size_t get_biggest_help_length();
 

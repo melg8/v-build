@@ -10,27 +10,35 @@
 #include <sys/types.h>
 #include <unistd.h>
 
+#include "plugin_parser.h"
 #include "text_creation.h"
 #include "text_processing.h"
 
-void load_common_plugin() { check_common_plugin(); }
+static char *cur_pwd = NULL;
+static char full_plugin_path[COMMON_TEXT_SIZE];
+
+void load_common_plugin() {
+  check_common_plugin();
+  if (load_plugin(full_plugin_path) != 0) {
+    print_info_msg(ERROR_MSG, "common plugin not loaded.", YES);
+  }
+}
 
 void check_common_plugin() {
-  char fullpath[COMMON_TEXT_SIZE];
-  char *cur_pwd = getenv("PWD");
+  cur_pwd = getenv("PWD");
   struct stat st;
 
   if (cur_pwd == NULL) {
     print_info_msg(ERROR_MSG, "cannot find PWD env variable. (plugin.h)", YES);
   }
 
-  strcpy(fullpath, cur_pwd);
-  strcat(fullpath, "/");
-  strcat(fullpath, COMMON_PLUGIN);
+  strcpy(full_plugin_path, cur_pwd);
+  strcat(full_plugin_path, "/");
+  strcat(full_plugin_path, COMMON_PLUGIN);
 
-  if (stat(fullpath, &st) == -1) {
+  if (stat(full_plugin_path, &st) == -1) {
     char err[COMMON_TEXT_SIZE];
-    strcpy(err, fullpath);
+    strcpy(err, full_plugin_path);
     strcat(err, ", ");
     strcat(err, strerror(errno));
     print_info_msg(ERROR_MSG, err, YES);
