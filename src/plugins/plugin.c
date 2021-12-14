@@ -13,6 +13,8 @@
 #include "text_creation.h"
 #include "text_processing.h"
 
+void load_common_plugin() { check_common_plugin(); }
+
 void check_common_plugin() {
   char fullpath[COMMON_TEXT_SIZE];
   char *cur_pwd = getenv("PWD");
@@ -41,5 +43,3 @@ void check_common_plugin() {
     EXIT(EXIT_FAILURE);
   }
 }
-
-int load_common_plugin() {}

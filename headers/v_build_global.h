@@ -1,5 +1,5 @@
-#ifndef OS_GLOBAL_H
-#define OS_GLOBAL_H
+#ifndef V_BUILD_GLOBAL_H
+#define V_BUILD_GLOBAL_H
 
 #include <stdlib.h>
 
@@ -46,5 +46,6 @@
 
 // common sizes
 #define COMMON_TEXT_SIZE 256
+#define PLUGIN_LIST_SIZE 1024
 
-#endif // OS_GLOBAL_H
+#endif // V_BUILD_GLOBAL_H

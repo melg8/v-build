@@ -29,14 +29,14 @@ SOURCES += \
         src/text_processing/text_processing.c
 
 HEADERS += \
-        headers/os_global.h \
         headers/plugins/plugin.h \
         headers/plugins/plugin_parser.h \
         headers/shell/sce.h \
         headers/text_processing/command_checks.h \
         headers/text_processing/text_creation.h \
         headers/shell/shell.h \
-        headers/text_processing/text_processing.h
+        headers/text_processing/text_processing.h \
+        headers/v_build_global.h
 
 DISTFILES += \
         plugins/common.plug

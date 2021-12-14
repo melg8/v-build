@@ -2,7 +2,7 @@
 #include <string.h>
 
 #include "command_checks.h"
-#include "os_global.h"
+#include "v_build_global.h"
 #include "text_creation.h"
 
 bool _is_command_exist(const char *cmd) {
