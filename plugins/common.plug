@@ -3,6 +3,7 @@
 # example
 # --begin
 # plugin = plugin_name
+# type = bin | script
 # alias = your_command_name ( 1 word )
 # dir = path to executable from "plugins" dir
 # exec = real name of executable file
@@ -12,13 +13,9 @@
 --begin
 plugin_name = common plugin
 
+type = script
 alias = check_export_vars
 dir = plugins/scripts/common
 exec = check_export_vars.sh
 desc = view v-build export vars
-
-# alias = check_host
-# dir = plugins/scripts/common
-# exec = check_host.sh
-# desc = check host environment
 --end

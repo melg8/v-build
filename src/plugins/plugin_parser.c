@@ -2,6 +2,7 @@
 
 #include <errno.h>
 #include <fcntl.h>
+#include <stdarg.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,46 +11,65 @@
 
 #include "text_processing.h"
 
-static plugin plugin_list[PLUGIN_LIST_SIZE];
 static u_int pos = 0;
 
-void _read_plugin(const char *restrict plugin_path);
+int _read_plugin(const char *restrict plugin_path);
+
+bool _is_eq(const char *line, const char *cmp);
+
+void _parse_line(const char *line, int values, ...);
 
 int load_plugin(const char *plugin_path) {
+  int ret = 0;
   if (plugin_path == NULL)
-    return -1;
+    ret = -1;
   else {
-    _read_plugin(plugin_path);
+    ret = _read_plugin(plugin_path);
   }
-  return 0;
+  return ret;
 }
 
-void _read_plugin(const char *restrict plugin_path) {
+int _read_plugin(const char *restrict plugin_path) {
   FILE *pf = fopen(plugin_path, "r");
   char *line = malloc(COMMON_TEXT_SIZE);
   char temp[COMMON_TEXT_SIZE];
   size_t n;
   ssize_t read;
-  plugin pl;
+  plugin pl = {0};
 
   if (pf == NULL) {
     char err[COMMON_TEXT_SIZE] = " _read_plugin, ";
     strcat(err, strerror(errno));
     print_info_msg(ERROR_MSG, err, YES);
+    return -1;
   }
 
   while ((read = getline(&line, &n, pf)) != -1) {
     if (line[0] == '#' || line[0] == '\n')
       continue;
 
-    memset(temp, 0, COMMON_TEXT_SIZE);
+    if (_is_eq(line, P_BEGIN)) {
+      // start parsing;
+      _parse_line(line, 6, P_NAME, P_TYPE, P_ALIAS, P_DIR, P_EXEC, P_DESC);
+    }
+
+    if (_is_eq(line, P_END)) {
+      // pos++;
+      // continue;
+    }
+
+    continue;
 
     if (strncmp(line, P_NAME, strlen(P_NAME)) == 0) {
       strcpy(temp, line + (strlen(P_NAME)));
       temp[strcspn(temp, "\n")] = 0;
       strcpy(pl.plugin_name, temp);
-      strcpy(plugin_list[pos].plugin_name, temp);
-      break;
+    }
+
+    if (strncmp(line, P_TYPE, strlen(P_TYPE)) == 0) {
+      strcpy(temp, line + (strlen(P_TYPE)));
+      temp[strcspn(temp, "\n")] = 0;
+      strcpy(pl.type, temp);
     }
 
     if (strncmp(line, P_ALIAS, strlen(P_ALIAS)) == 0) {
@@ -83,4 +103,19 @@ void _read_plugin(const char *restrict plugin_path) {
   }
 
   free(line);
+  return 0;
+}
+
+bool _is_eq(const char *line, const char *cmp) {
+  return strncmp(line, cmp, strlen(cmp)) == 0;
+}
+
+void _parse_line(const char *line, int values, ...) {
+  va_list arg_list;
+  va_start(arg_list, values);
+
+  for (int i = 0; i < values; ++i) {
+    char *str = va_arg(arg_list, char *);
+    printf("arg: %s\n", str);
+  }
 }
