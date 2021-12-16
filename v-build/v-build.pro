@@ -7,6 +7,7 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 QMAKE_CFLAGS += -ggdb3 -O0 -rdynamic
+QMAKE_LIBDIR_FLAGS += -ldl
 
 INCLUDEPATH += \
         $$PWD/src \

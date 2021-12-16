@@ -87,7 +87,7 @@ void_func get_void_func(const plugin *plugin_list, size_t pos) {
   strcat(path, "/");
   strcat(path, plugin_list[pos].exec);
 
-  plugin_handle = dlopen(path, RTLD_NOW | RTLD_GLOBAL);
+  plugin_handle = dlopen(path, RTLD_NOW | RTLD_DEEPBIND);
   if (plugin_handle == NULL) {
     printf("dlopen error: %s\n", dlerror());
     exit(EXIT_FAILURE);
