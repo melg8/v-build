@@ -13,14 +13,16 @@
 
 static char *cur_pwd = NULL;
 static char full_plugin_path[COMMON_TEXT_SIZE];
+
 void *plugin_handle = NULL;
 
-void_func vf = NULL;
-char_func chf = NULL;
+help_func print_help_f = NULL;
+char_func get_input_f = NULL;
+arg_bool_func arg_bool_f = NULL;
 
 int _check_main_plugin();
-
 void _open_text_lib();
+void *_get_binary_func_internal(const char *name);
 
 bool is_text_plugin_loaded() {
   if (_check_main_plugin() != 0) {
@@ -76,54 +78,45 @@ int _check_main_plugin() {
 }
 
 void _open_text_lib() {
-  vf = get_void_func(plugin_list, 0);
-  chf = get_char_func(plugin_list, 1);
+  print_help_f = get_func(plugin_list, 0);
+  get_input_f = get_func(plugin_list, 1);
+  arg_bool_f = get_func(plugin_list, 2);
 }
 
-void_func get_void_func(const plugin *plugin_list, size_t pos) {
-  void_func vf = NULL;
-  char path[COMMON_TEXT_SIZE] = {0};
-  strcpy(path, plugin_list[0].dir);
+void construct_path(char *path, size_t pos) {
+  strcpy(path, plugin_list[pos].dir);
   strcat(path, "/");
   strcat(path, plugin_list[pos].exec);
+}
 
+bool is_object_binary(const plugin *plugin_list, size_t pos) {
+  return strcmp(plugin_list[pos].type, "bin") == 0;
+}
+
+void open_binary(const char *path) {
   plugin_handle = dlopen(path, RTLD_NOW | RTLD_DEEPBIND);
   if (plugin_handle == NULL) {
     printf("dlopen error: %s\n", dlerror());
     exit(EXIT_FAILURE);
   }
-
-  vf = dlsym(plugin_handle, plugin_list[0].name);
-  if (vf == NULL) {
-    printf("cannot open %s.\n", plugin_list[0].name);
-    exit(EXIT_FAILURE);
-  }
-
-  return vf;
 }
 
-void print_help() { vf(); }
+void *_get_binary_func_internal(const char *name) {
+  void *p = dlsym(plugin_handle, name);
+  if (p == NULL) {
+    printf("cannot open %s.\n", name);
+    exit(EXIT_FAILURE);
+  }
+  return p;
+}
 
-char_func get_char_func(const plugin *plugin_list, size_t pos) {
-  char_func chf = NULL;
+void *get_func(const plugin *plugin_list, size_t pos) {
+  void *f = NULL;
   char path[COMMON_TEXT_SIZE] = {0};
-  strcpy(path, plugin_list[pos].dir);
-  strcat(path, "/");
-  strcat(path, plugin_list[pos].exec);
 
-  plugin_handle = dlopen(path, RTLD_NOW | RTLD_GLOBAL);
-  if (plugin_handle == NULL) {
-    printf("dlopen error: %s\n", dlerror());
-    exit(EXIT_FAILURE);
-  }
+  construct_path(path, pos);
+  open_binary(path);
+  f = _get_binary_func_internal(plugin_list[pos].name);
 
-  chf = dlsym(plugin_handle, plugin_list[pos].name);
-  if (chf == NULL) {
-    printf("cannot open %s.\n", plugin_list[pos].name);
-    exit(EXIT_FAILURE);
-  }
-
-  return chf;
+  return f;
 }
-
-void get_input_from_user() { char *ch = chf(); }

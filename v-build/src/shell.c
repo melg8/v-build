@@ -7,6 +7,11 @@
 
 void run_shell() {
   RUN_SHELL_LOOP {
-    get_input_from_user();
+    char *user_input = get_input_f();
+    if (arg_bool_f(user_input)) {
+      printf("good\n");
+    } else {
+      printf("bad\n");
+    }
   }
 }

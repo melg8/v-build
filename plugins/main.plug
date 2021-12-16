@@ -7,10 +7,12 @@
 # name = function name | script name
 # dir = path to file
 # exec = exec file
-# ret_val = char*, int, void | none
+# ret_val = char*, int, void, bool | none
 # args = arg1="one" arg2=234 | none
 # desc = description
 # --end
+
+################ MAIN TEXT INPUT/OUTPUT LIBRARY, DO NOT REMOVE IT
 
 --begin
 type = bin
@@ -33,11 +35,13 @@ desc = get user input
 --end
 
 --begin
-type = script
-name = hz_hz
-dir = plugins/hz
-exec = hz.sh
-ret_val = none
-args = HZ="hz"
-desc = main hz file
+type = bin
+name = is_command_exist
+dir = plugins/system
+exec = libtext_lib.so.1.0.0
+ret_val = bool
+args = const char * arg
+desc = find command from help menu
 --end
+
+############################## END OF TEXT LIBRARY
