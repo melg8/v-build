@@ -1,20 +1,21 @@
 # common build plugin, must be loaded everytime
 
 # example
+#
 # --begin
-# plugin = plugin_name
-# type = bin | script
-# alias = your_command_name ( 1 word )
-# dir = path to executable from "plugins" dir
-# exec = real name of executable file
+# type = plugin_name
+# name = bin | script
+# dir = your_command_name ( 1 word )
+# exec = path to executable from "plugins" dir
+# args = real name of executable file
 # desc = description, what does it do?
 # --end
 
 --begin
-plugin_name = text
 type = bin
-alias = text
+name = print_help_msg
 dir = plugins/system
 exec = libtext_lib.so.1.0.0
+args = void
 desc = text input/output support
 --end

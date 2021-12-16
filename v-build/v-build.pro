@@ -6,7 +6,7 @@ CONFIG += console
 CONFIG -= app_bundle
 CONFIG -= qt
 
-QMAKE_CFLAGS += -ggdb3 -O0
+QMAKE_CFLAGS += -ggdb3 -O0 -rdynamic
 
 INCLUDEPATH += \
         $$PWD/src \
@@ -25,6 +25,6 @@ HEADERS += \
         headers/v_build_global.h
 
 DISTFILES += \
-        ../plugins/common.plug
+    ../plugins/main.plug
 
 

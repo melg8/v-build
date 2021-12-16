@@ -15,7 +15,7 @@ EQ            = =
 CC            = gcc
 CXX           = g++
 DEFINES       = -DQT_QML_DEBUG
-CFLAGS        = -pipe -ggdb3 -O0 -g -Wall -Wextra -fPIC $(DEFINES)
+CFLAGS        = -pipe -ggdb3 -O0 -rdynamic -g -Wall -Wextra -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -g -Wall -Wextra -fPIC $(DEFINES)
 INCPATH       = -I../../v-build -I. -I../../v-build/src -I../../v-build/headers -I../../../../Qt/5.15.0/gcc_64/mkspecs/linux-g++
 QMAKE         = /home/user/Qt/5.15.0/gcc_64/bin/qmake
@@ -60,7 +60,7 @@ OBJECTS       = main.o \
 		plugin.o \
 		plugin_parser.o \
 		shell.o
-DIST          = ../../plugins/common.plug \
+DIST          = ../../plugins/main.plug \
 		/home/Qt/5.15.0/gcc_64/mkspecs/features/spec_pre.prf \
 		/home/Qt/5.15.0/gcc_64/mkspecs/common/unix.conf \
 		/home/Qt/5.15.0/gcc_64/mkspecs/common/linux.conf \

@@ -2,11 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#include "sce.h"
 #include "shell.h"
 #include "v_build_global.h"
-//#include "text_processing.h"
 
-void run_shell() {
-}
-
+void run_shell() { printf("in shell.\n"); }

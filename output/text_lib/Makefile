@@ -15,7 +15,7 @@ EQ            = =
 CC            = gcc
 CXX           = g++
 DEFINES       = -DQT_QML_DEBUG
-CFLAGS        = -pipe -ggdb3 -O0 -g -Wall -Wextra -fPIC $(DEFINES)
+CFLAGS        = -pipe -ggdb3 -O0 -rdynamic -g -Wall -Wextra -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -g -Wall -Wextra -fPIC $(DEFINES)
 INCPATH       = -I../../text_lib -I. -I../../text_lib -I../../../../Qt/5.15.0/gcc_64/mkspecs/linux-g++
 QMAKE         = /home/user/Qt/5.15.0/gcc_64/bin/qmake
