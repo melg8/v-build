@@ -22,9 +22,11 @@ bool is_command_exist(const char *cmd) {
 }
 
 // release the string after use ( free )
-char *get_command_from_user(const char *text_before) {
+char *get_command_from_user() {
   char user_command[USER_COMMAND_LEN];
-  printf("%s", text_before);
+  // printf("%s", SHELL_TITILE);
+
+  printf("shell: ");
 
   // check for the CTRL-D
   if (fgets(user_command, USER_COMMAND_LEN, stdin) == NULL) {

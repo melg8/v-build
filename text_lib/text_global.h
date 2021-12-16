@@ -33,7 +33,6 @@
 
 // common functions
 #define CLEAR_SCREEN system("clear")
-#define RUN_SHELL_LOOP for (;;)
 #define EXIT(code) exit(code)
 
 // commands

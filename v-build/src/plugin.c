@@ -11,12 +11,12 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#include "plugin_parser.h"
-
-typedef void (*print_help_func)();
-
 static char *cur_pwd = NULL;
 static char full_plugin_path[COMMON_TEXT_SIZE];
+void *plugin_handle = NULL;
+
+void_func vf = NULL;
+char_func chf = NULL;
 
 int _check_main_plugin();
 
@@ -32,13 +32,14 @@ bool is_text_plugin_loaded() {
     return false;
   }
 
-  for (int i = 0; i < 3; ++i) {
+  for (int i = 0; i < 5; ++i) {
     printf("%d) type: %s\n", i, plugin_list[i].type);
     printf("%d) name: %s\n", i, plugin_list[i].name);
     printf("%d) dir: %s\n", i, plugin_list[i].dir);
     printf("%d) exec: %s\n", i, plugin_list[i].exec);
+    printf("%d) ret_val: %s\n", i, plugin_list[i].ret_val);
     printf("%d) args: %s\n", i, plugin_list[i].args);
-    printf("%d) desc: %s\n", i, plugin_list[i].desc);
+    printf("%d) desc: %s\n\n", i, plugin_list[i].desc);
   }
 
   _open_text_lib();
@@ -75,33 +76,54 @@ int _check_main_plugin() {
 }
 
 void _open_text_lib() {
-  plugin *text_plugin = &plugin_list[0];
-  print_help_func phf = NULL;
-  void *text_handle = NULL;
+  vf = get_void_func(plugin_list, 0);
+  chf = get_char_func(plugin_list, 1);
+}
+
+void_func get_void_func(const plugin *plugin_list, size_t pos) {
+  void_func vf = NULL;
   char path[COMMON_TEXT_SIZE] = {0};
-  strcpy(path, text_plugin->dir);
+  strcpy(path, plugin_list[0].dir);
   strcat(path, "/");
-  strcat(path, text_plugin->exec);
+  strcat(path, plugin_list[pos].exec);
 
-  if (strcmp(text_plugin->name, "print_help_msg") == 0) {
-
-    text_handle = dlopen(path, RTLD_NOW | RTLD_GLOBAL);
-
-    if (text_handle == NULL) {
-      printf("dlopen error: %s\n", dlerror());
-      exit(EXIT_FAILURE);
-    }
-
-    phf = dlsym(text_handle, text_plugin->name);
-    if (phf == NULL) {
-      printf("cannot open text lib.\n");
-      exit(EXIT_FAILURE);
-    }
-
-    phf();
-
-  } else {
-    printf("main.plug is incorrect, exit\n");
+  plugin_handle = dlopen(path, RTLD_NOW | RTLD_GLOBAL);
+  if (plugin_handle == NULL) {
+    printf("dlopen error: %s\n", dlerror());
     exit(EXIT_FAILURE);
   }
+
+  vf = dlsym(plugin_handle, plugin_list[0].name);
+  if (vf == NULL) {
+    printf("cannot open %s.\n", plugin_list[0].name);
+    exit(EXIT_FAILURE);
+  }
+
+  return vf;
 }
+
+void print_help() { vf(); }
+
+char_func get_char_func(const plugin *plugin_list, size_t pos) {
+  char_func chf = NULL;
+  char path[COMMON_TEXT_SIZE] = {0};
+  strcpy(path, plugin_list[pos].dir);
+  strcat(path, "/");
+  strcat(path, plugin_list[pos].exec);
+
+  plugin_handle = dlopen(path, RTLD_NOW | RTLD_GLOBAL);
+  if (plugin_handle == NULL) {
+    printf("dlopen error: %s\n", dlerror());
+    exit(EXIT_FAILURE);
+  }
+
+  chf = dlsym(plugin_handle, plugin_list[pos].name);
+  if (chf == NULL) {
+    printf("cannot open %s.\n", plugin_list[pos].name);
+    exit(EXIT_FAILURE);
+  }
+
+  return chf;
+}
+
+void get_input_from_user() { char *ch = chf(); }

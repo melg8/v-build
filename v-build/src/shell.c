@@ -5,4 +5,8 @@
 #include "shell.h"
 #include "v_build_global.h"
 
-void run_shell() { printf("in shell.\n"); }
+void run_shell() {
+  RUN_SHELL_LOOP {
+    get_input_from_user();
+  }
+}

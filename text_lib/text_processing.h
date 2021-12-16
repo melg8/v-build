@@ -10,7 +10,7 @@ bool is_command_simple(const char *cmd);
 
 size_t find_command(const char *cmd);
 
-char *get_command_from_user(const char *text_before);
+char *get_command_from_user();
 
 void print_help_msg();
 

@@ -3,12 +3,13 @@
 # example
 #
 # --begin
-# type = plugin_name
-# name = bin | script
-# dir = your_command_name ( 1 word )
-# exec = path to executable from "plugins" dir
-# args = real name of executable file
-# desc = description, what does it do?
+# type = bin | script
+# name = function name | script name
+# dir = path to file
+# exec = exec file
+# ret_val = char*, int, void | none
+# args = arg1="one" arg2=234 | none
+# desc = description
 # --end
 
 --begin
@@ -16,6 +17,27 @@ type = bin
 name = print_help_msg
 dir = plugins/system
 exec = libtext_lib.so.1.0.0
-args = void
+ret_val = void
+args = none
 desc = text input/output support
+--end
+
+--begin
+type = bin
+name = get_command_from_user
+dir = plugins/system
+exec = libtext_lib.so.1.0.0
+ret_val = char*
+args = none
+desc = get user input
+--end
+
+--begin
+type = script
+name = hz_hz
+dir = plugins/hz
+exec = hz.sh
+ret_val = none
+args = HZ="hz"
+desc = main hz file
 --end
