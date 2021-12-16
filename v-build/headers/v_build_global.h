@@ -10,7 +10,8 @@
 #define PLUGIN_LIST_SIZE 64
 
 // main config
-#define MAIN_PLUGIN "plugins/main.plug"
+#define IO_INDEX 0
+#define IO_PLUGIN_PATH "plugins/input_output.plug"
 
 typedef void (*void_func)();
 typedef char *(*char_func)();

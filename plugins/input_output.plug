@@ -1,5 +1,3 @@
-# common build plugin, must be loaded everytime
-
 # example
 #
 # --begin
@@ -8,11 +6,19 @@
 # dir = path to file
 # exec = exec file
 # ret_val = char*, int, void, bool | none
-# args = arg1="one" arg2=234 | none
+# args = yes | no
 # desc = description
 # --end
 
-################ MAIN TEXT INPUT/OUTPUT LIBRARY, DO NOT REMOVE IT
+--begin
+type = bin
+name = greetings
+dir = plugins/system
+exec = libtext_lib.so.1.0.0
+ret_val = void
+args = no
+desc = initial_banner
+--end
 
 --begin
 type = bin
@@ -20,7 +26,7 @@ name = print_help_msg
 dir = plugins/system
 exec = libtext_lib.so.1.0.0
 ret_val = void
-args = none
+args = no
 desc = text input/output support
 --end
 
@@ -30,7 +36,7 @@ name = get_command_from_user
 dir = plugins/system
 exec = libtext_lib.so.1.0.0
 ret_val = char*
-args = none
+args = no
 desc = get user input
 --end
 
@@ -40,8 +46,6 @@ name = is_command_exist
 dir = plugins/system
 exec = libtext_lib.so.1.0.0
 ret_val = bool
-args = const char * arg
+args = no
 desc = find command from help menu
 --end
-
-############################## END OF TEXT LIBRARY

@@ -26,6 +26,6 @@ HEADERS += \
         headers/v_build_global.h
 
 DISTFILES += \
-    ../plugins/main.plug
+    ../plugins/input_output.plug
 
 

@@ -14,10 +14,9 @@ static u_int pos = 0;
 static bool ready_to_read = false;
 
 int _read_plugin(const char *restrict plugin_path);
-
 bool _is_eq(const char *line, const char *cmp);
-
 void _parse_line(const char *line, plugin *tp, int count, ...);
+void erase_list();
 
 size_t _get_offset(int value);
 
@@ -28,6 +27,7 @@ int load_plugin(const char *plugin_path) {
   if (plugin_path == NULL)
     ret = -1;
   else {
+    erase_list();
     ret = _read_plugin(plugin_path);
   }
 
@@ -118,3 +118,5 @@ size_t _get_offset(int value) {
     return offsetof(plugin, desc);
   return 0;
 }
+
+void erase_list() { memset(plugin_list, 0, sizeof(plugin_list)); }

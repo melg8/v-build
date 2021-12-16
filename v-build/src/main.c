@@ -6,9 +6,7 @@ int main(int argc, char *argv[]) {
   (void)argc;
   (void)argv;
 
-  if (is_text_plugin_loaded()) {
-    run_shell();
-  }
+  run_shell();
 
   return 0;
 }

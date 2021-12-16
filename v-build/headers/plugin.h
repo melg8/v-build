@@ -18,15 +18,6 @@
 
 extern void *plugin_handle;
 
-// function from plugin_list, related with input/output
-typedef void (*help_func)();
-typedef char *(*char_func)();
-typedef bool (*arg_bool_func)(const char *arg);
-
-extern help_func print_help_f;
-extern char_func get_input_f;
-extern arg_bool_func arg_bool_f;
-
 // plugin struct, see plugins/common.plug for more information
 typedef struct plugin {
   char type[COMMON_TEXT_SIZE];
@@ -43,12 +34,7 @@ extern plugin plugin_list[PLUGIN_LIST_SIZE];
 bool is_text_plugin_loaded();
 
 void construct_path(char *path, size_t pos);
-bool is_object_binary(const plugin *plugin_list, size_t pos);
-void open_binary(const char *path);
-void *get_func(const plugin *plugin_list, size_t pos);
-
-// basic mandatory functions from libtext
-void print_help();
-void get_input_from_user();
+int open_binary(const char *path);
+void *get_func(size_t pos);
 
 #endif // PLUGIN_H
