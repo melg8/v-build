@@ -23,7 +23,7 @@ typedef struct plugin {
   char desc[COMMON_TEXT_SIZE];
 } plugin;
 
-static plugin plugin_list[PLUGIN_LIST_SIZE];
+extern plugin plugin_list[PLUGIN_LIST_SIZE];
 
 void load_common_plugin();
 

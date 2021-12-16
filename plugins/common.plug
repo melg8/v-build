@@ -12,10 +12,20 @@
 
 --begin
 plugin_name = common plugin
-
 type = script
 alias = check_export_vars
 dir = plugins/scripts/common
 exec = check_export_vars.sh
 desc = view v-build export vars
 --end
+
+--begin
+plugin_name = common plugin
+type = bin
+alias = truncate makefile
+dir = plugins/bin
+exec = tr_makefile
+desc = remove unused from makefiles
+--end
+
+

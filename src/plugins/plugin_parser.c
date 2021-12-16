@@ -4,6 +4,7 @@
 #include <fcntl.h>
 #include <stdarg.h>
 #include <stdbool.h>
+#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -12,12 +13,17 @@
 #include "text_processing.h"
 
 static u_int pos = 0;
+static bool ready_to_read = false;
 
 int _read_plugin(const char *restrict plugin_path);
 
 bool _is_eq(const char *line, const char *cmp);
 
-void _parse_line(const char *line, int values, ...);
+void _parse_line(const char *line, plugin *tp, int count, ...);
+
+size_t _get_offset(int value);
+
+plugin plugin_list[PLUGIN_LIST_SIZE];
 
 int load_plugin(const char *plugin_path) {
   int ret = 0;
@@ -26,13 +32,13 @@ int load_plugin(const char *plugin_path) {
   else {
     ret = _read_plugin(plugin_path);
   }
+
   return ret;
 }
 
 int _read_plugin(const char *restrict plugin_path) {
   FILE *pf = fopen(plugin_path, "r");
   char *line = malloc(COMMON_TEXT_SIZE);
-  char temp[COMMON_TEXT_SIZE];
   size_t n;
   ssize_t read;
   plugin pl = {0};
@@ -49,55 +55,18 @@ int _read_plugin(const char *restrict plugin_path) {
       continue;
 
     if (_is_eq(line, P_BEGIN)) {
-      // start parsing;
-      _parse_line(line, 6, P_NAME, P_TYPE, P_ALIAS, P_DIR, P_EXEC, P_DESC);
+      ready_to_read = true;
+      continue;
+    }
+
+    if (ready_to_read) {
+      _parse_line(line, &pl, 6, P_NAME, P_TYPE, P_ALIAS, P_DIR, P_EXEC, P_DESC);
     }
 
     if (_is_eq(line, P_END)) {
-      // pos++;
-      // continue;
-    }
-
-    continue;
-
-    if (strncmp(line, P_NAME, strlen(P_NAME)) == 0) {
-      strcpy(temp, line + (strlen(P_NAME)));
-      temp[strcspn(temp, "\n")] = 0;
-      strcpy(pl.plugin_name, temp);
-    }
-
-    if (strncmp(line, P_TYPE, strlen(P_TYPE)) == 0) {
-      strcpy(temp, line + (strlen(P_TYPE)));
-      temp[strcspn(temp, "\n")] = 0;
-      strcpy(pl.type, temp);
-    }
-
-    if (strncmp(line, P_ALIAS, strlen(P_ALIAS)) == 0) {
-      strcpy(temp, line + (strlen(P_ALIAS)));
-      temp[strcspn(temp, "\n")] = 0;
-      strcpy(pl.alias, temp);
-    }
-
-    if (strncmp(line, P_DIR, strlen(P_DIR)) == 0) {
-      strcpy(temp, line + (strlen(P_DIR)));
-      temp[strcspn(temp, "\n")] = 0;
-      strcpy(pl.dir, temp);
-    }
-
-    if (strncmp(line, P_EXEC, strlen(P_EXEC)) == 0) {
-      strcpy(temp, line + (strlen(P_EXEC)));
-      temp[strcspn(temp, "\n")] = 0;
-      strcpy(pl.exec, temp);
-    }
-
-    if (strncmp(line, P_DESC, strlen(P_DESC)) == 0) {
-      strcpy(temp, line + (strlen(P_DESC)));
-      temp[strcspn(temp, "\n")] = 0;
-      strcpy(pl.desc, temp);
-      pos++;
-    }
-
-    if (strncmp(line, P_END, strlen(P_END)) == 0) {
+      ready_to_read = false;
+      memcpy(&plugin_list[pos], &pl, sizeof(pl));
+      memset(&pl, 0, sizeof(pl));
       pos++;
     }
   }
@@ -110,12 +79,41 @@ bool _is_eq(const char *line, const char *cmp) {
   return strncmp(line, cmp, strlen(cmp)) == 0;
 }
 
-void _parse_line(const char *line, int values, ...) {
-  va_list arg_list;
-  va_start(arg_list, values);
+void _parse_line(const char *line, plugin *tp, int count, ...) {
 
-  for (int i = 0; i < values; ++i) {
+  char temp[COMMON_TEXT_SIZE];
+
+  va_list arg_list;
+  va_start(arg_list, count);
+
+  for (int i = 0; i < count; ++i) {
+
     char *str = va_arg(arg_list, char *);
-    printf("arg: %s\n", str);
+
+    if (strncmp(line, str, strlen(str)) == 0) {
+      strcpy(temp, line + (strlen(str)));
+      temp[strcspn(temp, "\n")] = 0;
+
+      char *base = (char *)tp;
+      char *offs = base + _get_offset(i);
+
+      strcpy(offs, temp);
+    }
   }
+}
+
+size_t _get_offset(int value) {
+  if (value == 0)
+    return offsetof(plugin, plugin_name);
+  if (value == 1)
+    return offsetof(plugin, type);
+  if (value == 2)
+    return offsetof(plugin, alias);
+  if (value == 3)
+    return offsetof(plugin, dir);
+  if (value == 4)
+    return offsetof(plugin, exec);
+  if (value == 5)
+    return offsetof(plugin, desc);
+  return 0;
 }
