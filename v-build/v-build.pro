@@ -16,13 +16,11 @@ SOURCES += \
         src/main.c \
         src/plugin.c \
         src/plugin_parser.c \
-        src/sce.c \
         src/shell.c \
 
 HEADERS += \
         headers/plugin.h \
         headers/plugin_parser.h \
-        headers/sce.h \
         headers/shell.h \
         headers/v_build_global.h
 

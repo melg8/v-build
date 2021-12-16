@@ -55,12 +55,10 @@ OBJECTS_DIR   = ./
 SOURCES       = ../../v-build/src/main.c \
 		../../v-build/src/plugin.c \
 		../../v-build/src/plugin_parser.c \
-		../../v-build/src/sce.c \
 		../../v-build/src/shell.c 
 OBJECTS       = main.o \
 		plugin.o \
 		plugin_parser.o \
-		sce.o \
 		shell.o
 DIST          = ../../plugins/common.plug \
 		/home/Qt/5.15.0/gcc_64/mkspecs/features/spec_pre.prf \
@@ -257,12 +255,10 @@ DIST          = ../../plugins/common.plug \
 		/home/Qt/5.15.0/gcc_64/mkspecs/features/lex.prf \
 		../../v-build.pro headers/plugin.h \
 		headers/plugin_parser.h \
-		headers/sce.h \
 		headers/shell.h \
 		headers/v_build_global.h ../../v-build/src/main.c \
 		../../v-build/src/plugin.c \
 		../../v-build/src/plugin_parser.c \
-		../../v-build/src/sce.c \
 		../../v-build/src/shell.c
 QMAKE_TARGET  = v-build
 DESTDIR       = 
@@ -720,13 +716,8 @@ plugin_parser.o: ../../v-build/src/plugin_parser.c ../../v-build/headers/plugin_
 		../../v-build/headers/v_build_global.h
 	$(CC) -c $(CFLAGS) $(INCPATH) -o plugin_parser.o ../../v-build/src/plugin_parser.c
 
-sce.o: ../../v-build/src/sce.c ../../v-build/headers/sce.h \
+shell.o: ../../v-build/src/shell.c ../../v-build/headers/shell.h \
 		../../v-build/headers/v_build_global.h
-	$(CC) -c $(CFLAGS) $(INCPATH) -o sce.o ../../v-build/src/sce.c
-
-shell.o: ../../v-build/src/shell.c ../../v-build/headers/sce.h \
-		../../v-build/headers/v_build_global.h \
-		../../v-build/headers/shell.h
 	$(CC) -c $(CFLAGS) $(INCPATH) -o shell.o ../../v-build/src/shell.c
 
 ####### Install

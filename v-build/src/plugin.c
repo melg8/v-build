@@ -45,8 +45,8 @@ int _check_common_plugin() {
   struct stat st;
 
   if (cur_pwd == NULL) {
-    // print_info_msg(ERROR_MSG, "cannot find PWD env variable. (plugin.h)",
-    // YES);
+    printf("cannot find PWD environment variable.\n");
+    exit(EXIT_FAILURE);
   }
 
   strcpy(full_plugin_path, cur_pwd);
@@ -58,14 +58,11 @@ int _check_common_plugin() {
     strcpy(err, full_plugin_path);
     strcat(err, ", ");
     strcat(err, strerror(errno));
-    // print_info_msg(ERROR_MSG, err, YES);
-    EXIT(EXIT_FAILURE);
+    exit(EXIT_FAILURE);
   }
 
   if (!S_ISREG(st.st_mode)) {
-    // print_info_msg(ERROR_MSG, "common plugin is not a regular file, exit.",
-    // YES);
-    EXIT(EXIT_FAILURE);
+    exit(EXIT_FAILURE);
   }
   return 0;
 }

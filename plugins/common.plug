@@ -11,10 +11,10 @@
 # --end
 
 --begin
-plugin_name = help
+plugin_name = text
 type = bin
-alias = help
+alias = text
 dir = plugins/system
-exec = help.so
-desc = first plugin, displaing help message
+exec = libtext_lib.so.1.0.0
+desc = text input/output support
 --end
