@@ -118,7 +118,7 @@ void greetings() {
   strcpy(greetings_msg, OS_COLOR_YELLOW);
   strcat(greetings_msg, "*******************************************\n"
                         "\n"
-                        " Welcome to V - Build!\n"
+                        " Welcome to V-Build!\n"
                         "\n"
                         " Press help for start\n"
                         "\n"

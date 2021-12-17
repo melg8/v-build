@@ -14,12 +14,14 @@ INCLUDEPATH += \
         $$PWD/headers
 
 SOURCES += \
+    src/io.c \
         src/main.c \
         src/plugin.c \
         src/plugin_parser.c \
         src/shell.c \
 
 HEADERS += \
+        headers/io.h \
         headers/plugin.h \
         headers/plugin_parser.h \
         headers/shell.h \
