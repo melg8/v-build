@@ -58,7 +58,7 @@ int _read_plugin(const char *restrict plugin_path) {
     }
 
     if (ready_to_read) {
-      _parse_line(line, &pl, 7, P_TYPE, P_NAME, P_DIR, P_EXEC, P_RET_VAL,
+      _parse_line(line, &pl, 7, P_TYPE, P_NAME, P_EXEC, P_RET_VAL,
                   P_ARGS, P_DESC);
     }
 
@@ -107,14 +107,12 @@ size_t _get_offset(int value) {
   if (value == 1)
     return offsetof(plugin, name);
   if (value == 2)
-    return offsetof(plugin, dir);
-  if (value == 3)
     return offsetof(plugin, exec);
-  if (value == 4)
+  if (value == 3)
     return offsetof(plugin, ret_val);
-  if (value == 5)
+  if (value == 4)
     return offsetof(plugin, args);
-  if (value == 6)
+  if (value == 5)
     return offsetof(plugin, desc);
   return 0;
 }

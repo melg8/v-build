@@ -41,7 +41,7 @@ char *get_command_from_user() {
 
 void print_help_msg() {
   char *help_text = generate_help_string();
-  print_msg(help_text, SLEEP_MSEC_HELP);
+  print_msg(help_text, SLEEP_MSEC_FAST);
   free(help_text);
 }
 
@@ -97,7 +97,7 @@ int ask_yes_no(const char *question_text) {
   int answer = NO;
   while (!answer_received) {
     print_info_msg(QUESTION, question, NO);
-    char *user_string = get_command_from_user("");
+    char *user_string = get_command_from_user();
     if (strcmp(user_string, "Y") == 0 || strcmp(user_string, "y") == 0 ||
         strcmp(user_string, "YES") == 0 || strcmp(user_string, "yes") == 0) {
       answer_received = true;
@@ -111,4 +111,18 @@ int ask_yes_no(const char *question_text) {
     }
   }
   return answer;
+}
+
+void greetings() {
+  char greetings_msg[COMMON_TEXT_SIZE * 2] = {0};
+  strcpy(greetings_msg, OS_COLOR_YELLOW);
+  strcat(greetings_msg, "*******************************************\n"
+                        "\n"
+                        " Welcome to V - Build!\n"
+                        "\n"
+                        " Press help for start\n"
+                        "\n"
+                        "*******************************************\n\n");
+  strcat(greetings_msg, OS_NO_COLOR);
+  print_msg(greetings_msg, SLEEP_MSEC_FAST);
 }

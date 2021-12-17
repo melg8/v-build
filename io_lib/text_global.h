@@ -7,7 +7,7 @@
 #define SHELL_NAME "shell: "
 #define USER_COMMAND_LEN 128
 #define SLEEP_MSEC_COMMON 7000
-#define SLEEP_MSEC_HELP 500
+#define SLEEP_MSEC_FAST 500
 #define HELP_STRING_LENGTH 1024 * 1024
 #define MSG_LENGTH 512
 #define YES 1

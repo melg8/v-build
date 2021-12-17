@@ -15,13 +15,11 @@ void *plugin_handle = NULL;
 
 void *_get_binary_func_internal(const char *name);
 
-void construct_path(char *path, size_t pos) {
+void get_plugin_path(char *path, size_t pos) {
   if (path == NULL)
     return;
 
-  strcpy(path, plugin_list[pos].dir);
-  strcat(path, "/");
-  strcat(path, plugin_list[pos].exec);
+  strcpy(path, plugin_list[pos].exec);
 }
 
 int open_binary(const char *path) {
@@ -46,7 +44,7 @@ void *get_func(size_t pos) {
   void *f = NULL;
   char path[COMMON_TEXT_SIZE] = {0};
 
-  construct_path(path, pos);
+  get_plugin_path(path, pos);
   open_binary(path);
   f = _get_binary_func_internal(plugin_list[pos].name);
 

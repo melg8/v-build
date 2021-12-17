@@ -19,9 +19,6 @@ static const cmd_bunch help_cmds[] = {
     {"status", "s", "builder status", COMPOSITE},
     {"clear", "c", "clear screen", SIMPLE},
     {"quit", "q", "exit program", SIMPLE},
-    {"view plugins", "vp", "view available plugins", SIMPLE},
-    {"load plugin", "lp", "load your plugin", SIMPLE},
-    {"reload plugins", "rp", "reload plugins dir", SIMPLE},
     {"empty", "empty", "empty", SIMPLE}};
 
 char *generate_help_string();

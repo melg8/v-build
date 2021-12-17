@@ -1,41 +1,37 @@
-# example
+#   example
 #
-# --begin
-# type = bin | script
-# name = function name | script name
-# dir = path to file
-# exec = exec file
-# ret_val = char*, int, void, bool | none
-# args = yes | no
-# desc = description
-# --end
+#   --begin
+#   type = bin | script
+#   name = function name | script name
+#   exec = path from plugins dir to exec file
+#   ret_val = yes | no
+#   args = yes | no
+#   desc = description
+#   --end
 
 --begin
 type = bin
 name = greetings
-dir = plugins/system
-exec = libtext_lib.so.1.0.0
-ret_val = void
+exec = plugins/system/libio_lib.so.1.0.0
+ret_val = yes
 args = no
-desc = initial_banner
+desc = initial banner
 --end
 
 --begin
 type = bin
-name = print_help_msg
-dir = plugins/system
-exec = libtext_lib.so.1.0.0
-ret_val = void
+name = print_help
+exec = plugins/system/libtext_lib.so.1.0.0
+ret_val = yes
 args = no
-desc = text input/output support
+desc = print help message
 --end
 
 --begin
 type = bin
 name = get_command_from_user
-dir = plugins/system
-exec = libtext_lib.so.1.0.0
-ret_val = char*
+exec = plugins/system/libtext_lib.so.1.0.0
+ret_val = yes
 args = no
 desc = get user input
 --end
@@ -43,9 +39,8 @@ desc = get user input
 --begin
 type = bin
 name = is_command_exist
-dir = plugins/system
-exec = libtext_lib.so.1.0.0
-ret_val = bool
+exec = plugins/system/libtext_lib.so.1.0.0
+ret_val = yes
 args = no
 desc = find command from help menu
 --end

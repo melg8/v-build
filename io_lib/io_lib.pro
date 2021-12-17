@@ -1,6 +1,6 @@
 TEMPLATE = lib
 
-TARGET = text_lib
+TARGET = io_lib
 
 CONFIG += console
 CONFIG -= app_bundle
