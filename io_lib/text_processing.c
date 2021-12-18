@@ -59,7 +59,7 @@ int ask_yes_no(const char *question_text) {
   int answer = NO;
   while (!answer_received) {
     print_info_msg(QUESTION, question, NO);
-    char *user_string = get_command_from_user();
+    char *user_string = get_command_from_user(false);
     if (strcmp(user_string, "Y") == 0 || strcmp(user_string, "y") == 0 ||
         strcmp(user_string, "YES") == 0 || strcmp(user_string, "yes") == 0) {
       answer_received = true;
@@ -71,6 +71,7 @@ int ask_yes_no(const char *question_text) {
     } else {
       print_info_msg(ERROR_MSG, YES_NO_INCORRECT_INPUT, YES);
     }
+    free(user_string);
   }
   return answer;
 }
@@ -91,11 +92,11 @@ bool is_command_exist(const char *cmd) {
 }
 
 // release the string after use ( free )
-char *get_command_from_user() {
+char *get_command_from_user(bool is_title_needed) {
   char user_command[USER_COMMAND_LEN];
-  printf("%s", SHELL_TITILE);
 
-  // printf("shell: ");
+  if (is_title_needed)
+    printf("%s", SHELL_TITILE);
 
   // check for the CTRL-D
   if (fgets(user_command, USER_COMMAND_LEN, stdin) == NULL) {
@@ -107,22 +108,3 @@ char *get_command_from_user() {
   user_command[strcspn(user_command, "\n")] = 0;
   return strdup(user_command);
 }
-
-// bool is_command_simple(const char *cmd) {
-//   size_t i = find_command(cmd);
-//   return help_cmds[i].property == SIMPLE;
-// }
-
-// size_t find_command(const char *cmd) {
-//   size_t res = -1;
-//   size_t cmd_count = sizeof(help_cmds) / sizeof(help_cmds[0]);
-
-//  for (size_t i = 0; i < cmd_count; ++i) {
-//    if (strcmp(cmd, help_cmds[i].full_name) == 0 ||
-//        strcmp(cmd, help_cmds[i].short_name) == 0) {
-//      res = i;
-//      break;
-//    }
-//  }
-//  return res;
-//}

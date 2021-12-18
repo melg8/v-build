@@ -13,6 +13,8 @@
 
 void *plugin_handle = NULL;
 
+void *_get_binary_func(const plugin_element *restrict elem);
+
 int load_plugin(const char *plugin_name) {
   int ret = 0;
   char fname[COMMON_TEXT_SIZE];
@@ -28,50 +30,42 @@ int load_plugin(const char *plugin_name) {
   return ret;
 }
 
-// void *_get_binary_func_internal(const char *name);
-
-// int open_binary(const char *path) {
-//   plugin_handle = dlopen(path, RTLD_NOW | RTLD_DEEPBIND);
-//   if (plugin_handle == NULL) {
-//     printf("dlopen error: %s\n", dlerror());
-//     return -1;
-//   }
-//   return 0;
-// }
-
-// void *_get_binary_func_internal(const char *name) {
-//   void *p = dlsym(plugin_handle, name);
-//   if (p == NULL) {
-//     printf("cannot open %s.\n", name);
-//     exit(EXIT_FAILURE);
-//   }
-//   return p;
-// }
-
-// void *get_func(size_t pos) {
-//   void *f = NULL;
-//   char path[COMMON_TEXT_SIZE] = {0};
-
-//  get_plugin_path(path, pos);
-//  open_binary(path);
-//  f = _get_binary_func_internal(list[pos].name);
-
-//  return f;
-//}
-
-void *get_command(const char *command) {
-  void *cmd = NULL;
-  plugin_element *elem = NULL;
-  elem = find_command(command);
-  if (elem == NULL) {
-    printf("cannot find \"%s\"\n", command);
+// *function if success, NULL is error
+void *_get_binary_func(const plugin_element *restrict elem) {
+  void *func = NULL;
+  plugin_handle = dlopen(elem->desc.exec, RTLD_NOW | RTLD_DEEPBIND);
+  if (plugin_handle == NULL) {
+    printf("dlopen error: %s\n", dlerror());
     return NULL;
   }
 
-  return cmd;
+  func = dlsym(plugin_handle, elem->desc.command);
+  if (func == NULL) {
+    printf("cannot open %s.\n", elem->desc.command);
+    return NULL;
+  }
+
+  return func;
 }
 
-plugin_element *find_command(const char *command) {
+void *get_binary_function(const char *fname) {
+  plugin_element *elem = NULL;
+  void *func = NULL;
+
+  elem = find_element_by_command(fname);
+  if (elem == NULL) {
+    printf("cannot find \"%s\"\n", fname);
+    return NULL;
+  }
+
+  if (is_elem_binary(elem)) {
+    func = _get_binary_func(elem);
+  }
+
+  return func;
+}
+
+plugin_element *find_element_by_command(const char *command) {
   u_int cur_pos = _get_current_pos();
   for (u_int i = 0; i < cur_pos; ++i) {
     if (strcmp(list[i].desc.command, command) == 0) {
@@ -81,4 +75,10 @@ plugin_element *find_command(const char *command) {
   return NULL;
 }
 
-bool is_command_binary(const plugin_element *elem) {}
+bool is_elem_binary(const plugin_element *elem) {
+  return strcmp(elem->desc.type, ELEM_BINARY) == 0;
+}
+
+bool is_elem_script(const plugin_element *elem) {
+  return strcmp(elem->desc.type, ELEM_SCRIPT) == 0;
+}

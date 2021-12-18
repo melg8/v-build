@@ -12,6 +12,9 @@
 #define P_ARGS "args = "
 #define P_DESC "desc = "
 
+#define ELEM_BINARY "bin"
+#define ELEM_SCRIPT "script"
+
 // plugin descriptor, see plugins/io.plug for more information
 typedef struct plugin_descriptor {
   char type[COMMON_TEXT_SIZE];

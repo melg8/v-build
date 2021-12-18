@@ -8,11 +8,12 @@
 // 0 if success, -1 if error
 int load_plugin(const char *restrict plugin_name);
 
-// *cmd if success, NULL if error
-void *get_command(const char *restrict command);
+// *function if success, NULL if error
+void *get_binary_function(const char *restrict fname);
 
-plugin_element *find_command(const char *restrict command);
+plugin_element *find_element_by_command(const char *restrict command);
 
-bool is_command_binary(const plugin_element *restrict elem);
+bool is_elem_binary(const plugin_element *restrict elem);
+bool is_elem_script(const plugin_element *restrict elem);
 
 #endif // PLUGIN_H

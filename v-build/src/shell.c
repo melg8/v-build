@@ -10,4 +10,6 @@ void run_shell() {
     printf("error loading io plugin\n");
     exit(EXIT_FAILURE);
   }
+
+  ask_yes_no("everything alright?");
 }
