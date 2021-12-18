@@ -7,9 +7,7 @@
 
 void run_shell() {
   if (load_io() != 0) {
+    printf("error loading io plugin\n");
     exit(EXIT_FAILURE);
   }
-
-  greetings();
-  // RUN_SHELL_LOOP {}
 }

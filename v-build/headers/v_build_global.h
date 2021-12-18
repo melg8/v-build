@@ -7,11 +7,11 @@
 
 // main definitions
 #define COMMON_TEXT_SIZE 128
-#define PLUGIN_LIST_SIZE 64
+#define PLUGIN_LIST_SIZE 256
 
 // main config
 #define IO_INDEX 0
-#define IO_PLUGIN_PATH "plugins/input_output.plug"
+#define IO_PLUGIN_NAME "io"
 
 typedef void (*void_func)();
 typedef char *(*char_func)();

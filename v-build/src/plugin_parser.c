@@ -10,39 +10,26 @@
 #include <string.h>
 #include <unistd.h>
 
-static u_int pos = 0;
-static bool ready_to_read = false;
+static u_int _pos = 0;
+static bool _ready_to_load = false;
 
-int _read_plugin(const char *restrict plugin_path);
+int _load_plugin(const char *restrict plugin_path);
 bool _is_eq(const char *line, const char *cmp);
-void _parse_line(const char *line, plugin *tp, int count, ...);
-void erase_list();
-
+void _parse_line(const char *line, plugin_descriptor *pd, int count, ...);
+void _erase_list();
 size_t _get_offset(int value);
 
-plugin plugin_list[PLUGIN_LIST_SIZE];
+plugin_element list[PLUGIN_LIST_SIZE] = {0};
 
-int load_plugin(const char *plugin_path) {
-  int ret = 0;
-  if (plugin_path == NULL)
-    ret = -1;
-  else {
-    erase_list();
-    ret = _read_plugin(plugin_path);
-  }
-
-  return ret;
-}
-
-int _read_plugin(const char *restrict plugin_path) {
-  FILE *pf = fopen(plugin_path, "r");
+int _load_plugin(const char *restrict plugin_name) {
+  FILE *pf = fopen(plugin_name, "r");
   char *line = malloc(COMMON_TEXT_SIZE);
   size_t n;
   ssize_t read;
-  plugin pl = {0};
+  plugin_descriptor p_desc = {0};
 
   if (pf == NULL) {
-    char err[COMMON_TEXT_SIZE] = " _read_plugin, ";
+    char err[COMMON_TEXT_SIZE] = " _load_plugin, ";
     strcat(err, strerror(errno));
     printf("error: %s\n", err);
     return -1;
@@ -53,20 +40,21 @@ int _read_plugin(const char *restrict plugin_path) {
       continue;
 
     if (_is_eq(line, P_BEGIN)) {
-      ready_to_read = true;
+      _ready_to_load = true;
       continue;
     }
 
-    if (ready_to_read) {
-      _parse_line(line, &pl, 7, P_TYPE, P_NAME, P_EXEC, P_RET_VAL,
-                  P_ARGS, P_DESC);
+    if (_ready_to_load) {
+      _parse_line(line, &p_desc, 6, P_TYPE, P_NAME, P_EXEC, P_RET_VAL, P_ARGS,
+                  P_DESC);
     }
 
     if (_is_eq(line, P_END)) {
-      ready_to_read = false;
-      memcpy(&plugin_list[pos], &pl, sizeof(pl));
-      memset(&pl, 0, sizeof(pl));
-      pos++;
+      _ready_to_load = false;
+      strcpy(list[_pos].plugin_name, plugin_name);
+      memcpy(&list[_pos].desc, &p_desc, sizeof(p_desc));
+      memset(&p_desc, 0, sizeof(p_desc));
+      _pos++;
     }
   }
 
@@ -78,9 +66,9 @@ bool _is_eq(const char *line, const char *cmp) {
   return strncmp(line, cmp, strlen(cmp)) == 0;
 }
 
-void _parse_line(const char *line, plugin *tp, int count, ...) {
+void _parse_line(const char *line, plugin_descriptor *pd, int count, ...) {
 
-  char temp[COMMON_TEXT_SIZE];
+  char temp[COMMON_TEXT_SIZE] = {0};
 
   va_list arg_list;
   va_start(arg_list, count);
@@ -93,7 +81,7 @@ void _parse_line(const char *line, plugin *tp, int count, ...) {
       strcpy(temp, line + (strlen(str)));
       temp[strcspn(temp, "\n")] = 0;
 
-      char *base = (char *)tp;
+      char *base = (char *)pd;
       char *offs = base + _get_offset(i);
 
       strcpy(offs, temp);
@@ -103,18 +91,18 @@ void _parse_line(const char *line, plugin *tp, int count, ...) {
 
 size_t _get_offset(int value) {
   if (value == 0)
-    return offsetof(plugin, type);
+    return offsetof(plugin_descriptor, type);
   if (value == 1)
-    return offsetof(plugin, name);
+    return offsetof(plugin_descriptor, name);
   if (value == 2)
-    return offsetof(plugin, exec);
+    return offsetof(plugin_descriptor, exec);
   if (value == 3)
-    return offsetof(plugin, ret_val);
+    return offsetof(plugin_descriptor, ret_val);
   if (value == 4)
-    return offsetof(plugin, args);
+    return offsetof(plugin_descriptor, args);
   if (value == 5)
-    return offsetof(plugin, desc);
+    return offsetof(plugin_descriptor, desc);
   return 0;
 }
 
-void erase_list() { memset(plugin_list, 0, sizeof(plugin_list)); }
+void _erase_list() { memset(list, 0, sizeof(list)); }

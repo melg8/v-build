@@ -21,7 +21,7 @@ desc = initial banner
 --begin
 type = bin
 name = print_help
-exec = plugins/system/libtext_lib.so.1.0.0
+exec = plugins/system/libio_lib.so.1.0.0
 ret_val = yes
 args = no
 desc = print help message
@@ -30,7 +30,7 @@ desc = print help message
 --begin
 type = bin
 name = get_command_from_user
-exec = plugins/system/libtext_lib.so.1.0.0
+exec = plugins/system/libio_lib.so.1.0.0
 ret_val = yes
 args = no
 desc = get user input
@@ -39,7 +39,7 @@ desc = get user input
 --begin
 type = bin
 name = is_command_exist
-exec = plugins/system/libtext_lib.so.1.0.0
+exec = plugins/system/libio_lib.so.1.0.0
 ret_val = yes
 args = no
 desc = find command from help menu
