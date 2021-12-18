@@ -11,8 +11,6 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#include "plugin_parser.h"
-
 void *plugin_handle = NULL;
 
 int load_plugin(const char *plugin_name) {
@@ -63,21 +61,24 @@ int load_plugin(const char *plugin_name) {
 
 void *get_command(const char *command) {
   void *cmd = NULL;
-  if (find_command(command) != 0) {
+  plugin_element *elem = NULL;
+  elem = find_command(command);
+  if (elem == NULL) {
     printf("cannot find \"%s\"\n", command);
+    return NULL;
   }
 
   return cmd;
 }
 
-int find_command(const char *command) {
-  plugin_element elem;
+plugin_element *find_command(const char *command) {
   u_int cur_pos = _get_current_pos();
   for (u_int i = 0; i < cur_pos; ++i) {
     if (strcmp(list[i].desc.command, command) == 0) {
-      memcpy(&elem, &list[i], sizeof(list[i]));
-      return 0;
+      return &list[i];
     }
   }
-  return -1;
+  return NULL;
 }
+
+bool is_command_binary(const plugin_element *elem) {}

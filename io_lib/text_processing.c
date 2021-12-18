@@ -108,21 +108,21 @@ char *get_command_from_user() {
   return strdup(user_command);
 }
 
-bool is_command_simple(const char *cmd) {
-  size_t i = find_command(cmd);
-  return help_cmds[i].property == SIMPLE;
-}
+// bool is_command_simple(const char *cmd) {
+//   size_t i = find_command(cmd);
+//   return help_cmds[i].property == SIMPLE;
+// }
 
-size_t find_command(const char *cmd) {
-  size_t res = -1;
-  size_t cmd_count = sizeof(help_cmds) / sizeof(help_cmds[0]);
+// size_t find_command(const char *cmd) {
+//   size_t res = -1;
+//   size_t cmd_count = sizeof(help_cmds) / sizeof(help_cmds[0]);
 
-  for (size_t i = 0; i < cmd_count; ++i) {
-    if (strcmp(cmd, help_cmds[i].full_name) == 0 ||
-        strcmp(cmd, help_cmds[i].short_name) == 0) {
-      res = i;
-      break;
-    }
-  }
-  return res;
-}
+//  for (size_t i = 0; i < cmd_count; ++i) {
+//    if (strcmp(cmd, help_cmds[i].full_name) == 0 ||
+//        strcmp(cmd, help_cmds[i].short_name) == 0) {
+//      res = i;
+//      break;
+//    }
+//  }
+//  return res;
+//}

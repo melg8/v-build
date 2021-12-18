@@ -7,6 +7,8 @@
 // default io funcs
 extern void (*greetings)();
 extern void (*print_help)();
+extern void (*print_msg)();
+extern void (*print_info_msg)();
 
 // 0 is success, -1 is error
 int load_io();
