@@ -13,7 +13,22 @@
 
 #include "plugin_parser.h"
 
-// void *plugin_handle = NULL;
+void *plugin_handle = NULL;
+
+int load_plugin(const char *plugin_name) {
+  int ret = 0;
+  char fname[COMMON_TEXT_SIZE];
+  if (plugin_name == NULL)
+    ret = -1;
+  else {
+    strcpy(fname, "plugins/");
+    strcat(fname, plugin_name);
+    strcat(fname, ".plug");
+    ret = _load_plugin(fname);
+  }
+
+  return ret;
+}
 
 // void *_get_binary_func_internal(const char *name);
 
@@ -46,17 +61,23 @@
 //  return f;
 //}
 
-int load_plugin(const char *plugin_name) {
-  int ret = 0;
-  char fname[COMMON_TEXT_SIZE];
-  if (plugin_name == NULL)
-    ret = -1;
-  else {
-    strcpy(fname, "plugins/");
-    strcat(fname, plugin_name);
-    strcat(fname, ".plug");
-    ret = _load_plugin(fname);
+void *get_command(const char *command) {
+  void *cmd = NULL;
+  if (find_command(command) != 0) {
+    printf("cannot find \"%s\"\n", command);
   }
 
-  return ret;
+  return cmd;
+}
+
+int find_command(const char *command) {
+  plugin_element elem;
+  u_int cur_pos = _get_current_pos();
+  for (u_int i = 0; i < cur_pos; ++i) {
+    if (strcmp(list[i].desc.command, command) == 0) {
+      memcpy(&elem, &list[i], sizeof(list[i]));
+      return 0;
+    }
+  }
+  return -1;
 }

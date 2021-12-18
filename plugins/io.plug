@@ -2,7 +2,7 @@
 #
 #   --begin
 #   type = bin | script
-#   name = function name | script name
+#   command = function | script
 #   exec = path from plugins dir to exec file
 #   ret_val = yes | no
 #   args = yes | no
@@ -11,7 +11,7 @@
 
 --begin
 type = bin
-name = greetings
+command = greetings
 exec = plugins/system/libio_lib.so.1.0.0
 ret_val = yes
 args = no
@@ -20,7 +20,7 @@ desc = initial banner
 
 --begin
 type = bin
-name = print_help
+command = print_help
 exec = plugins/system/libio_lib.so.1.0.0
 ret_val = yes
 args = no
@@ -29,18 +29,18 @@ desc = print help message
 
 --begin
 type = bin
-name = get_command_from_user
+command = print_msg
 exec = plugins/system/libio_lib.so.1.0.0
 ret_val = yes
 args = no
-desc = get user input
+desc = print any text
 --end
 
 --begin
 type = bin
-name = is_command_exist
+command = print_info_msg
 exec = plugins/system/libio_lib.so.1.0.0
 ret_val = yes
 args = no
-desc = find command from help menu
+desc = print info message: error, complete, info
 --end

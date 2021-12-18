@@ -45,8 +45,8 @@ int _load_plugin(const char *restrict plugin_name) {
     }
 
     if (_ready_to_load) {
-      _parse_line(line, &p_desc, 6, P_TYPE, P_NAME, P_EXEC, P_RET_VAL, P_ARGS,
-                  P_DESC);
+      _parse_line(line, &p_desc, 6, P_TYPE, P_COMMAND, P_EXEC, P_RET_VAL,
+                  P_ARGS, P_DESC);
     }
 
     if (_is_eq(line, P_END)) {
@@ -93,7 +93,7 @@ size_t _get_offset(int value) {
   if (value == 0)
     return offsetof(plugin_descriptor, type);
   if (value == 1)
-    return offsetof(plugin_descriptor, name);
+    return offsetof(plugin_descriptor, command);
   if (value == 2)
     return offsetof(plugin_descriptor, exec);
   if (value == 3)
@@ -106,3 +106,5 @@ size_t _get_offset(int value) {
 }
 
 void _erase_list() { memset(list, 0, sizeof(list)); }
+
+u_int _get_current_pos() { return _pos; }

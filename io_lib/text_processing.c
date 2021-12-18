@@ -6,37 +6,18 @@
 #include "text_global.h"
 #include "text_processing.h"
 
-bool is_command_exist(const char *cmd) {
-  size_t cmd_count = sizeof(help_cmds) / sizeof(help_cmds[0]);
-  bool res = false;
-  for (size_t i = 0; i < cmd_count; ++i) {
-    if (strcmp(cmd, help_cmds[i].full_name) != 0) {
-      if (strcmp(cmd, help_cmds[i].short_name) == 0) {
-        res = true;
-      }
-    } else {
-      res = true;
-    }
-  }
-  return res;
-}
-
-// release the string after use ( free )
-char *get_command_from_user() {
-  char user_command[USER_COMMAND_LEN];
-  printf("%s", SHELL_TITILE);
-
-  // printf("shell: ");
-
-  // check for the CTRL-D
-  if (fgets(user_command, USER_COMMAND_LEN, stdin) == NULL) {
-    printf("\n");
-    EXIT(EXIT_SUCCESS);
-  }
-
-  // remove new line symbol '\n' and place 0
-  user_command[strcspn(user_command, "\n")] = 0;
-  return strdup(user_command);
+void greetings() {
+  char greetings_msg[COMMON_TEXT_SIZE * 2] = {0};
+  strcpy(greetings_msg, OS_COLOR_YELLOW);
+  strcat(greetings_msg, "*******************************************\n"
+                        "\n"
+                        " Welcome to V-Build!\n"
+                        "\n"
+                        " Press help for start\n"
+                        "\n"
+                        "*******************************************\n\n");
+  strcat(greetings_msg, OS_NO_COLOR);
+  print_msg(greetings_msg, SLEEP_MSEC_FAST);
 }
 
 void print_help_msg() {
@@ -53,25 +34,6 @@ void print_msg(const char *msg, size_t sleep_msec) {
     fflush(stdout);
     usleep(sleep_msec);
   }
-}
-
-bool is_command_simple(const char *cmd) {
-  size_t i = find_command(cmd);
-  return help_cmds[i].property == SIMPLE;
-}
-
-size_t find_command(const char *cmd) {
-  size_t res = -1;
-  size_t cmd_count = sizeof(help_cmds) / sizeof(help_cmds[0]);
-
-  for (size_t i = 0; i < cmd_count; ++i) {
-    if (strcmp(cmd, help_cmds[i].full_name) == 0 ||
-        strcmp(cmd, help_cmds[i].short_name) == 0) {
-      res = i;
-      break;
-    }
-  }
-  return res;
 }
 
 void print_info_msg(const char *title, const char *msg, int newline_symbol) {
@@ -113,16 +75,54 @@ int ask_yes_no(const char *question_text) {
   return answer;
 }
 
-void greetings() {
-  char greetings_msg[COMMON_TEXT_SIZE * 2] = {0};
-  strcpy(greetings_msg, OS_COLOR_YELLOW);
-  strcat(greetings_msg, "*******************************************\n"
-                        "\n"
-                        " Welcome to V-Build!\n"
-                        "\n"
-                        " Press help for start\n"
-                        "\n"
-                        "*******************************************\n\n");
-  strcat(greetings_msg, OS_NO_COLOR);
-  print_msg(greetings_msg, SLEEP_MSEC_FAST);
+bool is_command_exist(const char *cmd) {
+  size_t cmd_count = sizeof(help_cmds) / sizeof(help_cmds[0]);
+  bool res = false;
+  for (size_t i = 0; i < cmd_count; ++i) {
+    if (strcmp(cmd, help_cmds[i].full_name) != 0) {
+      if (strcmp(cmd, help_cmds[i].short_name) == 0) {
+        res = true;
+      }
+    } else {
+      res = true;
+    }
+  }
+  return res;
+}
+
+// release the string after use ( free )
+char *get_command_from_user() {
+  char user_command[USER_COMMAND_LEN];
+  printf("%s", SHELL_TITILE);
+
+  // printf("shell: ");
+
+  // check for the CTRL-D
+  if (fgets(user_command, USER_COMMAND_LEN, stdin) == NULL) {
+    printf("\n");
+    EXIT(EXIT_SUCCESS);
+  }
+
+  // remove new line symbol '\n' and place 0
+  user_command[strcspn(user_command, "\n")] = 0;
+  return strdup(user_command);
+}
+
+bool is_command_simple(const char *cmd) {
+  size_t i = find_command(cmd);
+  return help_cmds[i].property == SIMPLE;
+}
+
+size_t find_command(const char *cmd) {
+  size_t res = -1;
+  size_t cmd_count = sizeof(help_cmds) / sizeof(help_cmds[0]);
+
+  for (size_t i = 0; i < cmd_count; ++i) {
+    if (strcmp(cmd, help_cmds[i].full_name) == 0 ||
+        strcmp(cmd, help_cmds[i].short_name) == 0) {
+      res = i;
+      break;
+    }
+  }
+  return res;
 }
