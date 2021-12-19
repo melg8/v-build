@@ -24,7 +24,7 @@
 #define RUN_SHELL_LOOP for (;;)
 
 // main definitions
-#define COMMON_TEXT_SIZE 128
+#define COMMON_TEXT_SIZE 256
 #define PLUGIN_LIST_SIZE 256
 
 // main config

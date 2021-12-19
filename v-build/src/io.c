@@ -13,20 +13,7 @@ char *(*get_shell_input)();
 char *(*get_input)();
 // end io lib
 
-void _get_io_funcs();
-
-int load_io() {
-  if (load_plugin(IO_PLUGIN_NAME) == -1) {
-    printf("%s: plugin loading error, exit.\n", IO_PLUGIN_NAME);
-    return -1;
-  } else {
-    _get_io_funcs();
-  }
-
-  return 0;
-}
-
-void _get_io_funcs() {
+void load_io() {
   greetings = get_binary_function("greetings");
   print_help = get_binary_function("print_help_msg");
   print_msg = get_binary_function("print_msg");

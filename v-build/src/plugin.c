@@ -24,7 +24,7 @@ int load_plugin(const char *plugin_name) {
     strcpy(fname, "plugins/");
     strcat(fname, plugin_name);
     strcat(fname, ".plug");
-    ret = _load_plugin(fname);
+    ret = load_plugin_internal(fname);
   }
 
   return ret;
@@ -33,15 +33,15 @@ int load_plugin(const char *plugin_name) {
 // *function if success, NULL is error
 void *_get_binary_func(const plugin_element *restrict elem) {
   void *func = NULL;
-  plugin_handle = dlopen(elem->desc.exec, RTLD_NOW | RTLD_DEEPBIND);
+  plugin_handle = dlopen(elem->descriptor.exec, RTLD_NOW | RTLD_DEEPBIND);
   if (plugin_handle == NULL) {
     printf("dlopen error: %s\n", dlerror());
     return NULL;
   }
 
-  func = dlsym(plugin_handle, elem->desc.command);
+  func = dlsym(plugin_handle, elem->descriptor.command);
   if (func == NULL) {
-    printf("cannot open %s.\n", elem->desc.command);
+    printf("cannot open %s.\n", elem->descriptor.command);
     return NULL;
   }
 
@@ -58,17 +58,15 @@ void *get_binary_function(const char *fname) {
     return NULL;
   }
 
-  if (is_elem_binary(elem)) {
-    func = _get_binary_func(elem);
-  }
+  func = _get_binary_func(elem);
 
   return func;
 }
 
 plugin_element *find_element_by_command(const char *command) {
-  u_int cur_pos = _get_current_pos();
+  u_int cur_pos = get_current_list_pos();
   for (u_int i = 0; i < cur_pos; ++i) {
-    if (strcmp(list[i].desc.command, command) == 0) {
+    if (strcmp(list[i].descriptor.command, command) == 0) {
       return &list[i];
     }
   }
@@ -76,9 +74,9 @@ plugin_element *find_element_by_command(const char *command) {
 }
 
 bool is_elem_binary(const plugin_element *elem) {
-  return strcmp(elem->desc.type, ELEM_BINARY) == 0;
+  return strcmp(elem->descriptor.type, ELEM_BINARY) == 0;
 }
 
 bool is_elem_script(const plugin_element *elem) {
-  return strcmp(elem->desc.type, ELEM_SCRIPT) == 0;
+  return strcmp(elem->descriptor.type, ELEM_SCRIPT) == 0;
 }

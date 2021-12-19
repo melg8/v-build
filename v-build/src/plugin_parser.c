@@ -13,15 +13,14 @@
 static u_int _pos = 0;
 static bool _ready_to_load = false;
 
-int _load_plugin(const char *restrict plugin_path);
-bool _is_eq(const char *line, const char *cmp);
-void _parse_line(const char *line, plugin_descriptor *pd, int count, ...);
-void _erase_list();
-size_t _get_offset(int value);
+static bool _is_eq(const char *line, const char *cmp);
+static void _parse_line(const char *line, plugin_descriptor *pd, int count,
+                        ...);
+static size_t _get_offset(int value);
 
 plugin_element list[PLUGIN_LIST_SIZE] = {0};
 
-int _load_plugin(const char *restrict plugin_name) {
+int load_plugin_internal(const char *restrict plugin_name) {
   FILE *pf = fopen(plugin_name, "r");
   char *line = malloc(COMMON_TEXT_SIZE);
   size_t n;
@@ -52,21 +51,23 @@ int _load_plugin(const char *restrict plugin_name) {
     if (_is_eq(line, P_END)) {
       _ready_to_load = false;
       strcpy(list[_pos].plugin_name, plugin_name);
-      memcpy(&list[_pos].desc, &p_desc, sizeof(p_desc));
+      memcpy(&list[_pos].descriptor, &p_desc, sizeof(p_desc));
       memset(&p_desc, 0, sizeof(p_desc));
       _pos++;
     }
   }
 
+  fclose(pf);
   free(line);
   return 0;
 }
 
-bool _is_eq(const char *line, const char *cmp) {
+static bool _is_eq(const char *line, const char *cmp) {
   return strncmp(line, cmp, strlen(cmp)) == 0;
 }
 
-void _parse_line(const char *line, plugin_descriptor *pd, int count, ...) {
+static void _parse_line(const char *line, plugin_descriptor *pd, int count,
+                        ...) {
 
   char temp[COMMON_TEXT_SIZE] = {0};
 
@@ -89,7 +90,7 @@ void _parse_line(const char *line, plugin_descriptor *pd, int count, ...) {
   }
 }
 
-size_t _get_offset(int value) {
+static size_t _get_offset(int value) {
   if (value == 0)
     return offsetof(plugin_descriptor, type);
   if (value == 1)
@@ -105,6 +106,6 @@ size_t _get_offset(int value) {
   return 0;
 }
 
-void _erase_list() { memset(list, 0, sizeof(list)); }
+void erase_list() { memset(list, 0, sizeof(list)); }
 
-u_int _get_current_pos() { return _pos; }
+u_int get_current_list_pos() { return _pos; }

@@ -27,12 +27,13 @@ typedef struct plugin_descriptor {
 
 typedef struct plugin_element {
   char plugin_name[COMMON_TEXT_SIZE];
-  plugin_descriptor desc;
+  plugin_descriptor descriptor;
 } plugin_element;
 
 extern plugin_element list[PLUGIN_LIST_SIZE];
 
-int _load_plugin(const char *restrict plugin_name);
-u_int _get_current_pos();
+int load_plugin_internal(const char *restrict plugin_name);
+u_int get_current_list_pos();
+void erase_list();
 
 #endif // PLUGIN_PARSER_H

@@ -14,7 +14,6 @@ extern bool (*is_command_exist)(const char *cmd);
 extern char *(*get_shell_input)();
 extern char *(*get_input)();
 
-// 0 is success, -1 is error
-int load_io();
+void load_io();
 
 #endif // IO_H

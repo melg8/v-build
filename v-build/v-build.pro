@@ -14,6 +14,7 @@ INCLUDEPATH += \
         $$PWD/headers
 
 SOURCES += \
+    src/autoload.c \
     src/io.c \
         src/main.c \
         src/plugin.c \
@@ -21,6 +22,7 @@ SOURCES += \
         src/shell.c \
 
 HEADERS += \
+        headers/autoload.h \
         headers/io.h \
         headers/plugin.h \
         headers/plugin_parser.h \
@@ -28,6 +30,7 @@ HEADERS += \
         headers/v_build_global.h
 
 DISTFILES += \
-    ../plugins/io.plug
+    ../plugins/io.plug \
+    ../plugins/autoload.config
 
 
