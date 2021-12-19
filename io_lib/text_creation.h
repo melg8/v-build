@@ -14,12 +14,12 @@ typedef struct cmd_bunch {
   int property; // property holds whether composite or simple value
 } cmd_bunch;
 
-static const cmd_bunch help_cmds[] = {
-    {"help", "h", "help message", SIMPLE},
-    {"status", "s", "builder status", COMPOSITE},
-    {"clear", "c", "clear screen", SIMPLE},
-    {"quit", "q", "exit program", SIMPLE},
-    {"empty", "empty", "empty", SIMPLE}};
+static const cmd_bunch help_cmds[] = {{"help", "h", "help message", SIMPLE},
+                                      {"clear", "c", "clear screen", SIMPLE},
+                                      {"quit", "q", "exit program", SIMPLE},
+                                      {"empty", "empty", "empty", SIMPLE},
+                                      {"empty", "empty", "empty", SIMPLE},
+                                      {"empty", "empty", "empty", SIMPLE}};
 
 char *generate_help_string();
 
