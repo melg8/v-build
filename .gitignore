@@ -2,7 +2,6 @@ build/
 os-builder.pro.user
 os-builder.pro.user
 v-build.pro.user
-local_copy.sh
 output/*
 plugins/system/libtext_lib.so.1.0.0
 plugins/system/libtext_lib.so.1.0.0

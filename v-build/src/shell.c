@@ -1,8 +1,11 @@
 #include "shell.h"
 
+#include <dirent.h>
+#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/types.h>
 #include <unistd.h>
 
 #include "io.h"
@@ -34,5 +37,28 @@ void exec_help_command(const char *cmd) {
 
   if (strcmp(cmd, "quit") == 0 || strcmp(cmd, "q") == 0) {
     EXIT(EXIT_SUCCESS);
+  }
+
+  if (strcmp(cmd, "plugins") == 0 || strcmp(cmd, "p") == 0) {
+    view_all_plugins();
+  }
+
+  if (strcmp(cmd, "load") == 0 || strcmp(cmd, "l") == 0) {
+    // load plugin
+  }
+}
+
+void view_all_plugins() {
+  DIR *d = opendir("plugins");
+  struct dirent *dp = NULL;
+  char plugins[COMMON_TEXT_SIZE * 2] = {0};
+
+  if (d == NULL) {
+    print_info_msg(ERROR_MSG, strerror(errno), YES);
+    return;
+  }
+
+  while ((dp = readdir(d)) != 0) {
+    print_info_msg(INFO_MSG, dp->d_name, YES);
   }
 }

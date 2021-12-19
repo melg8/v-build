@@ -5,6 +5,8 @@
 
 #include "text_global.h"
 
+static const size_t separator = 3;
+
 size_t get_biggest_help_length();
 
 char *generate_help_string() {
@@ -18,6 +20,10 @@ char *generate_help_string() {
     if (i == 0) {
       strcpy(string, OS_COLOR_YELLOW);
     }
+
+    if (i == separator)
+      strcat(string, "\n");
+
     strcat(string, "[ ");
     strcat(string, help_cmds[i].full_name);
     strcat(string, ", ");

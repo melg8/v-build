@@ -36,7 +36,6 @@
 
 // commands
 
-#define NOT_IMPLEMENTED "command is simple, but not implemented yet."
 #define YES_NO_INCORRECT_INPUT "please enter (Y,YES,y,yes) || (N,NO,n,no)."
 
 // common sizes
