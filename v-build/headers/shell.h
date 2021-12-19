@@ -6,6 +6,6 @@
 void run_shell();
 
 // 0 - success, -1 is error
-int exec_help_command(const char *cmd);
+void exec_help_command(const char *cmd);
 
 #endif // SHELL_H

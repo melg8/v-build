@@ -16,6 +16,7 @@
 #define SHELL_TITILE OS_COLOR_GREEN SHELL_NAME OS_NO_COLOR
 
 #define CLEAR_SCREEN system("clear")
+#define EXIT(code) exit(code)
 
 #define INVALID_COMMAND                                                        \
   "invalid command, run \"help\" to view list of commands."
