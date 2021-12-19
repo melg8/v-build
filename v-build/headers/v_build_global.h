@@ -15,6 +15,11 @@
 
 #define SHELL_TITILE OS_COLOR_GREEN SHELL_NAME OS_NO_COLOR
 
+#define CLEAR_SCREEN system("clear")
+
+#define INVALID_COMMAND                                                        \
+  "invalid command, run \"help\" to view list of commands."
+
 // msg titles
 #define INFO_MSG OS_COLOR_BLUE "info: " OS_NO_COLOR
 #define ERROR_MSG OS_COLOR_RED "err: " OS_NO_COLOR

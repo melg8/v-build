@@ -3,10 +3,10 @@
 
 int main(int argc, char *argv[]) {
 
+  autoload_plugins();
+
   (void)argc;
   (void)argv;
-
-  autoload_plugins();
 
   run_shell();
 

@@ -18,7 +18,7 @@ char *generate_help_string() {
     if (i == 0) {
       strcpy(string, OS_COLOR_YELLOW);
     }
-    strcat(string, "\t[ ");
+    strcat(string, "[ ");
     strcat(string, help_cmds[i].full_name);
     strcat(string, ", ");
     strcat(string, help_cmds[i].short_name);

@@ -21,5 +21,5 @@ void load_io() {
   is_command_exist = get_binary_function("is_command_exist");
   get_shell_input = get_binary_function("get_shell_input");
 
-  print_info_msg(AUTOLOAD, "io plugin loaded.", YES);
+  greetings();
 }

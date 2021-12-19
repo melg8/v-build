@@ -32,12 +32,10 @@
 #define QUESTION OS_COLOR_YELLOW "question: " OS_NO_COLOR
 
 // common functions
-#define CLEAR_SCREEN system("clear")
 #define EXIT(code) exit(code)
 
 // commands
-#define INVALID_COMMAND                                                        \
-"invalid command, run \"help\" to view list of commands."
+
 #define NOT_IMPLEMENTED "command is simple, but not implemented yet."
 #define YES_NO_INCORRECT_INPUT "please enter (Y,YES,y,yes) || (N,NO,n,no)."
 
