@@ -53,3 +53,21 @@ ret_val = yes
 args = yes
 desc = ask user about smth, the answer is yes or no
 --end
+
+--begin
+type = bin
+command = is_command_exist
+exec = plugins/system/libio_lib.so.1.0.0
+ret_val = yes
+args = yes
+desc = search command in help menu
+--end
+
+--begin
+type = bin
+command = get_shell_input
+exec = plugins/system/libio_lib.so.1.0.0
+ret_val = yes
+args = no
+desc = get user input
+--end

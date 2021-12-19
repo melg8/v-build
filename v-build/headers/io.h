@@ -10,6 +10,9 @@ extern void (*print_help)();
 extern void (*print_msg)();
 extern void (*print_info_msg)();
 extern int (*ask_yes_no)(const char *question_text);
+extern bool (*is_command_exist)(const char *cmd);
+extern char *(*get_shell_input)();
+extern char *(*get_input)();
 
 // 0 is success, -1 is error
 int load_io();

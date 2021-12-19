@@ -16,6 +16,7 @@ int ask_yes_no(const char *question_text);
 
 bool is_command_exist(const char *cmd);
 
-char *get_command_from_user(bool is_title_needed);
+char *get_shell_input();
+char *get_input();
 
 #endif // TEXT_PROCESSING_H
