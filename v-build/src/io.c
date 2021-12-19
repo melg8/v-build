@@ -10,7 +10,6 @@ void (*print_info_msg)(const char *title, const char *msg, int newline_symbol);
 int (*ask_yes_no)(const char *question_text);
 bool (*is_command_exist)(const char *cmd);
 char *(*get_shell_input)();
-char *(*get_input)();
 // end io lib
 
 void load_io() {
@@ -19,4 +18,8 @@ void load_io() {
   print_msg = get_binary_function("print_msg");
   print_info_msg = get_binary_function("print_info_msg");
   ask_yes_no = get_binary_function("ask_yes_no");
+  is_command_exist = get_binary_function("is_command_exist");
+  get_shell_input = get_binary_function("get_shell_input");
+
+  print_info_msg(AUTOLOAD, "io plugin loaded.", YES);
 }

@@ -20,6 +20,7 @@
 #define ERROR_MSG OS_COLOR_RED "err: " OS_NO_COLOR
 #define COMPLETE OS_COLOR_GREEN "complete: " OS_NO_COLOR
 #define QUESTION OS_COLOR_YELLOW "question: " OS_NO_COLOR
+#define AUTOLOAD OS_COLOR_YELLOW "autoload: " OS_NO_COLOR
 
 #define RUN_SHELL_LOOP for (;;)
 
