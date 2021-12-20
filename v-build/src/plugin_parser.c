@@ -79,6 +79,7 @@ static void _parse_line(const char *line, plugin_descriptor *pd, int count,
     char *str = va_arg(arg_list, char *);
 
     if (strncmp(line, str, strlen(str)) == 0) {
+
       strcpy(temp, line + (strlen(str)));
       temp[strcspn(temp, "\n")] = 0;
 

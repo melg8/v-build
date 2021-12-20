@@ -80,3 +80,10 @@ bool is_elem_binary(const plugin_element *elem) {
 bool is_elem_script(const plugin_element *elem) {
   return strcmp(elem->descriptor.type, ELEM_SCRIPT) == 0;
 }
+
+bool is_plugin_command(const char *command) {
+  if (find_element_by_command(command) == NULL) {
+    return false;
+  }
+  return true;
+}

@@ -20,7 +20,8 @@ SOURCES += \
         src/plugin.c \
         src/plugin_parser.c \
         src/shell.c \
-    src/shell_helper.c
+    src/shell_helper.c \
+    src/user_input_parser.c
 
 HEADERS += \
         headers/autoload.h \
@@ -29,6 +30,7 @@ HEADERS += \
         headers/plugin_parser.h \
         headers/shell.h \
         headers/shell_helper.h \
+        headers/user_input_parser.h \
         headers/v_build_global.h
 
 DISTFILES += \

@@ -8,7 +8,7 @@
 #define P_TYPE "type = "
 #define P_COMMAND "command = "
 #define P_EXEC "exec = "
-#define P_RET_VAL "ret_val ="
+#define P_RET_VAL "ret_val = "
 #define P_ARGS "args = "
 #define P_DESC "desc = "
 

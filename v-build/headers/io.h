@@ -11,7 +11,7 @@ extern void (*print_msg)();
 extern void (*print_fmt_msg)();
 extern void (*print_info_msg)();
 extern int (*ask_yes_no)(const char *question_text);
-extern bool (*is_help_command_exist)(const char *cmd);
+extern bool (*is_help_command)(const char *cmd);
 extern char *(*get_shell_input)();
 
 void load_io();

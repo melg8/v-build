@@ -1,7 +1,9 @@
 #include "shell.h"
 
 #include "io.h"
+#include "plugin.h"
 #include "shell_helper.h"
+#include "user_input_parser.h"
 #include "v_build_global.h"
 
 void run_shell() {
@@ -11,13 +13,11 @@ void run_shell() {
   RUN_SHELL_LOOP {
     char *user_input = get_shell_input();
 
-    if (is_help_command_exist(user_input)) {
+    if (is_help_command(user_input)) {
       exec_help_command(user_input);
-    }
-    // if (is_plugin_command(user_input) {
-    // exec_plugin_command(user_input)
-    //}
-    else {
+    } else if (is_plugin_command(user_input)) {
+      exec_plugin_command(user_input);
+    } else {
       print_info_msg(ERROR_MSG, INVALID_COMMAND, YES);
     }
   }

@@ -38,7 +38,8 @@
 #define IO_INDEX 0
 #define IO_PLUGIN_NAME "io"
 
-typedef void (*void_func)();
-typedef char *(*char_func)();
+typedef void (*ret_void_no_args_func)();
+typedef int (*ret_int_no_args_func)();
+typedef char *(*ret_char_no_args_func)();
 
 #endif // V_BUILD_GLOBAL_H

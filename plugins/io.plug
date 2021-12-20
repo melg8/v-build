@@ -65,7 +65,7 @@ desc = ask user about smth, the answer is yes or no
 
 --begin
 type = bin
-command = is_help_command_exist
+command = is_help_command
 exec = plugins/system/libio_lib.so.1.0.0
 ret_val = bool
 args = char* cmd

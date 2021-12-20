@@ -91,7 +91,7 @@ int ask_yes_no(const char *question_text) {
   return answer;
 }
 
-bool is_help_command_exist(const char *cmd) {
+bool is_help_command(const char *cmd) {
   size_t cmd_count = sizeof(help_cmds) / sizeof(help_cmds[0]);
   bool res = false;
   for (size_t i = 0; i < cmd_count; ++i) {
