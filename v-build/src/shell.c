@@ -8,10 +8,12 @@
 #include <sys/types.h>
 #include <unistd.h>
 
+#include "help.h"
 #include "io.h"
 #include "v_build_global.h"
 
 void run_shell() {
+
   load_io();
 
   RUN_SHELL_LOOP {
@@ -29,6 +31,7 @@ void exec_help_command(const char *cmd) {
 
   if (strcmp(cmd, "help") == 0 || strcmp(cmd, "h") == 0) {
     print_help();
+    print_loaded_functions();
   }
 
   if (strcmp(cmd, "clear") == 0 || strcmp(cmd, "c") == 0) {
