@@ -52,6 +52,7 @@ void view_all_plugins() {
   DIR *d = opendir("plugins");
   struct dirent *dp = NULL;
   char plugins[COMMON_TEXT_SIZE * 2] = {0};
+  strcpy(plugins, "\n");
 
   if (d == NULL) {
     print_info_msg(ERROR_MSG, strerror(errno), YES);
@@ -59,6 +60,11 @@ void view_all_plugins() {
   }
 
   while ((dp = readdir(d)) != 0) {
-    print_info_msg(INFO_MSG, dp->d_name, YES);
+
+    if (strstr(dp->d_name, ".plug") != NULL) {
+      strcat(plugins, dp->d_name);
+      strcat(plugins, "\n");
+    }
   }
+  print_info_msg(COMPLETE, plugins, YES);
 }
