@@ -9,6 +9,7 @@ void greetings();
 void print_help_msg();
 
 void print_msg(const char *msg, size_t sleep_msec);
+void print_fmt_msg(int width, const char *msg);
 void print_info_msg(const char *title, const char *msg, int newline_symbol);
 
 // 1 - answer received, 0 - no

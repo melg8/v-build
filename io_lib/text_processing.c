@@ -36,6 +36,21 @@ void print_msg(const char *msg, size_t sleep_msec) {
   }
 }
 
+void print_fmt_msg(int width, const char *msg) {
+  char space[COMMON_TEXT_SIZE] = {0};
+
+  int cnt = width - strlen(msg);
+  if (cnt < 0)
+    cnt = 0;
+
+  for (int i = 0; i < cnt; ++i) {
+    space[i] = ' ';
+  }
+
+  print_msg(msg, SLEEP_MSEC_COMMON);
+  print_msg(space, SLEEP_MSEC_COMMON);
+}
+
 void print_info_msg(const char *title, const char *msg, int newline_symbol) {
   char string[MSG_LENGTH];
   memset(string, 0, MSG_LENGTH);

@@ -15,20 +15,20 @@ INCLUDEPATH += \
 
 SOURCES += \
     src/autoload.c \
-    src/help.c \
     src/io.c \
         src/main.c \
         src/plugin.c \
         src/plugin_parser.c \
         src/shell.c \
+    src/shell_helper.c
 
 HEADERS += \
         headers/autoload.h \
-        headers/help.h \
         headers/io.h \
         headers/plugin.h \
         headers/plugin_parser.h \
         headers/shell.h \
+        headers/shell_helper.h \
         headers/v_build_global.h
 
 DISTFILES += \
