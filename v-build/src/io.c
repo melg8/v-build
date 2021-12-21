@@ -5,13 +5,13 @@
 // function from io_lib, loading by default
 void (*greetings)();
 void (*print_help)();
-void (*print_msg)(const char *msg, size_t sleep_msec);
-void (*print_fmt_msg)(int width, const char *msg);
-void (*print_info_msg)(const char *title, const char *msg, int newline_symbol);
-int (*ask_yes_no)(const char *question_text);
-bool (*is_help_command)(const char *cmd);
+void (*print_msg)();
+void (*print_fmt_msg)();
+void (*print_info_msg)();
+int (*ask_yes_no)();
+bool (*is_help_command)();
 char *(*get_shell_input)();
-char *(*get_input)(const char *input);
+char *(*get_input)();
 // end io lib
 
 void load_io() {

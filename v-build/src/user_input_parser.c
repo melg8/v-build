@@ -20,15 +20,20 @@ void exec_plugin_command(const char *cmd) {
   if (is_elem_binary(elem)) {
     voidfunc f = get_binary_function(cmd);
     if (is_func_has_args(elem)) {
-      char *str = get_input("Enter args:");
+      char *str = elem->descriptor.args;
       parse_args(str);
+      get_func_args();
+
+      for (size_t i = 0; i < cnt; ++i) {
+        print_info_msg("your arg: ", user_args[i], YES);
+      }
     }
   }
 }
 
-void parse_args(const char *user_input) {
+void parse_args(const char *elem_args) {
   char copy[COMMON_TEXT_SIZE];
-  strcpy(copy, user_input);
+  strcpy(copy, elem_args);
   char delim[] = ",";
   char *p = NULL;
 
@@ -56,4 +61,22 @@ void parse_args(const char *user_input) {
 bool is_func_has_args(const plugin_element *elem) {
   bool has_args = strcmp(elem->descriptor.args, NO_ARGS) != 0;
   return has_args;
+}
+
+void get_func_args() {
+  char arg_type_must_be[COMMON_TEXT_SIZE] = {0};
+
+  if (cnt == 0)
+    return;
+
+  for (size_t i = 0; i < cnt; ++i) {
+    memset(arg_type_must_be, 0, sizeof(arg_type_must_be));
+
+    strcpy(arg_type_must_be, "Enter the argument (must be ");
+    strcat(arg_type_must_be, user_args[i]);
+    strcat(arg_type_must_be, "): ");
+
+    char *arg_value = get_input(arg_type_must_be);
+    strcpy(user_args[i], arg_value);
+  }
 }

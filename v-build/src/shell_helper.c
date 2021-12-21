@@ -75,7 +75,7 @@ void print_loaded_functions() {
       print_fmt_msg(10, temp);
 
       strcpy(temp, "args:");
-      print_fmt_msg(50, temp);
+      print_fmt_msg(35, temp);
 
       strcpy(temp, "description:");
       print_fmt_msg(50, temp);
@@ -88,7 +88,7 @@ void print_loaded_functions() {
     print_fmt_msg(8, elem->descriptor.type);
     print_fmt_msg(30, elem->descriptor.command);
     print_fmt_msg(10, elem->descriptor.ret_val);
-    print_fmt_msg(50, elem->descriptor.args);
+    print_fmt_msg(35, elem->descriptor.args);
     print_fmt_msg(50, elem->descriptor.desc);
 
     print_msg("\n", 0);

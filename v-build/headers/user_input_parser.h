@@ -22,8 +22,9 @@ void exec_plugin_command(const char *restrict cmd);
 void *determine_binary_func(const plugin_element *elem,
                             const char *restrict cmd);
 
-void parse_args(const char *user_input);
+void parse_args(const char *elem_args);
 
 bool is_func_has_args(const plugin_element *elem);
+void get_func_args();
 
 #endif // USER_INPUT_PARSER_H

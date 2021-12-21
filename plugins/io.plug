@@ -33,7 +33,7 @@ command = print_msg
 exec = plugins/system/libio_lib.so.1.0.0
 ret_val = void
 args = char*, int
-desc = print any text
+desc = char* - text, int - sleep(msec)
 --end
 
 --begin
@@ -42,7 +42,7 @@ command = print_fmt_msg
 exec = plugins/system/libio_lib.so.1.0.0
 ret_val = void
 args = int, char*
-desc = print formatted text
+desc = aligned text with int from RIGHT, char* - text
 --end
 
 --begin
@@ -51,7 +51,7 @@ command = print_info_msg
 exec = plugins/system/libio_lib.so.1.0.0
 ret_val = void
 args = char*, char*, char*
-desc = print info message: error, complete, info
+desc = print message - title, text, new_line ( YES or NO )
 --end
 
 --begin
@@ -60,7 +60,7 @@ command = ask_yes_no
 exec = plugins/system/libio_lib.so.1.0.0
 ret_val = int
 args = char*
-desc = ask user about smth, the answer is yes or no
+desc = char* - your question
 --end
 
 --begin
@@ -69,7 +69,7 @@ command = is_help_command
 exec = plugins/system/libio_lib.so.1.0.0
 ret_val = bool
 args = char*
-desc = search command in help menu
+desc = search in help list, char* - name of command
 --end
 
 --begin
@@ -78,7 +78,7 @@ command = get_shell_input
 exec = plugins/system/libio_lib.so.1.0.0
 ret_val = char*
 args = no
-desc = get user input
+desc = get user input, no args
 --end
 
 --begin
@@ -87,5 +87,5 @@ command = get_input
 exec = plugins/system/libio_lib.so.1.0.0
 ret_val = char*
 args = char*
-desc = get user input
+desc = char* - text before input
 --end

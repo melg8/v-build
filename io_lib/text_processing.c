@@ -120,6 +120,7 @@ char *get_input(const char *input) {
 
   char user_command[USER_COMMAND_LEN];
 
+  printf("%s", user_input);
   // check for the CTRL-D
   if (fgets(user_command, USER_COMMAND_LEN, stdin) == NULL) {
     printf("\n");

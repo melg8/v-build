@@ -10,10 +10,10 @@ extern void (*print_help)();
 extern void (*print_msg)();
 extern void (*print_fmt_msg)();
 extern void (*print_info_msg)();
-extern int (*ask_yes_no)(const char *question_text);
-extern bool (*is_help_command)(const char *cmd);
+extern int (*ask_yes_no)();
+extern bool (*is_help_command)();
 extern char *(*get_shell_input)();
-extern char *(*get_input)(const char *input);
+extern char *(*get_input)();
 
 void load_io();
 
