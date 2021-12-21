@@ -3,6 +3,12 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "io.h"
+
+char user_args[ARGS_COUNT] = {0};
+
+static size_t cnt = 0;
+
 void exec_plugin_command(const char *cmd) {
   plugin_element *elem = find_element_by_command(cmd);
 
@@ -12,72 +18,28 @@ void exec_plugin_command(const char *cmd) {
   }
 
   if (is_elem_binary(elem)) {
-
-    determine_binary_func(elem, cmd);
+    voidfunc f = get_binary_function(cmd);
+    if (strcmp(elem->descriptor.args, NO_ARGS) != 0) {
+      char *str = get_input("Enter args:");
+      parse_args(str);
+    }
   }
 }
 
-void determine_binary_func(const plugin_element *elem,
-                           const char *restrict cmd) {
-  if (is_func_ret_void(elem)) {
-    ret_void_func f = get_binary_function(cmd);
-    f();
+void parse_args(const char *user_input) {
+  char copy[COMMON_TEXT_SIZE];
+  strcpy(copy, user_input);
+  char delim = ' ';
+  char *p = NULL;
+
+  char *t1 = user_args;
+  size_t *t2 = &cnt;
+
+  memset(user_args, 0, sizeof(user_args));
+  cnt = 0;
+
+  while ((p = strtok(copy, &delim)) != NULL) {
+    strcpy(&user_args[cnt], p);
+    cnt++;
   }
-
-  if (is_func_ret_int(elem)) {
-    ret_int_func f = get_binary_function(cmd);
-    int res = f();
-    char str[COMMON_TEXT_SIZE] = {0};
-    sprintf(str, "%d", res);
-    print_info_msg(RESULT, str, YES);
-  }
-
-  if (is_func_ret_charp(elem)) {
-    ret_charp_func f = get_binary_function(cmd);
-    char *res = f();
-    print_info_msg(RESULT, res, YES);
-  }
-
-  if (is_func_ret_bool(elem)) {
-    ret_bool_func f = get_binary_function(cmd);
-
-    char str[COMMON_TEXT_SIZE] = {0};
-    strcpy(str, (f() ? "TRUE" : "FALSE"));
-
-    print_info_msg(RESULT, str, YES);
-  }
-}
-
-bool is_func_ret_void(const plugin_element *elem) {
-  if (strcmp(elem->descriptor.ret_val, IS_RET_VOID) == 0)
-    return true;
-
-  return false;
-}
-
-bool is_func_ret_int(const plugin_element *elem) {
-  if (strcmp(elem->descriptor.ret_val, IS_RET_INT) == 0)
-    return true;
-
-  return false;
-}
-
-bool is_func_ret_charp(const plugin_element *elem) {
-  if (strcmp(elem->descriptor.ret_val, IS_RET_CHAR_P) == 0)
-    return true;
-  return false;
-}
-
-bool is_func_ret_bool(const plugin_element *elem) {
-  if (strcmp(elem->descriptor.ret_val, IS_RET_BOOL) == 0)
-    return true;
-
-  return false;
-}
-
-bool is_func_have_args(const plugin_element *elem) {
-  if (strcmp(elem->descriptor.args, NO_ARGS) == 0)
-    return false;
-
-  return true;
 }

@@ -3,7 +3,6 @@
 
 #include <stdbool.h>
 
-#include "io.h"
 #include "plugin.h"
 #include "v_build_global.h"
 
@@ -14,17 +13,15 @@
 #define IS_TEXT "text"
 
 #define NO_ARGS "no"
+#define ARGS_COUNT 10
+
+extern char user_args[ARGS_COUNT];
 
 void exec_plugin_command(const char *restrict cmd);
 
-void determine_binary_func(const plugin_element *elem,
-                           const char *restrict cmd);
+void *determine_binary_func(const plugin_element *elem,
+                            const char *restrict cmd);
 
-// logical parsing functions
-bool is_func_ret_void(const plugin_element *elem);
-bool is_func_ret_int(const plugin_element *elem);
-bool is_func_ret_charp(const plugin_element *elem);
-bool is_func_ret_bool(const plugin_element *elem);
-bool is_func_have_args(const plugin_element *elem);
+void parse_args(const char *user_input);
 
 #endif // USER_INPUT_PARSER_H

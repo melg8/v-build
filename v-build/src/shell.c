@@ -10,6 +10,8 @@ void run_shell() {
   // must be 1st line. load_io
   load_io();
 
+  parse_args("arg1, arg2, arg3, adflkja");
+
   RUN_SHELL_LOOP {
     char *user_input = get_shell_input();
 
