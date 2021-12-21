@@ -36,6 +36,6 @@ HEADERS += \
 DISTFILES += \
     ../plugins/io.plug \
     ../plugins/autoload.config \
-    ../plugins/to_do
+    ../to_do
 
 
