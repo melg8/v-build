@@ -1,6 +1,7 @@
 #ifndef V_BUILD_GLOBAL_H
 #define V_BUILD_GLOBAL_H
 
+#include <stdbool.h>
 #include <stdlib.h>
 
 // colors for output
@@ -27,6 +28,7 @@
 #define COMPLETE OS_COLOR_GREEN "complete: " OS_NO_COLOR
 #define QUESTION OS_COLOR_YELLOW "question: " OS_NO_COLOR
 #define AUTOLOAD OS_COLOR_YELLOW "autoload: " OS_NO_COLOR
+#define RESULT OS_COLOR_GREEN "result: " OS_NO_COLOR
 
 #define RUN_SHELL_LOOP for (;;)
 
@@ -38,8 +40,10 @@
 #define IO_INDEX 0
 #define IO_PLUGIN_NAME "io"
 
-typedef void (*ret_void_no_args_func)();
+// no args
+typedef void (*no_ret_no_args_func)();
 typedef int (*ret_int_no_args_func)();
-typedef char *(*ret_char_no_args_func)();
+typedef char *(*ret_charp_no_args_func)();
+typedef bool (*ret_bool_no_args_func)();
 
 #endif // V_BUILD_GLOBAL_H
