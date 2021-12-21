@@ -9,8 +9,8 @@ void exec_plugin_command(const char *cmd) {
     return;
 
   if (is_func_void_no_ret(elem)) {
-    ret_void_no_args_func func = get_binary_function(cmd);
-    func();
+    ret_void_no_args_func f = get_binary_function(cmd);
+    f();
   }
 }
 
