@@ -19,27 +19,27 @@ void exec_plugin_command(const char *cmd) {
 
 void determine_binary_func(const plugin_element *elem,
                            const char *restrict cmd) {
-  if (is_func_no_ret_no_args(elem)) {
-    no_ret_no_args_func f = get_binary_function(cmd);
+  if (is_func_ret_void(elem)) {
+    ret_void_func f = get_binary_function(cmd);
     f();
   }
 
-  if (is_func_ret_int_no_args(elem)) {
-    ret_int_no_args_func f = get_binary_function(cmd);
+  if (is_func_ret_int(elem)) {
+    ret_int_func f = get_binary_function(cmd);
     int res = f();
     char str[COMMON_TEXT_SIZE] = {0};
     sprintf(str, "%d", res);
     print_info_msg(RESULT, str, YES);
   }
 
-  if (is_func_ret_charp_no_args(elem)) {
-    ret_charp_no_args_func f = get_binary_function(cmd);
+  if (is_func_ret_charp(elem)) {
+    ret_charp_func f = get_binary_function(cmd);
     char *res = f();
     print_info_msg(RESULT, res, YES);
   }
 
-  if (is_func_ret_bool_no_args(elem)) {
-    ret_bool_no_args_func f = get_binary_function(cmd);
+  if (is_func_ret_bool(elem)) {
+    ret_bool_func f = get_binary_function(cmd);
 
     char str[COMMON_TEXT_SIZE] = {0};
     strcpy(str, (f() ? "TRUE" : "FALSE"));
@@ -48,39 +48,36 @@ void determine_binary_func(const plugin_element *elem,
   }
 }
 
-bool is_func_no_ret_no_args(const plugin_element *elem) {
-  if (strcmp(elem->descriptor.ret_val, IS_RET_VOID) == 0) {
-    if (strcmp(elem->descriptor.args, NO_ARGS) == 0) {
-      return true;
-    }
-  }
+bool is_func_ret_void(const plugin_element *elem) {
+  if (strcmp(elem->descriptor.ret_val, IS_RET_VOID) == 0)
+    return true;
 
   return false;
 }
 
-bool is_func_ret_int_no_args(const plugin_element *elem) {
-  if (strcmp(elem->descriptor.ret_val, IS_RET_INT) == 0) {
-    if (strcmp(elem->descriptor.args, NO_ARGS) == 0) {
-      return true;
-    }
-  }
+bool is_func_ret_int(const plugin_element *elem) {
+  if (strcmp(elem->descriptor.ret_val, IS_RET_INT) == 0)
+    return true;
+
   return false;
 }
 
-bool is_func_ret_charp_no_args(const plugin_element *elem) {
-  if (strcmp(elem->descriptor.ret_val, IS_RET_CHAR_P) == 0) {
-    if (strcmp(elem->descriptor.args, NO_ARGS) == 0) {
-      return true;
-    }
-  }
+bool is_func_ret_charp(const plugin_element *elem) {
+  if (strcmp(elem->descriptor.ret_val, IS_RET_CHAR_P) == 0)
+    return true;
   return false;
 }
 
-bool is_func_ret_bool_no_args(const plugin_element *elem) {
-  if (strcmp(elem->descriptor.ret_val, IS_RET_BOOL) == 0) {
-    if (strcmp(elem->descriptor.args, NO_ARGS) == 0) {
-      return true;
-    }
-  }
+bool is_func_ret_bool(const plugin_element *elem) {
+  if (strcmp(elem->descriptor.ret_val, IS_RET_BOOL) == 0)
+    return true;
+
   return false;
+}
+
+bool is_func_have_args(const plugin_element *elem) {
+  if (strcmp(elem->descriptor.args, NO_ARGS) == 0)
+    return false;
+
+  return true;
 }

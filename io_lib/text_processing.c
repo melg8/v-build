@@ -74,7 +74,7 @@ int ask_yes_no(const char *question_text) {
   int answer = NO;
   while (!answer_received) {
     print_info_msg(QUESTION, question, NO);
-    char *user_string = get_input();
+    char *user_string = get_input(NULL);
     if (strcmp(user_string, "Y") == 0 || strcmp(user_string, "y") == 0 ||
         strcmp(user_string, "YES") == 0 || strcmp(user_string, "yes") == 0) {
       answer_received = true;
@@ -109,10 +109,15 @@ bool is_help_command(const char *cmd) {
 // release the string after use ( free )
 char *get_shell_input() {
   printf("%s", SHELL_TITILE);
-  return get_input();
+  return get_input(NULL);
 }
 
-char *get_input() {
+char *get_input(const char *input) {
+  char user_input[COMMON_TEXT_SIZE] = {0};
+  if (input != NULL) {
+    strcpy(user_input, input);
+  }
+
   char user_command[USER_COMMAND_LEN];
 
   // check for the CTRL-D

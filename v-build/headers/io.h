@@ -13,6 +13,7 @@ extern void (*print_info_msg)();
 extern int (*ask_yes_no)(const char *question_text);
 extern bool (*is_help_command)(const char *cmd);
 extern char *(*get_shell_input)();
+extern char *(*get_input)(const char *input);
 
 void load_io();
 

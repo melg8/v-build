@@ -41,9 +41,9 @@
 #define IO_PLUGIN_NAME "io"
 
 // no args
-typedef void (*no_ret_no_args_func)();
-typedef int (*ret_int_no_args_func)();
-typedef char *(*ret_charp_no_args_func)();
-typedef bool (*ret_bool_no_args_func)();
+typedef void (*ret_void_func)();
+typedef int (*ret_int_func)();
+typedef char *(*ret_charp_func)();
+typedef bool (*ret_bool_func)();
 
 #endif // V_BUILD_GLOBAL_H

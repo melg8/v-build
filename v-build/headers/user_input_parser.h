@@ -21,10 +21,10 @@ void determine_binary_func(const plugin_element *elem,
                            const char *restrict cmd);
 
 // logical parsing functions
-bool is_func_no_ret_no_args(const plugin_element *elem);
-
-bool is_func_ret_int_no_args(const plugin_element *elem);
-bool is_func_ret_charp_no_args(const plugin_element *elem);
-bool is_func_ret_bool_no_args(const plugin_element *elem);
+bool is_func_ret_void(const plugin_element *elem);
+bool is_func_ret_int(const plugin_element *elem);
+bool is_func_ret_charp(const plugin_element *elem);
+bool is_func_ret_bool(const plugin_element *elem);
+bool is_func_have_args(const plugin_element *elem);
 
 #endif // USER_INPUT_PARSER_H

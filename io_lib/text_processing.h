@@ -18,6 +18,6 @@ int ask_yes_no(const char *question_text);
 bool is_help_command(const char *cmd);
 
 char *get_shell_input();
-char *get_input();
+char *get_input(const char *input);
 
 #endif // TEXT_PROCESSING_H
