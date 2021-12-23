@@ -83,7 +83,7 @@ bool is_func_has_args(const plugin_element *elem) {
 }
 
 void get_func_args() {
-  char arg_type_must_be[COMMON_TEXT_SIZE] = {0};
+  char arg_type_text[COMMON_TEXT_SIZE] = {0};
 
   if (_cnt == 0)
     return;
@@ -93,10 +93,10 @@ input:
 
     _print_pre_input_text(user_args_etalon[i]);
 
-    char *arg_value = get_input(arg_type_must_be);
+    char *arg_value = get_input(arg_type_text);
     strcpy(user_input_args[i], arg_value);
 
-    memset(arg_type_must_be, 0, sizeof(arg_type_must_be));
+    memset(arg_type_text, 0, sizeof(arg_type_text));
   }
 
   if (!is_args_ok()) {

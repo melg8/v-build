@@ -113,14 +113,14 @@ char *get_shell_input() {
 }
 
 char *get_input(const char *input) {
-  char user_input[COMMON_TEXT_SIZE] = {0};
+
+  char *user_command = malloc(USER_COMMAND_LEN);
+  memset(user_command, 0, USER_COMMAND_LEN);
+
   if (input != NULL) {
-    strcpy(user_input, input);
+    printf("%s", input);
   }
 
-  char user_command[USER_COMMAND_LEN];
-
-  printf("%s", user_input);
   // check for the CTRL-D
   if (fgets(user_command, USER_COMMAND_LEN, stdin) == NULL) {
     printf("\n");
@@ -129,5 +129,5 @@ char *get_input(const char *input) {
 
   // remove new line symbol '\n' and place 0
   user_command[strcspn(user_command, "\n")] = 0;
-  return strdup(user_command);
+  return user_command;
 }
