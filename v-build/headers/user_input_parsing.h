@@ -1,5 +1,5 @@
-#ifndef USER_INPUT_PARSER_H
-#define USER_INPUT_PARSER_H
+#ifndef USER_INPUT_PARSING_H
+#define USER_INPUT_PARSING_H
 
 #include <stdbool.h>
 
@@ -36,4 +36,4 @@ bool is_all_numbers(const char *array);
 
 void reset_user_args();
 
-#endif // USER_INPUT_PARSER_H
+#endif // USER_INPUT_PARSING_H

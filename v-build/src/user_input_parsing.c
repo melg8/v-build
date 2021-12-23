@@ -1,4 +1,4 @@
-#include "user_input_parser.h"
+#include "user_input_parsing.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -25,6 +25,8 @@ void exec_plugin_command(const char *cmd) {
     if (is_func_has_args(elem)) {
 
       char *str = elem->descriptor.args;
+
+      // get etalon func args and place them into user_args_etalon
       parse_args(str);
 
       while (!is_input_correct) {

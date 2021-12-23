@@ -18,19 +18,21 @@ SOURCES += \
     src/io.c \
         src/main.c \
         src/plugin.c \
+    src/plugin_exec.c \
         src/plugin_parser.c \
         src/shell.c \
     src/shell_helper.c \
-    src/user_input_parser.c
+    src/user_input_parsing.c
 
 HEADERS += \
         headers/autoload.h \
         headers/io.h \
         headers/plugin.h \
+        headers/plugin_exec.h \
         headers/plugin_parser.h \
         headers/shell.h \
         headers/shell_helper.h \
-        headers/user_input_parser.h \
+        headers/user_input_parsing.h \
         headers/v_build_global.h
 
 DISTFILES += \
