@@ -19,18 +19,25 @@
 
 extern char user_args_etalon[ARGS_COUNT][COMMON_TEXT_SIZE];
 extern char user_input_args[ARGS_COUNT][COMMON_TEXT_SIZE];
-extern size_t cnt;
-extern bool is_input_correct;
+extern size_t _cnt;
+extern bool _is_input_correct;
+extern bool _is_args_ok;
+extern bool _is_has_args;
 
 void parse_user_plugin_input(const char *restrict cmd);
 void parse_args(const char *elem_args);
 
 bool is_func_has_args(const plugin_element *elem);
 void get_func_args();
-bool is_args_ok();
 
-bool is_arg_numeric(const char *arg);
+// big chank of args checks
+bool is_args_ok();
+bool is_empty_arg(const char *entered);
+bool is_arg_must_be_numeric(const char *expected);
+bool is_arg_digits(const char *entered);
 
 void reset_user_args();
+void print_incorrect_expected_values(size_t cur_cnt, const char *expected,
+                                     const char *entered);
 
 #endif // USER_INPUT_PARSING_H
