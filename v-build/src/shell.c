@@ -33,7 +33,15 @@ void run_shell() {
 }
 
 void try_to_exec_plugin(const char *user_input) {
-  if (is_user_plugin_input_correct(user_input)) {
+  plugin_element *elem = find_element_by_command(user_input);
+
+  if (is_elem_binary(elem)) {
+    run_binary_command(elem);
+  }
+}
+
+void run_binary_command(const plugin_element *elem) {
+  if (is_user_plugin_input_correct(elem)) {
     print_info_msg(COMPLETE, "ready to exec", YES);
   } else {
     print_info_msg(ERROR_MSG, "try again", YES);

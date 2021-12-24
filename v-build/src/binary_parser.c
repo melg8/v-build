@@ -24,32 +24,30 @@ void _print_pre_input_text(const char *arg_type) {
 
 //                      END
 
-bool is_user_plugin_input_correct(const char *cmd) {
-  plugin_element *elem = find_element_by_command(cmd);
+bool is_user_plugin_input_correct(const plugin_element *restrict elem) {
 
   if (elem == NULL) {
     print_info_msg(ERROR_MSG, "Strange behaviour, command not found", YES);
     return false;
   }
 
-  if (is_elem_binary(elem)) {
-    reset_user_args();
-    if (is_func_has_args(elem)) {
+  reset_user_args();
+  if (is_func_has_args(elem)) {
 
-      char *str = elem->descriptor.args;
+    const char *str = elem->descriptor.args;
 
-      // get etalon func args and place them into user_args_etalon
-      parse_etalon_args(str);
+    // get etalon func args and place them into user_args_etalon
+    parse_etalon_args(str);
 
-      get_func_args();
+    get_func_args();
 
-      return _is_args_ok;
+    return _is_args_ok;
 
-    } else {
-      // run without args
-      return true;
-    }
+  } else {
+    // run without args
+    return true;
   }
+
   // elem is not binary
   return false;
 }
