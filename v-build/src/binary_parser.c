@@ -1,4 +1,4 @@
-#include "user_input_parsing.h"
+#include "binary_parser.h"
 
 #include <ctype.h>
 #include <stdio.h>
@@ -11,7 +11,7 @@ char user_input_args[ARGS_COUNT][COMMON_TEXT_SIZE] = {0};
 size_t _cnt = 0;
 bool _is_input_correct = false;
 bool _is_has_args = false;
-bool _is_args_ok = true;
+bool _is_args_ok = false;
 
 //                      INNER
 
@@ -24,36 +24,37 @@ void _print_pre_input_text(const char *arg_type) {
 
 //                      END
 
-void parse_user_plugin_input(const char *cmd) {
+bool is_user_plugin_input_correct(const char *cmd) {
   plugin_element *elem = find_element_by_command(cmd);
 
   if (elem == NULL) {
     print_info_msg(ERROR_MSG, "Strange behaviour, command not found", YES);
-    return;
+    return false;
   }
 
   if (is_elem_binary(elem)) {
-
-    // voidfunc f = get_binary_function(cmd);
-
     reset_user_args();
     if (is_func_has_args(elem)) {
 
       char *str = elem->descriptor.args;
 
       // get etalon func args and place them into user_args_etalon
-      parse_args(str);
+      parse_etalon_args(str);
 
-      while (!_is_input_correct) {
-        get_func_args();
-      }
+      get_func_args();
+
+      return _is_args_ok;
+
     } else {
       // run without args
+      return true;
     }
   }
+  // elem is not binary
+  return false;
 }
 
-void parse_args(const char *elem_args) {
+void parse_etalon_args(const char *elem_args) {
   char copy[COMMON_TEXT_SIZE];
   strcpy(copy, elem_args);
   char delim[] = ",";
@@ -82,13 +83,12 @@ bool is_func_has_args(const plugin_element *elem) {
   return _is_has_args;
 }
 
-void get_func_args() {
+int get_func_args() {
   char arg_type_text[COMMON_TEXT_SIZE] = {0};
 
   if (_cnt == 0)
-    return;
+    return -1;
 
-input:
   for (size_t i = 0; i < _cnt; ++i) {
 
     _print_pre_input_text(user_args_etalon[i]);
@@ -99,23 +99,17 @@ input:
     memset(arg_type_text, 0, sizeof(arg_type_text));
   }
 
-  if (!is_args_ok()) {
-    goto input;
-  }
-
-  _is_input_correct = true;
+  return is_args_ok();
 }
 
 bool is_args_ok() {
-
-  bool temp = true;
 
   for (size_t i = 0; i < _cnt; ++i) {
 
     if (is_empty_arg(user_input_args[i])) {
       print_incorrect_expected_values(i, user_args_etalon[i],
                                       user_input_args[i]);
-      temp = false;
+      _is_args_ok = false;
       break;
     }
 
@@ -123,12 +117,13 @@ bool is_args_ok() {
       if (!is_arg_digits(user_input_args[i])) {
         print_incorrect_expected_values(i, user_args_etalon[i],
                                         user_input_args[i]);
-        temp = false;
+        _is_args_ok = false;
         break;
       }
     }
+    _is_args_ok = true;
   }
-  _is_args_ok = temp;
+
   return _is_args_ok;
 }
 
@@ -151,10 +146,9 @@ void reset_user_args() {
   // reset input data
   memset(user_args_etalon, 0, sizeof(user_args_etalon));
   memset(user_input_args, 0, sizeof(user_input_args));
-  _is_input_correct = false;
   _is_has_args = false;
   _cnt = 0;
-  _is_args_ok = true;
+  _is_args_ok = false;
 }
 
 void print_incorrect_expected_values(size_t cur_cnt, const char *expected,

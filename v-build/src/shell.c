@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "binary_parser.h"
 #include "io.h"
 #include "plugin_exec.h"
 #include "shell_helper.h"
@@ -20,11 +21,21 @@ void run_shell() {
     if (is_help_command(user_input)) {
       exec_help_command(user_input);
     } else if (is_plugin_command(user_input)) {
-      try_to_exec_plugin_command(user_input);
+      // parse user input
+      try_to_exec_plugin(user_input);
+      // then exec
     } else {
       print_info_msg(ERROR_MSG, INVALID_COMMAND, YES);
     }
 
     free(user_input);
+  }
+}
+
+void try_to_exec_plugin(const char *user_input) {
+  if (is_user_plugin_input_correct(user_input)) {
+    print_info_msg(COMPLETE, "ready to exec", YES);
+  } else {
+    print_info_msg(ERROR_MSG, "try again", YES);
   }
 }

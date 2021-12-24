@@ -1,5 +1,5 @@
-#ifndef USER_INPUT_PARSING_H
-#define USER_INPUT_PARSING_H
+#ifndef BINARY_PARSER_H
+#define BINARY_PARSER_H
 
 #include <stdbool.h>
 
@@ -24,11 +24,14 @@ extern bool _is_input_correct;
 extern bool _is_args_ok;
 extern bool _is_has_args;
 
-void parse_user_plugin_input(const char *restrict cmd);
-void parse_args(const char *elem_args);
+bool is_user_plugin_input_correct(const char *restrict cmd);
+
+void parse_etalon_args(const char *elem_args);
 
 bool is_func_has_args(const plugin_element *elem);
-void get_func_args();
+
+// 0 success, -1 error
+int get_func_args();
 
 // big chank of args checks
 bool is_args_ok();
@@ -40,4 +43,4 @@ void reset_user_args();
 void print_incorrect_expected_values(size_t cur_cnt, const char *expected,
                                      const char *entered);
 
-#endif // USER_INPUT_PARSING_H
+#endif // BINARY_PARSER_H

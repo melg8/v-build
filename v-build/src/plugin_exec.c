@@ -5,6 +5,4 @@
 
 #include "io.h"
 
-void try_to_exec_plugin_command(const char *user_input) {
-  parse_user_plugin_input(user_input);
-}
+void exec_plugin(const char *user_input) {}
