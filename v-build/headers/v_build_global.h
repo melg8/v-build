@@ -28,7 +28,7 @@
 #define COMPLETE OS_COLOR_GREEN "complete: " OS_NO_COLOR
 #define QUESTION OS_COLOR_YELLOW "question: " OS_NO_COLOR
 #define AUTOLOAD OS_COLOR_YELLOW "autoload: " OS_NO_COLOR
-#define RESULT OS_COLOR_GREEN "result: " OS_NO_COLOR
+#define RETURN_VAL OS_COLOR_YELLOW "return value: " OS_NO_COLOR
 
 #define RUN_SHELL_LOOP for (;;)
 
@@ -40,6 +40,9 @@
 #define IO_INDEX 0
 #define IO_PLUGIN_NAME "io"
 
-typedef void *(*voidfunc)();
+typedef void (*voidfunc)();
+typedef int (*intfunc)();
+typedef bool (*boolfunc)();
+typedef char *(*charpfunc)();
 
 #endif // V_BUILD_GLOBAL_H

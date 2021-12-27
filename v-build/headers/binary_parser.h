@@ -11,6 +11,7 @@
 #define IS_VALUE_INT "int"
 #define IS_VALUE_BOOL "bool"
 #define IS_VALUE_CHAR_P "char*"
+#define IS_VALUE_BOOL "bool"
 
 #define IS_VALUE_TEXT "text"
 
@@ -19,7 +20,7 @@
 
 extern char user_args_etalon[ARGS_COUNT][COMMON_TEXT_SIZE];
 extern char user_input_args[ARGS_COUNT][COMMON_TEXT_SIZE];
-extern size_t _cnt;
+extern size_t _cmd_arg_counter;
 extern bool _is_input_correct;
 extern bool _is_args_ok;
 extern bool _is_has_args;
@@ -36,7 +37,7 @@ int get_user_func_args();
 // big chank of args checks
 bool is_args_ok();
 bool is_empty_arg(const char *entered);
-bool is_arg_must_be_numeric(const char *expected);
+bool is_arg_must_be_int(const char *expected);
 bool is_arg_digits(const char *entered);
 
 void reset_user_args();

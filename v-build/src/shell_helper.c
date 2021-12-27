@@ -122,7 +122,7 @@ void print_incorrect_expected_values(size_t cur_idx, const char *expected_value,
                                      const char *entered_value) {
   char temp[COMMON_TEXT_SIZE];
   char value[10] = {0};
-  strcpy(temp, "[ arg(");
+  strcpy(temp, "arg(");
   sprintf(value, "%lo", cur_idx);
   strcat(temp, value);
   strcat(temp, "), ");
@@ -131,6 +131,6 @@ void print_incorrect_expected_values(size_t cur_idx, const char *expected_value,
   strcat(temp, "\", ");
   strcat(temp, "entered value: \"");
   strcat(temp, entered_value);
-  strcat(temp, "\" ]");
+  strcat(temp, "\"");
   print_info_msg(ERROR_MSG, temp, YES);
 }

@@ -9,7 +9,7 @@
 
 char user_args_etalon[ARGS_COUNT][COMMON_TEXT_SIZE] = {0};
 char user_input_args[ARGS_COUNT][COMMON_TEXT_SIZE] = {0};
-size_t _cnt = 0;
+size_t _cmd_arg_counter = 0;
 bool _is_input_correct = false;
 bool _is_has_args = false;
 bool _is_args_ok = false;
@@ -60,13 +60,13 @@ void parse_etalon_args(const char *elem_args) {
 
   // find all args
   while (p != NULL) {
-    strcpy(user_args_etalon[_cnt], p);
+    strcpy(user_args_etalon[_cmd_arg_counter], p);
     p = strtok(NULL, delim);
-    _cnt++;
+    _cmd_arg_counter++;
   }
 
   // remove whitespaces in args, if any exists
-  for (size_t i = 0; i < _cnt; ++i) {
+  for (size_t i = 0; i < _cmd_arg_counter; ++i) {
     char temp[COMMON_TEXT_SIZE] = {0};
     strcpy(temp, user_args_etalon[i]);
     size_t spnz = strspn(temp, " ");
@@ -82,10 +82,10 @@ bool is_func_has_args(const plugin_element *elem) {
 int get_user_func_args() {
   char arg_type_text[COMMON_TEXT_SIZE] = {0};
 
-  if (_cnt == 0)
+  if (_cmd_arg_counter == 0)
     return -1;
 
-  for (size_t i = 0; i < _cnt; ++i) {
+  for (size_t i = 0; i < _cmd_arg_counter; ++i) {
 
     _print_pre_input_text(user_args_etalon[i]);
 
@@ -100,19 +100,19 @@ int get_user_func_args() {
 
 bool is_args_ok() {
 
-  for (size_t i = 0; i < _cnt; ++i) {
+  for (size_t i = 0; i < _cmd_arg_counter; ++i) {
 
     if (is_empty_arg(user_input_args[i])) {
       print_incorrect_expected_values(i, user_args_etalon[i],
-                                        user_input_args[i]);
+                                      user_input_args[i]);
       _is_args_ok = false;
       break;
     }
 
-    if (is_arg_must_be_numeric(user_args_etalon[i])) {
+    if (is_arg_must_be_int(user_args_etalon[i])) {
       if (!is_arg_digits(user_input_args[i])) {
         print_incorrect_expected_values(i, user_args_etalon[i],
-                                          user_input_args[i]);
+                                        user_input_args[i]);
         _is_args_ok = false;
         break;
       }
@@ -143,11 +143,11 @@ void reset_user_args() {
   memset(user_args_etalon, 0, sizeof(user_args_etalon));
   memset(user_input_args, 0, sizeof(user_input_args));
   _is_has_args = false;
-  _cnt = 0;
+  _cmd_arg_counter = 0;
   _is_args_ok = false;
 }
 
-bool is_arg_must_be_numeric(const char *expected) {
+bool is_arg_must_be_int(const char *expected) {
   if ((strcmp(expected, IS_VALUE_INT) == 0)) {
     return true;
   }

@@ -12,7 +12,7 @@
 void run_shell() {
   char *user_input = NULL;
 
-  // must be 1st line. load_io
+  // must be 1st line. load io library
   load_io();
 
   RUN_SHELL_LOOP {
@@ -43,8 +43,6 @@ void try_to_exec_plugin(const char *user_input) {
 
 void run_binary_command(const plugin_element *elem) {
   if (is_user_plugin_input_correct(elem)) {
-    print_info_msg(COMPLETE, "ready to exec", YES);
-  } else {
-    print_info_msg(ERROR_MSG, "try again", YES);
+    exec_plugin(elem);
   }
 }
