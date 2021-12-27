@@ -5,6 +5,7 @@
 #include <string.h>
 
 #include "io.h"
+#include "shell_helper.h"
 
 char user_args_etalon[ARGS_COUNT][COMMON_TEXT_SIZE] = {0};
 char user_input_args[ARGS_COUNT][COMMON_TEXT_SIZE] = {0};
@@ -39,7 +40,7 @@ bool is_user_plugin_input_correct(const plugin_element *restrict elem) {
     // get etalon func args and place them into user_args_etalon
     parse_etalon_args(str);
 
-    get_func_args();
+    get_user_func_args();
 
     return _is_args_ok;
 
@@ -47,9 +48,6 @@ bool is_user_plugin_input_correct(const plugin_element *restrict elem) {
     // run without args
     return true;
   }
-
-  // elem is not binary
-  return false;
 }
 
 void parse_etalon_args(const char *elem_args) {
@@ -81,7 +79,7 @@ bool is_func_has_args(const plugin_element *elem) {
   return _is_has_args;
 }
 
-int get_func_args() {
+int get_user_func_args() {
   char arg_type_text[COMMON_TEXT_SIZE] = {0};
 
   if (_cnt == 0)
@@ -106,7 +104,7 @@ bool is_args_ok() {
 
     if (is_empty_arg(user_input_args[i])) {
       print_incorrect_expected_values(i, user_args_etalon[i],
-                                      user_input_args[i]);
+                                        user_input_args[i]);
       _is_args_ok = false;
       break;
     }
@@ -114,7 +112,7 @@ bool is_args_ok() {
     if (is_arg_must_be_numeric(user_args_etalon[i])) {
       if (!is_arg_digits(user_input_args[i])) {
         print_incorrect_expected_values(i, user_args_etalon[i],
-                                        user_input_args[i]);
+                                          user_input_args[i]);
         _is_args_ok = false;
         break;
       }
@@ -147,23 +145,6 @@ void reset_user_args() {
   _is_has_args = false;
   _cnt = 0;
   _is_args_ok = false;
-}
-
-void print_incorrect_expected_values(size_t cur_cnt, const char *expected,
-                                     const char *entered) {
-  char temp[COMMON_TEXT_SIZE];
-  char value[10] = {0};
-  strcpy(temp, "arg(");
-  sprintf(value, "%lo", cur_cnt);
-  strcat(temp, value);
-  strcat(temp, "), ");
-  strcat(temp, "expected type: \"");
-  strcat(temp, expected);
-  strcat(temp, "\", ");
-  strcat(temp, "entered value: \"");
-  strcat(temp, entered);
-  strcat(temp, "\"");
-  print_info_msg(ERROR_MSG, temp, YES);
 }
 
 bool is_arg_must_be_numeric(const char *expected) {

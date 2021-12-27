@@ -31,7 +31,7 @@ void parse_etalon_args(const char *elem_args);
 bool is_func_has_args(const plugin_element *elem);
 
 // 0 success, -1 error
-int get_func_args();
+int get_user_func_args();
 
 // big chank of args checks
 bool is_args_ok();
@@ -40,7 +40,5 @@ bool is_arg_must_be_numeric(const char *expected);
 bool is_arg_digits(const char *entered);
 
 void reset_user_args();
-void print_incorrect_expected_values(size_t cur_cnt, const char *expected,
-                                     const char *entered);
 
 #endif // BINARY_PARSER_H

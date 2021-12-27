@@ -35,6 +35,7 @@ void run_shell() {
 void try_to_exec_plugin(const char *user_input) {
   plugin_element *elem = find_element_by_command(user_input);
 
+  // determine the type of command, binary or script
   if (is_elem_binary(elem)) {
     run_binary_command(elem);
   }

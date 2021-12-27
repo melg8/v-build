@@ -11,6 +11,7 @@
 
 #include "io.h"
 #include "plugin.h"
+#include "plugin_parser.h"
 #include "v_build_global.h"
 
 typedef struct counter {
@@ -115,4 +116,21 @@ void view_all_plugins() {
   }
   strcat(plugins, OS_NO_COLOR);
   print_info_msg(OS_COLOR_YELLOW, plugins, YES);
+}
+
+void print_incorrect_expected_values(size_t cur_idx, const char *expected_value,
+                                     const char *entered_value) {
+  char temp[COMMON_TEXT_SIZE];
+  char value[10] = {0};
+  strcpy(temp, "[ arg(");
+  sprintf(value, "%lo", cur_idx);
+  strcat(temp, value);
+  strcat(temp, "), ");
+  strcat(temp, "expected type: \"");
+  strcat(temp, expected_value);
+  strcat(temp, "\", ");
+  strcat(temp, "entered value: \"");
+  strcat(temp, entered_value);
+  strcat(temp, "\" ]");
+  print_info_msg(ERROR_MSG, temp, YES);
 }
