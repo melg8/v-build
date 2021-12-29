@@ -19,6 +19,28 @@
   (strcmp(user_input_args[idx], "1") == 0) ||                                  \
       (strcmp(user_input_args[idx], "TRUE") == 0) ||                           \
       (strcmp(user_input_args[idx], "true") == 0)
+#define T_LAUNCH(f, data, ret)                                                 \
+  do {                                                                         \
+    switch (_cmd_arg_counter) {                                                \
+    case 1:                                                                    \
+      ret = f(data[0]);                                                        \
+      break;                                                                   \
+    case 2:                                                                    \
+      ret = f(data[0], data[1]);                                               \
+      break;                                                                   \
+    case 3:                                                                    \
+      ret = f(data[0], data[1], data[2]);                                      \
+      break;                                                                   \
+    case 4:                                                                    \
+      ret = f(data[0], data[1], data[2], data[3]);                             \
+      break;                                                                   \
+    case 5:                                                                    \
+      ret = f(data[0], data[1], data[2], data[3], data[4]);                    \
+      break;                                                                   \
+    default:                                                                   \
+      break;                                                                   \
+    }                                                                          \
+  } while (0)
 
 union Data {
   int integer;
@@ -28,10 +50,10 @@ union Data {
 
 static const plugin_element *_elem = NULL;
 
-void_p_func vf = NULL;
+void_p_func vpf = NULL;
 
-static bool is_ret_void() {
-  return strcmp(_elem->descriptor.ret_val, IS_VALUE_VOID) == 0;
+static bool is_ret_int() {
+  return strcmp(_elem->descriptor.ret_val, IS_VALUE_INT) == 0;
 }
 
 static bool is_arg_int(size_t idx) {
@@ -46,9 +68,14 @@ static bool is_arg_bool(size_t idx) {
   return strcmp(user_args_etalon[idx], IS_VALUE_BOOL) == 0;
 }
 
-void run_void_func_with_args(void_p_func f) {
+void *run(void_p_func vpf) {
 
   union Data data[_cmd_arg_counter];
+  void *ret = malloc(RETURN_VALUE_SIZE);
+
+  if (!is_func_has_args(_elem)) {
+    vpf();
+  }
 
   for (size_t i = 0; i < _cmd_arg_counter; ++i) {
 
@@ -65,34 +92,16 @@ void run_void_func_with_args(void_p_func f) {
     }
   }
 
-  switch (_cmd_arg_counter) {
-  case 1:
-    f(data[0]);
-    break;
-  case 2:
-    f(data[0], data[1]);
-    break;
-  case 3:
-    f(data[0], data[1], data[2]);
-    break;
-  default:
-    break;
-  }
-}
+  T_LAUNCH(vpf, data, ret);
 
-void exec_void_func() {
-  vf = get_binary_function(_elem->descriptor.command);
-
-  if (!is_func_has_args(_elem)) {
-    vf();
-  } else {
-    run_void_func_with_args(vf);
-  }
+  return ret;
 }
 
 // global
 
 void exec_bin(const plugin_element *elem) {
+  void *ret = NULL;
+
   _elem = elem;
 
   if (_elem == NULL) {
@@ -100,7 +109,17 @@ void exec_bin(const plugin_element *elem) {
     EXIT(EXIT_FAILURE);
   }
 
-  if (is_ret_void()) {
-    exec_void_func();
+  vpf = get_binary_function(_elem->descriptor.command);
+
+  ret = run(vpf);
+
+  if (ret != NULL) {
+    if (is_ret_int()) {
+      char res_text[COMMON_TEXT_SIZE] = {0};
+      int *i = (int *)ret;
+      sprintf(res_text, "%d", *i);
+      print_info_msg(RETURN_VAL, res_text, YES);
+      free(ret);
+    }
   }
 }

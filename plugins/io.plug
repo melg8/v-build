@@ -60,7 +60,7 @@ command = ask_yes_no
 exec = plugins/system/libio_lib.so.1.0.0
 ret_val = int
 args = char*
-desc = char* - your question
+desc = 1 - answer received, 0 - no
 --end
 
 --begin

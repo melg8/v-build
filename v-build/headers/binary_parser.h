@@ -15,7 +15,7 @@
 #define IS_VALUE_TEXT "text"
 
 #define NO_ARGS "no"
-#define ARGS_COUNT 10
+#define ARGS_COUNT 5
 
 extern char user_args_etalon[ARGS_COUNT][COMMON_TEXT_SIZE];
 extern char user_input_args[ARGS_COUNT][COMMON_TEXT_SIZE];

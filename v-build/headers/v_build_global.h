@@ -35,6 +35,7 @@
 // main definitions
 #define COMMON_TEXT_SIZE 256
 #define PLUGIN_LIST_SIZE 256
+#define RETURN_VALUE_SIZE 128
 
 // main config
 #define IO_INDEX 0
