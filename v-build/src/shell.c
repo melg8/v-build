@@ -5,15 +5,15 @@
 
 #include "binary_parser.h"
 #include "io.h"
-#include "plugin_exec.h"
+#include "plugin_bin_exec.h"
 #include "shell_helper.h"
 #include "v_build_global.h"
 
 void run_shell() {
-  char *user_input = NULL;
-
   // must be 1st line. load io library
   load_io();
+
+  char *user_input = NULL;
 
   RUN_SHELL_LOOP {
     user_input = get_shell_input();
@@ -43,6 +43,6 @@ void try_to_exec_plugin(const char *user_input) {
 
 void run_binary_command(const plugin_element *elem) {
   if (is_user_plugin_input_correct(elem)) {
-    exec_plugin(elem);
+    exec_bin(elem);
   }
 }

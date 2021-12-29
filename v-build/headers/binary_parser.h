@@ -11,7 +11,6 @@
 #define IS_VALUE_INT "int"
 #define IS_VALUE_BOOL "bool"
 #define IS_VALUE_CHAR_P "char*"
-#define IS_VALUE_BOOL "bool"
 
 #define IS_VALUE_TEXT "text"
 
@@ -38,7 +37,9 @@ int get_user_func_args();
 bool is_args_ok();
 bool is_empty_arg(const char *entered);
 bool is_arg_must_be_int(const char *expected);
+bool is_arg_must_be_bool(const char *expected);
 bool is_arg_digits(const char *entered);
+bool is_entered_arg_is_bool(const char *entered);
 
 void reset_user_args();
 

@@ -40,9 +40,6 @@
 #define IO_INDEX 0
 #define IO_PLUGIN_NAME "io"
 
-typedef void (*voidfunc)();
-typedef int (*intfunc)();
-typedef bool (*boolfunc)();
-typedef char *(*charpfunc)();
+typedef void *(*void_p_func)();
 
 #endif // V_BUILD_GLOBAL_H

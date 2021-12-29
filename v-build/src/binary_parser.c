@@ -117,6 +117,14 @@ bool is_args_ok() {
         break;
       }
     }
+
+    if (is_arg_must_be_bool(user_args_etalon[i])) {
+      if (!is_entered_arg_is_bool(user_input_args[i])) {
+        print_incorrect_expected_values(i, user_args_etalon[i],
+                                        user_input_args[i]);
+        _is_args_ok = false;
+      }
+    }
     _is_args_ok = true;
   }
 
@@ -152,4 +160,19 @@ bool is_arg_must_be_int(const char *expected) {
     return true;
   }
   return false;
+}
+
+bool is_arg_must_be_bool(const char *expected) {
+  return strcmp(expected, IS_VALUE_BOOL) == 0;
+}
+
+bool is_entered_arg_is_bool(const char *entered) {
+  bool is_true = (strcmp(entered, "true") == 0) ||
+                 (strcmp(entered, "TRUE") == 0) || (strcmp(entered, "1") == 0);
+
+  bool is_false = (strcmp(entered, "false") == 0) ||
+                  (strcmp(entered, "FALSE") == 0) ||
+                  (strcmp(entered, "0") == 0);
+
+  return is_true || is_false;
 }

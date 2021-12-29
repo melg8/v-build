@@ -50,8 +50,8 @@ type = bin
 command = print_info_msg
 exec = plugins/system/libio_lib.so.1.0.0
 ret_val = void
-args = char*, char*, char*
-desc = print message - title, text, new_line ( YES or NO )
+args = char*, char*, bool
+desc = print message - title, text, new_line ( true, 1, false, 0 )
 --end
 
 --begin

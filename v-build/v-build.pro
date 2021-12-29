@@ -19,7 +19,7 @@ SOURCES += \
     src/io.c \
         src/main.c \
         src/plugin.c \
-    src/plugin_exec.c \
+    src/plugin_bin_exec.c \
         src/plugin_parser.c \
         src/shell.c \
     src/shell_helper.c
@@ -29,7 +29,7 @@ HEADERS += \
         headers/binary_parser.h \
         headers/io.h \
         headers/plugin.h \
-        headers/plugin_exec.h \
+        headers/plugin_bin_exec.h \
         headers/plugin_parser.h \
         headers/shell.h \
         headers/shell_helper.h \
