@@ -123,6 +123,7 @@ bool is_args_ok() {
         print_incorrect_expected_values(i, user_args_etalon[i],
                                         user_input_args[i]);
         _is_args_ok = false;
+        break;
       }
     }
     _is_args_ok = true;
