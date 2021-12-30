@@ -36,10 +36,17 @@ int get_user_func_args();
 // big chank of args checks
 bool is_args_ok();
 bool is_empty_arg(const char *entered);
-bool is_arg_must_be_int(const char *expected);
-bool is_arg_must_be_bool(const char *expected);
 bool is_arg_digits(const char *entered);
 bool is_entered_arg_is_bool(const char *entered);
+
+bool is_arg_char(size_t idx);
+bool is_arg_int(size_t idx);
+bool is_arg_bool(size_t idx);
+
+bool is_func_ret_void(size_t idx);
+bool is_func_ret_int(size_t idx);
+bool is_func_ret_charp(size_t idx);
+bool is_func_ret_bool(size_t idx);
 
 void reset_user_args();
 

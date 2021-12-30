@@ -109,7 +109,7 @@ bool is_args_ok() {
       break;
     }
 
-    if (is_arg_must_be_int(user_args_etalon[i])) {
+    if (is_arg_int(i)) {
       if (!is_arg_digits(user_input_args[i])) {
         print_incorrect_expected_values(i, user_args_etalon[i],
                                         user_input_args[i]);
@@ -118,7 +118,7 @@ bool is_args_ok() {
       }
     }
 
-    if (is_arg_must_be_bool(user_args_etalon[i])) {
+    if (is_arg_bool(i)) {
       if (!is_entered_arg_is_bool(user_input_args[i])) {
         print_incorrect_expected_values(i, user_args_etalon[i],
                                         user_input_args[i]);
@@ -156,17 +156,6 @@ void reset_user_args() {
   _is_args_ok = false;
 }
 
-bool is_arg_must_be_int(const char *expected) {
-  if ((strcmp(expected, IS_VALUE_INT) == 0)) {
-    return true;
-  }
-  return false;
-}
-
-bool is_arg_must_be_bool(const char *expected) {
-  return strcmp(expected, IS_VALUE_BOOL) == 0;
-}
-
 bool is_entered_arg_is_bool(const char *entered) {
   bool is_true = (strcmp(entered, "true") == 0) ||
                  (strcmp(entered, "TRUE") == 0) || (strcmp(entered, "1") == 0);
@@ -176,4 +165,18 @@ bool is_entered_arg_is_bool(const char *entered) {
                   (strcmp(entered, "0") == 0);
 
   return is_true || is_false;
+}
+
+bool is_arg_char(size_t idx) {
+  return strcmp(user_args_etalon[idx], IS_VALUE_CHAR_P);
+}
+
+bool is_arg_int(size_t idx) {
+  return strcmp(user_args_etalon[idx], IS_VALUE_INT);
+}
+
+bool is_arg_bool(size_t idx) {
+  return (strcmp(user_input_args[idx], "1") == 0) ||
+         (strcmp(user_input_args[idx], "TRUE") == 0) ||
+         (strcmp(user_input_args[idx], "true") == 0);
 }
