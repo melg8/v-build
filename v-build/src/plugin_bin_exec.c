@@ -16,9 +16,9 @@ typedef int (*int_f)();
 typedef char *(*char_f)();
 typedef bool (*bool_f)();
 
-static char *charp_args[ARGS_COUNT] = {0};
+static char *charp_args[ARGS_COUNT] = {NULL};
 static int int_args[ARGS_COUNT] = {0};
-static bool bool_args[ARGS_COUNT] = {0};
+static int bool_args[ARGS_COUNT] = {0};
 
 static const plugin_element *_elem = NULL;
 
@@ -31,7 +31,8 @@ int_f fi = NULL;
 char_f fc = NULL;
 bool_f fb = NULL;
 
-#define ASSIGN_FUNC(f) f = get_binary_function(_elem->descriptor.command)
+#define ASSIGN_FUNC_INTERNAL(f)                                                \
+  f = get_binary_function(_elem->descriptor.command)
 
 void print_result() {
   char *p = NULL;
@@ -69,7 +70,7 @@ void exec_bin(const plugin_element *elem) {
     }
 
     if (is_arg_bool(i)) {
-      bool_args[i] = user_input_args[i];
+      bool_args[i] = is_entered_arg_is_bool(user_input_args[i]);
     }
   }
 }
