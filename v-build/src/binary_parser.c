@@ -167,16 +167,32 @@ bool is_entered_arg_is_bool(const char *entered) {
   return is_true || is_false;
 }
 
-bool is_arg_char(size_t idx) {
-  return strcmp(user_args_etalon[idx], IS_VALUE_CHAR_P);
+bool is_arg_charp(size_t idx) {
+  return strcmp(user_args_etalon[idx], IS_VALUE_CHAR_P) == 0;
 }
 
 bool is_arg_int(size_t idx) {
-  return strcmp(user_args_etalon[idx], IS_VALUE_INT);
+  return strcmp(user_args_etalon[idx], IS_VALUE_INT) == 0;
 }
 
 bool is_arg_bool(size_t idx) {
   return (strcmp(user_input_args[idx], "1") == 0) ||
          (strcmp(user_input_args[idx], "TRUE") == 0) ||
          (strcmp(user_input_args[idx], "true") == 0);
+}
+
+bool is_func_ret_void(const plugin_element *elem) {
+  return strcmp(elem->descriptor.ret_val, IS_VALUE_VOID) == 0;
+}
+
+bool is_func_ret_int(const plugin_element *elem) {
+  return strcmp(elem->descriptor.ret_val, IS_VALUE_INT) == 0;
+}
+
+bool is_func_ret_charp(const plugin_element *elem) {
+  return strcmp(elem->descriptor.ret_val, IS_VALUE_CHAR_P) == 0;
+}
+
+bool is_func_ret_bool(const plugin_element *elem) {
+  return strcmp(elem->descriptor.ret_val, IS_VALUE_BOOL) == 0;
 }

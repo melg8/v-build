@@ -12,7 +12,7 @@ void print_msg(const char *msg, size_t sleep_msec);
 void print_fmt_msg(int width, const char *msg);
 void print_info_msg(const char *title, const char *msg, int newline_symbol);
 
-// 1 - answer received, 0 - no
+// 1 - answer YES, 0 - NO
 int ask_yes_no(const char *question_text);
 
 bool is_help_command(const char *cmd);

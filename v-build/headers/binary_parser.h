@@ -1,4 +1,4 @@
-#ifndef BINARY_PARSER_H
+﻿#ifndef BINARY_PARSER_H
 #define BINARY_PARSER_H
 
 #include <stdbool.h>
@@ -7,7 +7,6 @@
 #include "v_build_global.h"
 
 #define IS_VALUE_VOID "void"
-
 #define IS_VALUE_INT "int"
 #define IS_VALUE_BOOL "bool"
 #define IS_VALUE_CHAR_P "char*"
@@ -15,7 +14,7 @@
 #define IS_VALUE_TEXT "text"
 
 #define NO_ARGS "no"
-#define ARGS_COUNT 5
+#define ARGS_COUNT 3
 
 extern char user_args_etalon[ARGS_COUNT][COMMON_TEXT_SIZE];
 extern char user_input_args[ARGS_COUNT][COMMON_TEXT_SIZE];
@@ -39,14 +38,14 @@ bool is_empty_arg(const char *entered);
 bool is_arg_digits(const char *entered);
 bool is_entered_arg_is_bool(const char *entered);
 
-bool is_arg_char(size_t idx);
+bool is_arg_charp(size_t idx);
 bool is_arg_int(size_t idx);
 bool is_arg_bool(size_t idx);
 
-bool is_func_ret_void(size_t idx);
-bool is_func_ret_int(size_t idx);
-bool is_func_ret_charp(size_t idx);
-bool is_func_ret_bool(size_t idx);
+bool is_func_ret_void(const plugin_element *elem);
+bool is_func_ret_int(const plugin_element *elem);
+bool is_func_ret_charp(const plugin_element *elem);
+bool is_func_ret_bool(const plugin_element *elem);
 
 void reset_user_args();
 
