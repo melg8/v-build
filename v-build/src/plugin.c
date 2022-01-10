@@ -13,7 +13,7 @@
 
 void *plugin_handle = NULL;
 
-void *_get_binary_func(const plugin_element *restrict elem);
+static void *_get_binary_func_internal(const plugin_element *restrict elem);
 
 int load_plugin(const char *plugin_name) {
   int ret = 0;
@@ -31,7 +31,7 @@ int load_plugin(const char *plugin_name) {
 }
 
 // *function if success, NULL is error
-void *_get_binary_func(const plugin_element *restrict elem) {
+static void *_get_binary_func_internal(const plugin_element *restrict elem) {
   void *func = NULL;
   plugin_handle = dlopen(elem->descriptor.exec, RTLD_NOW | RTLD_DEEPBIND);
   if (plugin_handle == NULL) {
@@ -58,7 +58,9 @@ void *get_binary_function(const char *fname) {
     return NULL;
   }
 
-  func = _get_binary_func(elem);
+  if ((func = _get_binary_func_internal(elem)) == NULL) {
+    printf("error while loading \"%s\"\n", fname);
+  }
 
   return func;
 }

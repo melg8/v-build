@@ -10,12 +10,12 @@
 #include "v_build_global.h"
 
 void run_shell() {
-  // must be 1st line. load io library
+  // must be 1st line. load i/o library
   load_io();
 
   char *user_input = NULL;
 
-  RUN_SHELL_LOOP {
+  SHELL_LOOP {
     user_input = get_shell_input();
 
     if (is_help_command(user_input)) {

@@ -30,7 +30,7 @@
 #define AUTOLOAD OS_COLOR_YELLOW "autoload: " OS_NO_COLOR
 #define RETURN_VAL OS_COLOR_YELLOW "return value: " OS_NO_COLOR
 
-#define RUN_SHELL_LOOP for (;;)
+#define SHELL_LOOP for (;;)
 
 // main definitions
 #define COMMON_TEXT_SIZE 256
