@@ -23,7 +23,7 @@ extern bool _is_input_correct;
 extern bool _is_args_ok;
 extern bool _is_has_args;
 
-bool is_user_plugin_input_correct(const plugin_element *restrict elem);
+bool get_plugin_args(const plugin_element *restrict elem);
 
 void parse_etalon_args(const char *elem_args);
 

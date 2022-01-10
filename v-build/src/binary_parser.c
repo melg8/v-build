@@ -25,7 +25,7 @@ void _print_pre_input_text(const char *arg_type) {
 
 //                      END
 
-bool is_user_plugin_input_correct(const plugin_element *restrict elem) {
+bool get_plugin_args(const plugin_element *restrict elem) {
 
   if (elem == NULL) {
     print_info_msg(ERROR_MSG, "Strange behaviour, command not found", YES);
