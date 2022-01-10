@@ -7,9 +7,9 @@
 #include "v_build_global.h"
 
 #define IS_VALUE_VOID "void"
+#define IS_VALUE_CHAR_P "char*"
 #define IS_VALUE_INT "int"
 #define IS_VALUE_BOOL "bool"
-#define IS_VALUE_CHAR_P "char*"
 
 #define IS_VALUE_TEXT "text"
 
