@@ -4,7 +4,7 @@
 #   type = bin | script
 #   command = function | script
 #   exec = path from plugins dir to exec file
-#   ret_val = void || int || bool || char* || text
+#   ret_val = void || int || bool || char* || text (script)
 #   args = arg1, arg2, argN || no
 #   desc = description
 #   --end

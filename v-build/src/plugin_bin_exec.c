@@ -26,40 +26,38 @@ static int res_int = 0;
 static bool res_bool = false;
 static char *res_charp = NULL;
 
-void_f fv = NULL;
-int_f fi = NULL;
-char_f fc = NULL;
-bool_f fb = NULL;
+void_f fvoid = NULL;
+int_f fint = NULL;
+char_f fcharp = NULL;
+bool_f fbool = NULL;
 
 #define ASSIGN_FUNC_INTERNAL(f)                                                \
   f = get_binary_function(_elem->descriptor.command)
 
-void print_result() {
-  char *p = NULL;
+static void _print_result() {
+  void *ptr = NULL;
   if (is_func_ret_int(_elem)) {
-    p = malloc(sizeof(int));
-    sprintf(p, "%d", res_int);
-    print_info_msg(RETURN_VAL, p, YES);
-    free(p);
+    ptr = malloc(sizeof(int));
+    sprintf(ptr, "%d", res_int);
+    print_info_msg(RETURN_VAL, ptr, YES);
+    free(ptr);
   }
   if (is_func_ret_bool(_elem)) {
-    p = malloc(COMMON_TEXT_SIZE);
+    ptr = malloc(COMMON_TEXT_SIZE);
     if (res_bool == false) {
-      strcpy(p, "false");
+      strcpy(ptr, "false");
     } else if (res_bool == true) {
-      strcpy(p, "true");
+      strcpy(ptr, "true");
     }
-    print_info_msg(RETURN_VAL, p, YES);
-    free(p);
+    print_info_msg(RETURN_VAL, ptr, YES);
+    free(ptr);
   }
   if (is_func_ret_charp(_elem)) {
     print_info_msg(RETURN_VAL, res_charp, YES);
   }
 }
 
-void exec_bin(const plugin_element *elem) {
-  _elem = elem;
-
+static void _collect_args() {
   for (size_t i = 0; i < _cmd_arg_counter; ++i) {
     if (is_arg_charp(i)) {
       charp_args[i] = user_input_args[i];
@@ -73,4 +71,47 @@ void exec_bin(const plugin_element *elem) {
       bool_args[i] = is_entered_arg_is_bool(user_input_args[i]);
     }
   }
+}
+
+static void _assign_func() {
+  if (is_func_ret_bool(_elem)) {
+    ASSIGN_FUNC_INTERNAL(fbool);
+  }
+  if (is_func_ret_charp(_elem)) {
+    ASSIGN_FUNC_INTERNAL(fcharp);
+  }
+  if (is_func_ret_int(_elem)) {
+    ASSIGN_FUNC_INTERNAL(fint);
+  }
+  if (is_func_ret_void(_elem)) {
+    ASSIGN_FUNC_INTERNAL(fvoid);
+  }
+}
+
+static void _run_no_args() {
+  if (fbool != NULL) {
+    res_bool = fbool();
+  }
+  if (fcharp != NULL) {
+    res_charp = fcharp();
+  }
+  if (fint != NULL) {
+    res_int = fint();
+  }
+  if (fvoid != NULL) {
+    fvoid();
+  }
+}
+
+void exec_bin(const plugin_element *elem) {
+  _elem = elem;
+
+  _collect_args();
+  _assign_func();
+
+  if (!is_func_has_args(_elem)) {
+    _run_no_args();
+  }
+
+  _print_result();
 }
