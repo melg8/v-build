@@ -47,8 +47,8 @@ void print_fmt_msg(int width, const char *msg) {
     space[i] = ' ';
   }
 
-  print_msg(msg, SLEEP_MSEC_COMMON);
-  print_msg(space, SLEEP_MSEC_COMMON);
+  print_msg(msg, SLEEP_MSEC_FAST);
+  print_msg(space, SLEEP_MSEC_FAST);
 }
 
 void print_info_msg(const char *title, const char *msg, int newline_symbol) {
