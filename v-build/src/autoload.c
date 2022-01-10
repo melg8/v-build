@@ -18,7 +18,7 @@ void autoload_plugins() {
   ssize_t read;
 
   if (pf == NULL) {
-    char err[COMMON_TEXT_SIZE] = " autoload.config, , ";
+    char err[COMMON_TEXT_SIZE] = " file autoload.config, ";
     strcat(err, strerror(errno));
     printf("error: %s\n", err);
     return;
