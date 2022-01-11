@@ -1,0 +1,19 @@
+#   example
+#
+#   --begin
+#   type = bin | script
+#   command = function | script
+#   exec = path from plugins dir to exec file
+#   ret_val = void || int || bool || char* || text (script)
+#   args = arg1, arg2, argN || no
+#   desc = description
+#   --end
+
+--begin
+type = bin
+command = ls
+exec = plugins/system/libnavigation_lib.so.1.0.0
+ret_val = void
+args = char*
+desc = view directory pointed by char*
+--end
