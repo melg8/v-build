@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "binary_parser.h"
+#include "bin_parser.h"
 #include "io.h"
 #include "plugin_bin_exec.h"
 #include "shell_helper.h"

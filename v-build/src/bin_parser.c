@@ -1,4 +1,4 @@
-#include "binary_parser.h"
+#include "bin_parser.h"
 
 #include <ctype.h>
 #include <stdio.h>

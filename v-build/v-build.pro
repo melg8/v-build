@@ -15,7 +15,7 @@ INCLUDEPATH += \
 
 SOURCES += \
     src/autoload.c \
-    src/binary_parser.c \
+    src/bin_parser.c \
     src/io.c \
         src/main.c \
         src/plugin.c \
@@ -26,7 +26,7 @@ SOURCES += \
 
 HEADERS += \
         headers/autoload.h \
-        headers/binary_parser.h \
+        headers/bin_parser.h \
         headers/io.h \
         headers/plugin.h \
         headers/plugin_bin_exec.h \

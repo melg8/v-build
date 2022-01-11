@@ -1,5 +1,5 @@
-﻿#ifndef BINARY_PARSER_H
-#define BINARY_PARSER_H
+#ifndef BIN_PARSER_H
+#define BIN_PARSER_H
 
 #include <stdbool.h>
 
@@ -49,4 +49,4 @@ bool is_func_ret_bool(const plugin_element *elem);
 
 void reset_user_args();
 
-#endif // BINARY_PARSER_H
+#endif // BIN_PARSER_H
