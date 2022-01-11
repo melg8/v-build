@@ -15,21 +15,23 @@ INCLUDEPATH += \
 
 SOURCES += \
     src/autoload.c \
+    src/bin_exec.c \
+    src/bin_exec_internal.c \
     src/bin_parser.c \
     src/io.c \
         src/main.c \
         src/plugin.c \
-    src/plugin_bin_exec.c \
         src/plugin_parser.c \
         src/shell.c \
     src/shell_helper.c
 
 HEADERS += \
         headers/autoload.h \
+        headers/bin_exec.h \
+        headers/bin_exec_internal.h \
         headers/bin_parser.h \
         headers/io.h \
         headers/plugin.h \
-        headers/plugin_bin_exec.h \
         headers/plugin_parser.h \
         headers/shell.h \
         headers/shell_helper.h \
