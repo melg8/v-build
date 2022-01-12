@@ -16,4 +16,6 @@ void print_incorrect_expected_values(size_t cur_idx,
                                      const char *restrict expected_value,
                                      const char *entered_value);
 
+void view_config();
+
 #endif // SHELL_HELPER_H

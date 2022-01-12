@@ -29,6 +29,9 @@
 #define QUESTION OS_COLOR_YELLOW "question: " OS_NO_COLOR
 #define AUTOLOAD OS_COLOR_YELLOW "autoload: " OS_NO_COLOR
 #define RETURN_VAL OS_COLOR_YELLOW "return value: " OS_NO_COLOR
+#define CONFIG_NAME(config_name) OS_COLOR_YELLOW " >>> " config_name OS_NO_COLOR
+#define GREEN_YES OS_COLOR_GREEN "yes" OS_NO_COLOR
+#define RED_NO OS_COLOR_RED "no" OS_NO_COLOR
 
 #define SHELL_LOOP for (;;)
 

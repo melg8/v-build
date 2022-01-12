@@ -14,10 +14,14 @@
 #include "plugin_parser.h"
 #include "v_build_global.h"
 
-typedef struct counter {
-  char plugin_name[COMMON_TEXT_SIZE];
-  u_int func_count;
-} counter;
+#define PRINT_CONFIG_PARAM(param, param_readable)                              \
+  ({                                                                           \
+    if (param) {                                                               \
+      print_info_msg(CONFIG_NAME(param_readable), GREEN_YES, YES);             \
+    } else {                                                                   \
+      print_info_msg(CONFIG_NAME(param_readable), RED_NO, YES);                \
+    }                                                                          \
+  })
 
 void exec_help_command(const char *cmd) {
 
@@ -30,16 +34,32 @@ void exec_help_command(const char *cmd) {
     CLEAR_SCREEN;
   }
 
-  if (strcmp(cmd, "quit") == 0 || strcmp(cmd, "q") == 0) {
-    EXIT(EXIT_SUCCESS);
-  }
-
   if (strcmp(cmd, "plugins") == 0 || strcmp(cmd, "p") == 0) {
     view_all_plugins();
   }
 
   if (strcmp(cmd, "load") == 0 || strcmp(cmd, "l") == 0) {
-    // load plugin
+    // unused
+  }
+
+  if (strcmp(cmd, "set_column_args") == 0 || strcmp(cmd, "sca") == 0) {
+    g_conf.is_column_args = true;
+    g_conf.is_line_args = false;
+    print_info_msg(COMPLETE, "column args", YES);
+  }
+
+  if (strcmp(cmd, "set_line_args") == 0 || strcmp(cmd, "sla") == 0) {
+    g_conf.is_column_args = false;
+    g_conf.is_line_args = true;
+    print_info_msg(COMPLETE, "line args", YES);
+  }
+
+  if (strcmp(cmd, "view_config") == 0 || strcmp(cmd, "vc") == 0) {
+    view_config();
+  }
+
+  if (strcmp(cmd, "quit") == 0 || strcmp(cmd, "q") == 0) {
+    EXIT(EXIT_SUCCESS);
   }
 }
 
@@ -134,4 +154,9 @@ void print_incorrect_expected_values(size_t cur_idx, const char *expected_value,
   strcat(temp, entered_value);
   strcat(temp, "\"");
   print_info_msg(ERROR_MSG, temp, YES);
+}
+
+void view_config() {
+  PRINT_CONFIG_PARAM(g_conf.is_column_args, "column args: ");
+  PRINT_CONFIG_PARAM(g_conf.is_line_args, "line args: ");
 }
