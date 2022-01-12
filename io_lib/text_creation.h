@@ -13,9 +13,11 @@ typedef struct cmd_bunch {
 static const cmd_bunch help_cmds[] = {
     {"help", "h", "help message"},
     {"clear", "c", "clear screen"},
-    {"quit", "q", "exit program"},
     {"plugins", "p", "view all plugins, located in plugins dir"},
-    {"load", "l", "load plugin from plugins dir"}};
+    {"load", "l", "load plugin from plugins dir"},
+    {"set_column_args", "sca", "set args one by one"},
+    {"set_line_args", "sla", "set args in one row after call function/script"},
+    {"quit", "q", "exit program"}};
 
 char *generate_help_string();
 
