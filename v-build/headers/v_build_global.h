@@ -41,4 +41,11 @@
 #define IO_INDEX 0
 #define IO_PLUGIN_NAME "io"
 
+typedef struct global_conf {
+  bool is_column_args;
+  bool is_line_args;
+} global_conf;
+
+extern global_conf g_conf;
+
 #endif // V_BUILD_GLOBAL_H

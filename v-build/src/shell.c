@@ -9,9 +9,18 @@
 #include "shell_helper.h"
 #include "v_build_global.h"
 
+global_conf g_conf = {0};
+
+static void _set_global_conf() {
+  g_conf.is_column_args = true;
+  g_conf.is_line_args = false;
+}
+
 void run_shell() {
   // must be 1st line. load i/o library
   load_io();
+
+  _set_global_conf();
 
   char *user_input = NULL;
 

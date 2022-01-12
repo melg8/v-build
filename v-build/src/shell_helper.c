@@ -49,8 +49,8 @@ void print_loaded_functions() {
   for (u_int i = 0; i < get_current_list_pos(); ++i) {
     plugin_element *elem = &list[i];
 
-    if (strcmp(elem->plugin_name, "plugins/io.plug") == 0)
-      continue;
+    //    if (strcmp(elem->plugin_name, "plugins/io.plug") == 0)
+    //      continue;
 
     if (strcmp(name_comparator, elem->plugin_name) != 0) {
       char temp[COMMON_TEXT_SIZE] = {0};
