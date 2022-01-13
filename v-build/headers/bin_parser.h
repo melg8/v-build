@@ -29,8 +29,7 @@ void parse_etalon_args(const char *elem_args);
 
 bool is_func_has_args(const plugin_element *elem);
 
-// 0 success, -1 error
-int get_user_func_args();
+void get_user_func_column_args();
 
 // big chank of args checks
 bool is_args_ok();

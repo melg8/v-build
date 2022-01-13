@@ -16,7 +16,8 @@ static const cmd_bunch help_cmds[] = {
     {"plugins", "p", "view all plugins, located in plugins dir"},
     {"load", "l", "load plugin from plugins dir"},
     {"set_column_args", "sca", "set args one by one (default)"},
-    {"set_line_args", "sla", "set args in one row after call function/script"},
+    {"set_line_args", "sla",
+     "set args in one row after function/script call devided by space"},
     {"view_config", "vc", "view shell global configuration"},
     {"quit", "q", "exit program"}};
 

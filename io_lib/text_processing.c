@@ -115,7 +115,10 @@ char *get_shell_input() {
 char *get_input(const char *input) {
 
   char *user_command = malloc(USER_COMMAND_LEN);
+  char *final_str = malloc(USER_COMMAND_LEN);
+
   memset(user_command, 0, USER_COMMAND_LEN);
+  memset(final_str, 0, USER_COMMAND_LEN);
 
   if (input != NULL) {
     printf("%s", input);
@@ -127,7 +130,11 @@ char *get_input(const char *input) {
     EXIT(EXIT_SUCCESS);
   }
 
+  memcpy(final_str, user_command, USER_COMMAND_LEN);
+
   // remove new line symbol '\n' and place 0
-  user_command[strcspn(user_command, "\n")] = 0;
-  return user_command;
+  final_str[strcspn(final_str, "\n")] = 0;
+
+  free(user_command);
+  return final_str;
 }

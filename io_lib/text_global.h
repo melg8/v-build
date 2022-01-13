@@ -5,7 +5,7 @@
 
 // main definitions
 #define SHELL_NAME "shell: "
-#define USER_COMMAND_LEN 128
+#define USER_COMMAND_LEN 256
 #define SLEEP_MSEC_COMMON 5000
 #define SLEEP_MSEC_FAST 500
 #define HELP_STRING_LENGTH 1024 * 128

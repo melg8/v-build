@@ -32,7 +32,6 @@ bool get_plugin_args(const plugin_element *restrict elem) {
     return false;
   }
 
-  reset_user_args();
   if (is_func_has_args(elem)) {
 
     const char *str = elem->descriptor.args;
@@ -40,9 +39,9 @@ bool get_plugin_args(const plugin_element *restrict elem) {
     // get etalon func args and place them into user_args_etalon
     parse_etalon_args(str);
 
-    get_user_func_args();
+    get_user_func_column_args();
 
-    return _is_args_ok;
+    return is_args_ok();
 
   } else {
     // run without args
@@ -79,11 +78,11 @@ bool is_func_has_args(const plugin_element *elem) {
   return _is_has_args;
 }
 
-int get_user_func_args() {
+void get_user_func_column_args() {
   char arg_type_text[COMMON_TEXT_SIZE] = {0};
 
   if (_cmd_arg_counter == 0)
-    return -1;
+    return;
 
   for (size_t i = 0; i < _cmd_arg_counter; ++i) {
 
@@ -94,8 +93,6 @@ int get_user_func_args() {
 
     memset(arg_type_text, 0, sizeof(arg_type_text));
   }
-
-  return is_args_ok();
 }
 
 bool is_args_ok() {
