@@ -6,6 +6,7 @@
 #include "bin_exec.h"
 #include "bin_parser.h"
 #include "io.h"
+#include "line_args_parser.h"
 #include "shell_helper.h"
 #include "v_build_global.h"
 
@@ -29,14 +30,16 @@ void run_shell() {
 
     if (is_help_command(user_input)) {
       exec_help_command(user_input);
-    } else if (is_plugin_command(user_input)) {
-      // parse user input
-      try_to_exec_plugin(user_input);
-      // then exec
     } else {
-      print_info_msg(ERROR_MSG, INVALID_COMMAND, YES);
+      char *cmd = get_command_from_line(user_input);
+      if (is_plugin_command(cmd)) {
+        printf("%s\n", cmd);
+        break;
+        try_to_exec_plugin(cmd);
+      } else {
+        print_info_msg(ERROR_MSG, INVALID_COMMAND, YES);
+      }
     }
-
     free(user_input);
   }
 }
@@ -53,7 +56,9 @@ void try_to_exec_plugin(const char *user_input) {
 }
 
 void run_binary_command(const plugin_element *elem) {
-  if (get_plugin_args(elem)) {
-    exec_bin(elem);
+  if (g_conf.is_column_args) {
+    get_plugin_args(elem);
   }
+
+  exec_bin(elem);
 }

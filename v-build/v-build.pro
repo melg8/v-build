@@ -19,6 +19,7 @@ SOURCES += \
     src/bin_exec_internal.c \
     src/bin_parser.c \
     src/io.c \
+    src/line_args_parser.c \
         src/main.c \
         src/plugin.c \
         src/plugin_parser.c \
@@ -31,6 +32,7 @@ HEADERS += \
         headers/bin_exec_internal.h \
         headers/bin_parser.h \
         headers/io.h \
+        headers/line_args_parser.h \
         headers/plugin.h \
         headers/plugin_parser.h \
         headers/shell.h \
