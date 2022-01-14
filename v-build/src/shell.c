@@ -38,15 +38,15 @@ void run_shell() {
 
     if (is_help_command(user_input)) {
       exec_help_command(user_input);
+    } else if (is_plugin_command(user_input)) {
+      try_to_exec_plugin(user_input);
+    } else if (is_extra_command(user_input)) {
+      exec_extra_command(user_input);
     } else {
-      if (is_plugin_command(user_input)) {
-        try_to_exec_plugin(user_input);
-      } else {
-        print_info_msg(ERROR_MSG, INVALID_COMMAND, YES);
-      }
+      print_info_msg(ERROR_MSG, INVALID_COMMAND, YES);
     }
-    free(user_input);
   }
+  free(user_input);
 }
 
 void try_to_exec_plugin(const char *user_input) {

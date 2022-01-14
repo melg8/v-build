@@ -2,7 +2,6 @@
 
 #include <dirent.h>
 #include <errno.h>
-#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -159,4 +158,18 @@ void print_incorrect_expected_values(size_t cur_idx, const char *expected_value,
 void view_config() {
   PRINT_CONFIG_PARAM(g_conf.is_column_args, "column args: ");
   PRINT_CONFIG_PARAM(g_conf.is_line_args, "line args: ");
+}
+
+bool is_extra_command(const char *cmd) {
+  if (strcmp(cmd, "") == 0) {
+    return true;
+  }
+
+  return false;
+}
+
+void exec_extra_command(const char *cmd) {
+  if (strcmp(cmd, "") == 0) {
+    return;
+  }
 }
