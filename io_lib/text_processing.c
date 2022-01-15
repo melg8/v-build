@@ -2,6 +2,7 @@
 #include <stdio_ext.h>
 #include <stdlib.h>
 #include <string.h>
+#include <termios.h>
 #include <unistd.h>
 
 #include "text_global.h"
@@ -115,6 +116,7 @@ char *get_shell_input() {
 
 char *get_input(const char *input) {
   __fpurge(stdin);
+  tcflush(0, TCIFLUSH);
 
   char *user_command = malloc(USER_COMMAND_LEN);
   char *final_str = malloc(USER_COMMAND_LEN);
