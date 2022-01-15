@@ -2,6 +2,7 @@
 
 #include <dirent.h>
 #include <errno.h>
+#include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -9,9 +10,17 @@
 #include <unistd.h>
 
 #include "io.h"
+#include "line_args_parser.h"
 #include "plugin.h"
 #include "plugin_parser.h"
-#include "v_build_global.h"
+
+global_conf g_conf = {0};
+
+pthread_t input_thread;
+pthread_t err_thread;
+pthread_rwlock_t rwlock;
+
+void *user_input = NULL;
 
 #define PRINT_CONFIG_PARAM(param, param_readable)                              \
   ({                                                                           \
@@ -21,6 +30,50 @@
       print_info_msg(CONFIG_NAME(param_readable), RED_NO, YES);                \
     }                                                                          \
   })
+
+static char *_get_user_command_internal() {
+
+  char *value = NULL;
+  if (g_conf.is_line_args) {
+    value = get_command_from_line(get_shell_input());
+  } else {
+    value = get_shell_input();
+  }
+
+  return value;
+}
+
+static void *_thread_input_internal(void *arg) {
+  pthread_rwlock_rdlock(&rwlock);
+  arg = ((void *)_get_user_command_internal());
+  pthread_rwlock_unlock(&rwlock);
+  pthread_exit(arg);
+}
+
+void set_internal_conf() {
+  g_conf.is_column_args = false;
+  g_conf.is_line_args = true;
+
+  pthread_rwlock_init(&rwlock, NULL);
+}
+
+char *get_user_input() {
+  pthread_create(&input_thread, NULL, _thread_input_internal, user_input);
+  pthread_join(input_thread, &user_input);
+  return ((char *)user_input);
+}
+
+static void *_err_func(void *arg) {
+  pthread_rwlock_wrlock(&rwlock);
+  print_info_msg(ERROR_MSG, INVALID_COMMAND, YES);
+  pthread_rwlock_unlock(&rwlock);
+  pthread_exit(arg);
+}
+
+void print_err() {
+  pthread_create(&err_thread, NULL, _err_func, NULL);
+  pthread_join(err_thread, NULL);
+}
 
 void exec_help_command(const char *cmd) {
 
@@ -172,4 +225,9 @@ void exec_extra_command(const char *cmd) {
   if (strcmp(cmd, "") == 0) {
     return;
   }
+}
+
+void unset_internal_conf() {
+  free(user_input);
+  pthread_rwlock_destroy(&rwlock);
 }
