@@ -42,6 +42,8 @@ void try_to_exec_plugin(const char *user_input) {
       run_binary_command(elem);
     }
   }
+
+  add_cmd_to_history(user_input);
   reset_user_args();
 }
 

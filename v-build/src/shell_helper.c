@@ -22,6 +22,9 @@ pthread_rwlock_t rwlock;
 
 void *user_input = NULL;
 
+char history[COMMON_TEXT_SIZE * 10][COMMON_TEXT_SIZE] = {0};
+static size_t history_count = 0;
+
 #define PRINT_CONFIG_PARAM(param, param_readable)                              \
   ({                                                                           \
     if (param) {                                                               \
@@ -113,9 +116,15 @@ void exec_help_command(const char *cmd) {
     view_config();
   }
 
+  if (strcmp(cmd, "history") == 0 || strcmp(cmd, "hist") == 0) {
+    view_history();
+  }
+
   if (strcmp(cmd, "quit") == 0 || strcmp(cmd, "q") == 0) {
     EXIT(EXIT_SUCCESS);
   }
+
+  add_cmd_to_history(cmd);
 }
 
 void print_loaded_functions() {
@@ -227,10 +236,29 @@ bool is_extra_command(const char *cmd) {
 void exec_extra_command(const char *cmd) {
   if (strcmp(cmd, "") == 0) {
     return;
+  } else {
+    add_cmd_to_history(cmd);
   }
 }
 
 void unset_internal_conf() {
   free(user_input);
   pthread_rwlock_destroy(&rwlock);
+}
+
+void add_cmd_to_history(const char *cmd) {
+  strcpy(history[history_count], cmd);
+  history_count++;
+}
+
+void view_history() {
+  char cnt[10] = {0};
+  for (size_t i = 0; i < history_count; ++i) {
+    sprintf(cnt, "%lu", i);
+    char temp[COMMON_TEXT_SIZE];
+    strcpy(temp, " ");
+    strcat(temp, cnt);
+    strcat(temp, " ");
+    print_info_msg(temp, history[i], YES);
+  }
 }

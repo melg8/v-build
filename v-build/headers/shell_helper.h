@@ -32,7 +32,10 @@ void print_incorrect_expected_values(size_t cur_idx,
                                      const char *entered_value);
 
 void view_config();
+void view_history();
 
 bool is_extra_command(const char *cmd);
+
+void add_cmd_to_history(const char *cmd);
 
 #endif // SHELL_HELPER_H

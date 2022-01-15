@@ -20,6 +20,7 @@ static const cmd_bunch help_cmds[] = {
     {"set_line_args", "sla",
      "set args in one row after function/script call devided by space"},
     {"view_config", "vc", "view shell global configuration"},
+    {"history", "hist", "view command history"},
     {"quit", "q", "exit program"}};
 
 char *generate_help_string();
