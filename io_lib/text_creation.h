@@ -13,7 +13,8 @@ typedef struct cmd_bunch {
 static const cmd_bunch help_cmds[] = {
     {"help", "h", "help message"},
     {"clear", "c", "clear screen"},
-    {"plugins", "p", "view all plugins, located in plugins dir"},
+    {"show_loaded", "sl", "show loaded plugins"},
+    {"plugins_all", "pla", "view all plugins, located in plugins dir"},
     {"load", "l", "load plugin from plugins dir"},
     {"set_column_args", "sca", "set args one by one (default)"},
     {"set_line_args", "sla",

@@ -79,14 +79,17 @@ void exec_help_command(const char *cmd) {
 
   if (strcmp(cmd, "help") == 0 || strcmp(cmd, "h") == 0) {
     print_help();
-    print_loaded_functions();
   }
 
   if (strcmp(cmd, "clear") == 0 || strcmp(cmd, "c") == 0) {
     CLEAR_SCREEN;
   }
 
-  if (strcmp(cmd, "plugins") == 0 || strcmp(cmd, "p") == 0) {
+  if (strcmp(cmd, "show_loaded") == 0 || strcmp(cmd, "sl") == 0) {
+    print_loaded_functions();
+  }
+
+  if (strcmp(cmd, "plugins_all") == 0 || strcmp(cmd, "pla") == 0) {
     view_all_plugins();
   }
 
