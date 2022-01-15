@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdio_ext.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
@@ -113,6 +114,7 @@ char *get_shell_input() {
 }
 
 char *get_input(const char *input) {
+  __fpurge(stdin);
 
   char *user_command = malloc(USER_COMMAND_LEN);
   char *final_str = malloc(USER_COMMAND_LEN);
