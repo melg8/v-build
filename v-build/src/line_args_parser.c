@@ -85,8 +85,14 @@ bool fill_line_args(const plugin_element *restrict elem) {
         strcpy(user_input_args[i], _final_args[i]);
       }
       return is_args_ok();
+    } else {
+      return false;
     }
   }
 
   return true;
 }
+
+bool is_parse_line_ok() { return _is_parse_line_ok(); }
+
+char *get_line_arg(size_t idx) { return _final_args[idx]; }

@@ -11,6 +11,7 @@ int load_plugin(const char *restrict plugin_name);
 // *function if success, NULL if error
 void *get_binary_function(const char *restrict fname);
 
+bool is_plugin_already_loaded(const char *plugin_name);
 plugin_element *find_element_by_command(const char *restrict command);
 
 bool is_plugin_command(const char *restrict command);

@@ -24,7 +24,13 @@ int load_plugin(const char *plugin_name) {
     strcpy(fname, "plugins/");
     strcat(fname, plugin_name);
     strcat(fname, ".plug");
-    ret = load_plugin_internal(fname);
+
+    if (is_plugin_already_loaded(fname)) {
+      printf("%s already loaded\n", fname);
+      ret = -1;
+    } else {
+      ret = load_plugin_internal(fname);
+    }
   }
 
   return ret;
@@ -88,4 +94,14 @@ bool is_plugin_command(const char *command) {
     return false;
   }
   return true;
+}
+
+bool is_plugin_already_loaded(const char *plugin_name) {
+  u_int cur_pos = get_current_list_pos();
+  for (u_int i = 0; i < cur_pos; ++i) {
+    if (strcmp(list[i].plugin_name, plugin_name) == 0) {
+      return true;
+    }
+  }
+  return false;
 }

@@ -9,6 +9,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 
+#include "bin_parser.h"
 #include "io.h"
 #include "line_args_parser.h"
 #include "plugin.h"
@@ -97,7 +98,19 @@ void exec_help_command(const char *cmd) {
   }
 
   if (strcmp(cmd, "load") == 0 || strcmp(cmd, "l") == 0) {
-    // unused
+    char *plugin_name = NULL;
+    if (g_conf.is_column_args) {
+      print_info_msg(INFO_MSG, "plugin name: ", NO);
+      plugin_name = get_input();
+    } else {
+      _cmd_arg_counter = 1;
+      if (is_parse_line_ok()) {
+        plugin_name = get_line_arg(0);
+      }
+    }
+
+    load_plugin(plugin_name);
+    reset_user_args();
   }
 
   if (strcmp(cmd, "set_column_args") == 0 || strcmp(cmd, "sca") == 0) {
