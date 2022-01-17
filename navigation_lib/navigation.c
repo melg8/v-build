@@ -9,7 +9,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-int ls(const char *path) {
+void ls(const char *path) {
 
   //  DIR *d = NULL;
   //  struct dirent *dir = NULL;
@@ -39,6 +39,16 @@ int ls(const char *path) {
   strcat(lscmd, "-lah --color=auto");
 
   system(lscmd);
+}
 
-  return 0;
+void pwd() { system("pwd"); }
+
+int cd(const char *path) {
+  int ret = chdir(path);
+
+  if (ret != 0) {
+    printf("%s\n", strerror(errno));
+  }
+
+  return ret;
 }

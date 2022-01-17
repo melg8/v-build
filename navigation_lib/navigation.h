@@ -1,6 +1,8 @@
 #ifndef NAVIGATION_H
 #define NAVIGATION_H
 
-int ls(const char *path);
+void ls(const char *path);
+void pwd();
+int cd(const char *path);
 
 #endif // NAVIGATION_H

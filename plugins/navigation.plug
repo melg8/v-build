@@ -13,7 +13,26 @@
 type = bin
 command = ls
 exec = plugins/system/libnavigation_lib.so.1.0.0
-ret_val = int
+ret_val = void
 args = char*
 desc = view directory pointed by char*
 --end
+
+--begin
+type = bin
+command = pwd
+exec = plugins/system/libnavigation_lib.so.1.0.0
+ret_val = void
+args = no
+desc = print current directory pointed by char*
+--end
+
+--begin
+type = bin
+command = cd
+exec = plugins/system/libnavigation_lib.so.1.0.0
+ret_val = int
+args = char*
+desc = change directory pointed by char*
+--end
+
