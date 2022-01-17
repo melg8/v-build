@@ -11,7 +11,7 @@
 
 static struct termios stored_settings;
 
-bool _is_arrow_key(char *user_command) {
+bool _is_special_key(char *user_command) {
   bool retval = false;
 
   struct termios new_settings;
@@ -53,12 +53,20 @@ bool _is_arrow_key(char *user_command) {
       retval = true;
     }
   } else {
+
+    if (ch == 10) {
+      printf("\n");
+      retval = true;
+      goto reset_attr;
+    }
+
     char value[COMMON_TEXT_SIZE] = {0};
     sprintf(value, "%c", ch);
     printf("%s", value);
     strcpy(user_command, value);
   }
 
+reset_attr:
   // return canonical mode
   tcsetattr(0, TCSANOW, &stored_settings);
 
@@ -185,7 +193,7 @@ char *get_input(const char *input) {
     printf("%s", input);
   }
 
-  if (_is_arrow_key(user_command)) {
+  if (_is_special_key(user_command)) {
     goto copy;
   }
 

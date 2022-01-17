@@ -274,6 +274,14 @@ void exec_extra_command(const char *cmd) {
     printf("down!\n");
     add_cmd_to_history(cmd);
   }
+  if (strcmp(cmd, ARROW_LEFT) == 0) {
+    printf("\n");
+    return;
+  }
+  if (strcmp(cmd, ARROW_RIGHT) == 0) {
+    printf("\n");
+    return;
+  }
 }
 
 void unset_internal_conf() {
