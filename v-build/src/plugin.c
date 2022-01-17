@@ -4,6 +4,7 @@
 #include <dlfcn.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -17,11 +18,14 @@ static void *_get_binary_func_internal(const plugin_element *restrict elem);
 
 int load_plugin(const char *plugin_name) {
   int ret = 0;
-  char fname[COMMON_TEXT_SIZE];
+  char fname[COMMON_TEXT_SIZE] = {0};
+
+  getcwd(fname, COMMON_TEXT_SIZE);
+
   if (plugin_name == NULL)
     ret = -1;
   else {
-    strcpy(fname, "plugins/");
+    strcat(fname, "/plugins/");
     strcat(fname, plugin_name);
     strcat(fname, ".plug");
 
