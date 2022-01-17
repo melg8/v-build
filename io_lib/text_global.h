@@ -42,4 +42,10 @@
 #define COMMON_TEXT_SIZE 256
 #define PLUGIN_LIST_SIZE 1024
 
+// key arrows
+#define ARROW_UP "UP"
+#define ARROW_DOWN "DOWN"
+#define ARROW_LEFT "LEFT"
+#define ARROW_RIGHT "RIGHT"
+
 #endif // TEXT_GLOBAL_H

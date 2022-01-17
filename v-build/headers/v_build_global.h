@@ -4,6 +4,11 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
+#define ARROW_UP "UP"
+#define ARROW_DOWN "DOWN"
+#define ARROW_LEFT "LEFT"
+#define ARROW_RIGHT "RIGHT"
+
 #define ARGS_COUNT 3
 
 // main definitions

@@ -20,8 +20,8 @@ bool _is_arrow_key(char *user_command) {
 
   new_settings = stored_settings;
 
-  /* Disable canonical mode, and set buffer size to 1 byte */
-  new_settings.c_lflag &= ~(ICANON|ECHO);
+  // disable canonical mode, and set buffer size to 1 byte
+  new_settings.c_lflag &= ~(ICANON | ECHO);
   new_settings.c_cc[VTIME] = 0;
   new_settings.c_cc[VMIN] = 1;
 
@@ -33,15 +33,36 @@ bool _is_arrow_key(char *user_command) {
     ch = getchar();
     if (ch == 91) {
       ch = getchar();
+      switch (ch) {
+      case 65:
+        strcpy(user_command, ARROW_UP);
+        break;
+      case 66:
+        strcpy(user_command, ARROW_DOWN);
+        break;
+      case 67:
+        strcpy(user_command, ARROW_RIGHT);
+        break;
+      case 68:
+        strcpy(user_command, ARROW_LEFT);
+        break;
+      default:
+        break;
+      }
+
+      retval = true;
     }
+  } else {
+    char value[COMMON_TEXT_SIZE] = {0};
+    sprintf(value, "%c", ch);
+    printf("%s", value);
+    strcpy(user_command, value);
   }
 
-  printf("your char is %d\n", ch);
-  strcpy(user_command, (char *)&ch);
-
+  // return canonical mode
   tcsetattr(0, TCSANOW, &stored_settings);
 
-  return retval = true;
+  return retval;
 }
 
 void greetings() {
@@ -169,7 +190,7 @@ char *get_input(const char *input) {
   }
 
   // check for the CTRL-D
-  if (fgets(user_command, USER_COMMAND_LEN, stdin) == NULL) {
+  if (fgets(user_command + 1, USER_COMMAND_LEN - 1, stdin) == NULL) {
     printf("\n");
     EXIT(EXIT_SUCCESS);
   }
@@ -181,5 +202,6 @@ copy:
   final_str[strcspn(final_str, "\n")] = 0;
 
   free(user_command);
+
   return final_str;
 }

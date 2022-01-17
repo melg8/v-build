@@ -243,13 +243,35 @@ bool is_extra_command(const char *cmd) {
     return true;
   }
 
+  if (strcmp(cmd, ARROW_UP) == 0) {
+    return true;
+  }
+
+  if (strcmp(cmd, ARROW_DOWN) == 0) {
+    return true;
+  }
+
+  if (strcmp(cmd, ARROW_LEFT) == 0) {
+    return true;
+  }
+
+  if (strcmp(cmd, ARROW_RIGHT) == 0) {
+    return true;
+  }
+
   return false;
 }
 
 void exec_extra_command(const char *cmd) {
   if (strcmp(cmd, "") == 0) {
     return;
-  } else {
+  }
+  if (strcmp(cmd, ARROW_UP) == 0) {
+    printf("up!\n");
+    add_cmd_to_history(cmd);
+  }
+  if (strcmp(cmd, ARROW_DOWN) == 0) {
+    printf("down!\n");
     add_cmd_to_history(cmd);
   }
 }
