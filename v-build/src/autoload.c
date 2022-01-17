@@ -4,15 +4,27 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
 
 #include "plugin.h"
 #include "v_build_global.h"
+
+char exec_dir[COMMON_TEXT_SIZE] = {0};
 
 static bool _is_eq(const char *line, const char *cmp);
 static bool _ready_to_load = false;
 
 void autoload_plugins() {
-  FILE *pf = fopen(AUTOLOAD_FILE, "r");
+
+  getcwd(exec_dir, COMMON_TEXT_SIZE);
+
+  char autoload_path[COMMON_TEXT_SIZE] = {0};
+
+  strcpy(autoload_path, exec_dir);
+  strcat(autoload_path, "/");
+  strcat(autoload_path, AUTOLOAD_FILE);
+
+  FILE *pf = fopen(autoload_path, "r");
   char *line = malloc(COMMON_TEXT_SIZE);
   size_t n;
   ssize_t read;

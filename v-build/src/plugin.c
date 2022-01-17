@@ -43,7 +43,11 @@ int load_plugin(const char *plugin_name) {
 // *function if success, NULL is error
 static void *_get_binary_func_internal(const plugin_element *restrict elem) {
   void *func = NULL;
-  plugin_handle = dlopen(elem->descriptor.exec, RTLD_NOW | RTLD_DEEPBIND);
+  char exec_path[COMMON_TEXT_SIZE] = {0};
+  strcpy(exec_path, exec_dir);
+  strcat(exec_path, "/");
+  strcat(exec_path, elem->descriptor.exec);
+  plugin_handle = dlopen(exec_path, RTLD_NOW | RTLD_DEEPBIND);
   if (plugin_handle == NULL) {
     printf("dlopen error: %s\n", dlerror());
     return NULL;

@@ -4,6 +4,7 @@
 #include <stdbool.h>
 
 #include "plugin_parser.h"
+#include "v_build_global.h"
 
 // 0 if success, -1 if error
 int load_plugin(const char *restrict plugin_name);
