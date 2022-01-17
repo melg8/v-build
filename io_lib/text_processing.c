@@ -193,17 +193,12 @@ char *get_input(const char *input) {
     printf("%s", input);
   }
 
-  if (_is_special_key(user_command)) {
-    goto copy;
-  }
-
   // check for the CTRL-D
-  if (fgets(user_command + 1, USER_COMMAND_LEN - 1, stdin) == NULL) {
+  if (fgets(user_command, USER_COMMAND_LEN, stdin) == NULL) {
     printf("\n");
     EXIT(EXIT_SUCCESS);
   }
 
-copy:
   memcpy(final_str, user_command, USER_COMMAND_LEN);
 
   // remove new line symbol '\n' and place 0

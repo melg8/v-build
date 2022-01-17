@@ -41,7 +41,7 @@ void try_to_exec_plugin(const char *user_input) {
     run_plugin(elem);
   }
 
-  add_cmd_to_history(user_input);
+  add_cmd_to_history(user_input, elem);
   reset_user_args();
 }
 

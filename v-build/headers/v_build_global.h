@@ -33,6 +33,7 @@ extern bool _is_has_args;
 #define YES 1
 #define NO 0
 
+#define SHELL_NAME "shell: "
 #define SHELL_TITILE OS_COLOR_GREEN SHELL_NAME OS_NO_COLOR
 
 #define CLEAR_SCREEN system("clear")

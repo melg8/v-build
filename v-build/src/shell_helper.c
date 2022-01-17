@@ -137,7 +137,7 @@ void exec_help_command(const char *cmd) {
     EXIT(EXIT_SUCCESS);
   }
 
-  add_cmd_to_history(cmd);
+  add_cmd_to_history(cmd, NULL);
 }
 
 void print_loaded_functions() {
@@ -267,20 +267,16 @@ void exec_extra_command(const char *cmd) {
     return;
   }
   if (strcmp(cmd, ARROW_UP) == 0) {
-    printf("up!\n");
-    add_cmd_to_history(cmd);
+    printf("\n");
   }
   if (strcmp(cmd, ARROW_DOWN) == 0) {
-    printf("down!\n");
-    add_cmd_to_history(cmd);
+    printf("\n");
   }
   if (strcmp(cmd, ARROW_LEFT) == 0) {
     printf("\n");
-    return;
   }
   if (strcmp(cmd, ARROW_RIGHT) == 0) {
     printf("\n");
-    return;
   }
 }
 
@@ -289,8 +285,19 @@ void unset_internal_conf() {
   pthread_rwlock_destroy(&rwlock);
 }
 
-void add_cmd_to_history(const char *cmd) {
-  strcpy(history[history_count], cmd);
+void add_cmd_to_history(const char *cmd, const plugin_element *elem) {
+  if (elem == NULL) {
+    strcpy(history[history_count], cmd);
+  } else {
+    char args[COMMON_TEXT_SIZE] = {0};
+    strcpy(args, cmd);
+    strcat(args, " ");
+    for (size_t i = 0; i < _cmd_arg_counter; ++i) {
+      strcat(args, user_input_args[i]);
+      strcat(args, " ");
+    }
+    strcpy(history[history_count], args);
+  }
   history_count++;
 }
 

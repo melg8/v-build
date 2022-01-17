@@ -5,6 +5,7 @@
 #include <stddef.h>
 
 #include "v_build_global.h"
+#include "plugin_parser.h"
 
 extern global_conf g_conf;
 extern pthread_t input_thread;
@@ -36,6 +37,6 @@ void view_history();
 
 bool is_extra_command(const char *cmd);
 
-void add_cmd_to_history(const char *cmd);
+void add_cmd_to_history(const char *cmd, const plugin_element* elem);
 
 #endif // SHELL_HELPER_H
