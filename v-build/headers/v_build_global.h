@@ -4,6 +4,20 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
+#define ARGS_COUNT 3
+
+// main definitions
+#define COMMON_TEXT_SIZE 256
+#define PLUGIN_LIST_SIZE 256
+#define RETURN_VALUE_SIZE 128
+
+extern char user_args_etalon[ARGS_COUNT][COMMON_TEXT_SIZE];
+extern char user_input_args[ARGS_COUNT][COMMON_TEXT_SIZE];
+extern size_t _cmd_arg_counter;
+extern bool _is_input_correct;
+extern bool _is_args_ok;
+extern bool _is_has_args;
+
 // colors for output
 #define OS_COLOR_RED "\x1B[31m"
 #define OS_COLOR_GREEN "\x1B[32m"
@@ -34,11 +48,6 @@
 #define RED_NO OS_COLOR_RED "no" OS_NO_COLOR
 
 #define SHELL_LOOP for (;;)
-
-// main definitions
-#define COMMON_TEXT_SIZE 256
-#define PLUGIN_LIST_SIZE 256
-#define RETURN_VALUE_SIZE 128
 
 // main config
 #define IO_INDEX 0

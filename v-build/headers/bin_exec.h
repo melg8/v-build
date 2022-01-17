@@ -1,7 +1,7 @@
 #ifndef BIN_EXEC_H
 #define BIN_EXEC_H
 
-#include "bin_parser.h"
+#include "column_args_parser.h"
 #include "plugin.h"
 
 typedef void (*void_f)();

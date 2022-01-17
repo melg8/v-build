@@ -4,16 +4,16 @@
 #   type = bin | script
 #   command = function | script
 #   exec = path from plugins dir to exec file
-#   ret_val = void || int || bool || char* || text (script)
+#   ret_val = void || int || bool || char* || int (script)
 #   args = arg1, arg2, argN || no
 #   desc = description
 #   --end
 
 --begin
-type = bin
+type = script
 command = ls
-exec = plugins/system/libnavigation_lib.so.1.0.0
-ret_val = void
+exec = plugins/system/navigation/ls.sh
+ret_val = int
 args = char*
 desc = view directory pointed by char*
 --end

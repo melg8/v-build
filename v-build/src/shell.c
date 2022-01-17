@@ -4,9 +4,10 @@
 #include <string.h>
 
 #include "bin_exec.h"
-#include "bin_parser.h"
+#include "column_args_parser.h"
 #include "io.h"
 #include "line_args_parser.h"
+#include "script_exec.h"
 #include "shell_helper.h"
 #include "v_build_global.h"
 
@@ -37,25 +38,26 @@ void try_to_exec_plugin(const char *user_input) {
   plugin_element *elem = find_element_by_command(user_input);
 
   if (elem != NULL) {
-    // determine the type of command, binary or script
-    if (is_elem_binary(elem)) {
-      run_binary_command(elem);
-    }
+    run_plugin(elem);
   }
 
   add_cmd_to_history(user_input);
   reset_user_args();
 }
 
-void run_binary_command(const plugin_element *elem) {
+void run_plugin(const plugin_element *elem) {
   bool args_ok = false;
   if (g_conf.is_column_args) {
-    args_ok = get_plugin_args(elem);
+    args_ok = get_column_args(elem);
   } else if (g_conf.is_line_args) {
     args_ok = fill_line_args(elem);
   }
 
   if (args_ok) {
-    exec_bin(elem);
+    if (is_elem_binary(elem)) {
+      exec_bin(elem);
+    } else if (is_elem_script(elem)) {
+      exec_script(elem);
+    }
   }
 }

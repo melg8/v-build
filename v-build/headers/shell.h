@@ -7,6 +7,6 @@ void run_shell();
 
 void try_to_exec_plugin(const char *restrict user_input);
 
-void run_binary_command(const plugin_element *restrict elem);
+void run_plugin(const plugin_element *restrict elem);
 
 #endif // SHELL_H

@@ -9,7 +9,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#include "bin_parser.h"
+#include "column_args_parser.h"
 #include "io.h"
 #include "line_args_parser.h"
 #include "plugin.h"

@@ -1,5 +1,5 @@
-#ifndef BIN_PARSER_H
-#define BIN_PARSER_H
+#ifndef COLUMN_ARGS_PARSER_H
+#define COLUMN_ARGS_PARSER_H
 
 #include <stdbool.h>
 
@@ -14,21 +14,10 @@
 #define IS_VALUE_TEXT "text"
 
 #define NO_ARGS "no"
-#define ARGS_COUNT 3
 
-extern char user_args_etalon[ARGS_COUNT][COMMON_TEXT_SIZE];
-extern char user_input_args[ARGS_COUNT][COMMON_TEXT_SIZE];
-extern size_t _cmd_arg_counter;
-extern bool _is_input_correct;
-extern bool _is_args_ok;
-extern bool _is_has_args;
-
-bool get_plugin_args(const plugin_element *restrict elem);
-
+bool get_column_args(const plugin_element *restrict elem);
 void parse_etalon_args(const char *elem_args);
-
 bool is_func_has_args(const plugin_element *elem);
-
 void get_user_func_column_args();
 
 // big chank of args checks
@@ -48,4 +37,4 @@ bool is_func_ret_bool(const plugin_element *elem);
 
 void reset_user_args();
 
-#endif // BIN_PARSER_H
+#endif // COLUMN_ARGS_PARSER_H

@@ -3,7 +3,7 @@
 
 #include <stdbool.h>
 
-#include "bin_parser.h"
+#include "column_args_parser.h"
 #include "plugin.h"
 #include "plugin_parser.h"
 

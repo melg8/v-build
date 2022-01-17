@@ -1,4 +1,4 @@
-#include "bin_parser.h"
+#include "column_args_parser.h"
 
 #include <ctype.h>
 #include <stdio.h>
@@ -25,7 +25,7 @@ void _print_pre_input_text(const char *arg_type) {
 
 //                      END
 
-bool get_plugin_args(const plugin_element *restrict elem) {
+bool get_column_args(const plugin_element *restrict elem) {
 
   if (elem == NULL) {
     print_info_msg(ERROR_MSG, "Strange behaviour, command not found", YES);
