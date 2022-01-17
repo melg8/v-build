@@ -39,7 +39,7 @@ void exec_script(const plugin_element *elem) {
       sprintf(ret_ch, "%d", ret_val);
       print_info_msg(RETURN_VAL, ret_ch, YES);
     }
-  } else if (pid != 0 && pid != -1) {
+  } else if (pid != 0 || pid != -1) {
     wait(NULL);
   } else {
     strerror(errno);

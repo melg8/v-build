@@ -17,3 +17,21 @@ ret_val = int
 args = char*
 desc = view directory pointed by char*
 --end
+
+--begin
+type = script
+command = pwd
+exec = plugins/system/navigation/pwd.sh
+ret_val = int
+args = no
+desc = print current directory
+--end
+
+--begin
+type = script
+command = cd
+exec = plugins/system/navigation/cd.sh
+ret_val = int
+args = char*
+desc = change directory pointed by char*
+--end

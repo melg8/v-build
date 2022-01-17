@@ -1,3 +1,5 @@
+#include "text_processing.h"
+
 #include <stdio.h>
 #include <stdio_ext.h>
 #include <stdlib.h>
@@ -6,7 +8,41 @@
 #include <unistd.h>
 
 #include "text_global.h"
-#include "text_processing.h"
+
+static struct termios stored_settings;
+
+bool _is_arrow_key(char *user_command) {
+  bool retval = false;
+
+  struct termios new_settings;
+
+  tcgetattr(0, &stored_settings);
+
+  new_settings = stored_settings;
+
+  /* Disable canonical mode, and set buffer size to 1 byte */
+  new_settings.c_lflag &= ~(ICANON|ECHO);
+  new_settings.c_cc[VTIME] = 0;
+  new_settings.c_cc[VMIN] = 1;
+
+  tcsetattr(0, TCSANOW, &new_settings);
+
+  int ch = getchar();
+
+  if (ch == 27) {
+    ch = getchar();
+    if (ch == 91) {
+      ch = getchar();
+    }
+  }
+
+  printf("your char is %d\n", ch);
+  strcpy(user_command, (char *)&ch);
+
+  tcsetattr(0, TCSANOW, &stored_settings);
+
+  return retval = true;
+}
 
 void greetings() {
   char greetings_msg[COMMON_TEXT_SIZE * 2] = {0};
@@ -128,12 +164,17 @@ char *get_input(const char *input) {
     printf("%s", input);
   }
 
+  if (_is_arrow_key(user_command)) {
+    goto copy;
+  }
+
   // check for the CTRL-D
   if (fgets(user_command, USER_COMMAND_LEN, stdin) == NULL) {
     printf("\n");
     EXIT(EXIT_SUCCESS);
   }
 
+copy:
   memcpy(final_str, user_command, USER_COMMAND_LEN);
 
   // remove new line symbol '\n' and place 0
