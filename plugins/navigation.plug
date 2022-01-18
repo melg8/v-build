@@ -31,8 +31,63 @@ desc = print current directory pointed by char*
 type = bin
 command = cd
 exec = plugins/system/libnavigation_lib.so.1.0.0
-ret_val = int
+ret_val = void
 args = char*
 desc = change directory pointed by char*
 --end
+
+--begin
+type = bin
+command = createdir
+exec = plugins/system/libnavigation_lib.so.1.0.0
+ret_val = void
+args = char*
+desc = create directory pointed by char*
+--end
+
+--begin
+type = bin
+command = removenode
+exec = plugins/system/libnavigation_lib.so.1.0.0
+ret_val = void
+args = char*
+desc = remove node pointed by char*
+--end
+
+--begin
+type = bin
+command = createfile
+exec = plugins/system/libnavigation_lib.so.1.0.0
+ret_val = void
+args = char*
+desc = create file pointed by char*
+--end
+
+--begin
+type = bin
+command = renamenode
+exec = plugins/system/libnavigation_lib.so.1.0.0
+ret_val = void
+args = char*, char*
+desc = rename node, old_name, new_name
+--end
+
+--begin
+type = bin
+command = edit
+exec = plugins/system/libnavigation_lib.so.1.0.0
+ret_val = void
+args = char*
+desc = edit file pointed by char*
+--end
+
+--begin
+type = bin
+command = viewfile
+exec = plugins/system/libnavigation_lib.so.1.0.0
+ret_val = void
+args = char*
+desc = view file pointed by char*
+--end
+
 
