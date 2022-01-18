@@ -10,5 +10,7 @@ void removenode(const char *path);
 void renamenode(const char *old_name, const char *new_name);
 void edit(const char *path);
 void viewfile(const char *path);
+void invoke_script(const char* path);
+void invoke_bin(const char* path);
 
 #endif // NAVIGATION_H

@@ -90,4 +90,21 @@ args = char*
 desc = view file pointed by char*
 --end
 
+--begin
+type = bin
+command = invoke_script
+exec = plugins/system/libnavigation_lib.so.1.0.0
+ret_val = void
+args = char*
+desc = try to invoke script pointed by char*
+--end
+
+--begin
+type = bin
+command = invoke_bin
+exec = plugins/system/libnavigation_lib.so.1.0.0
+ret_val = void
+args = char*
+desc = try to invoke file pointed by char*
+--end
 
