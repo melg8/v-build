@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# copy sdz-kernel project headers into tree
+# copy kernel project headers into tree
 
 GREEN='\033[0;32m'
 RED='\033[0;31m'
@@ -29,7 +29,7 @@ msg_green "Copy headers from: " "$LINUX_KERNEL"
 cd $LINUX_KERNEL && make distclean
 cd $LINUX_KERNEL && make install-hdr HDR_PATH="${V_BUILD_TREE_X86_64}/usr"
 
-msg_green "sdz-kernel headers were copied into: " "$V_BUILD_TREE_X86_64/usr/include"
+msg_green "kernel headers were copied into: " "$V_BUILD_TREE_X86_64/usr/include"
 
 exit 0
 

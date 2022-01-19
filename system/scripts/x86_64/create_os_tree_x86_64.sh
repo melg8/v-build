@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Create sdz os tree X86_64
+# Create OS tree X86_64
 
 GREEN='\033[0;32m'
 RED='\033[0;31m'
