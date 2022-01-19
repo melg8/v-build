@@ -13,9 +13,6 @@
 #define YES 1
 #define NO 0
 
-// main config
-#define PLUGINS_DIR "plugins"
-
 // colors for output
 #define OS_COLOR_RED "\x1B[31m"
 #define OS_COLOR_GREEN "\x1B[32m"

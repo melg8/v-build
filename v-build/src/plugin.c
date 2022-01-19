@@ -25,7 +25,7 @@ int load_plugin(const char *plugin_name) {
   if (plugin_name == NULL)
     ret = -1;
   else {
-    strcat(fname, "/plugins/");
+    strcat(fname, "/system/");
     strcat(fname, plugin_name);
     strcat(fname, ".plug");
 

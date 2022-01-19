@@ -15,7 +15,7 @@
 #define ELEM_BINARY "bin"
 #define ELEM_SCRIPT "script"
 
-// plugin descriptor, see plugins/io.plug for more information
+// plugin descriptor, see system/io.plug for more information
 typedef struct plugin_descriptor {
   char type[COMMON_TEXT_SIZE];
   char command[COMMON_TEXT_SIZE];

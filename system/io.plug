@@ -3,7 +3,7 @@
 #   --begin
 #   type = bin | script
 #   command = function | script
-#   exec = path from plugins dir to exec file
+#   exec = path from system dir to exec file
 #   ret_val = void || int || bool || char* || text (script)
 #   args = arg1, arg2, argN || no
 #   desc = description
@@ -12,7 +12,7 @@
 --begin
 type = bin
 command = greetings
-exec = plugins/system/libio_lib.so.1.0.0
+exec = system/libs/libio_lib.so.1.0.0
 ret_val = void
 args = no
 desc = initial banner
@@ -21,7 +21,7 @@ desc = initial banner
 --begin
 type = bin
 command = print_help_msg
-exec = plugins/system/libio_lib.so.1.0.0
+exec = system/libs/libio_lib.so.1.0.0
 ret_val = void
 args = no
 desc = print help message
@@ -30,7 +30,7 @@ desc = print help message
 --begin
 type = bin
 command = print_msg
-exec = plugins/system/libio_lib.so.1.0.0
+exec = system/libs/libio_lib.so.1.0.0
 ret_val = void
 args = char*, int
 desc = char* - text, int - sleep(msec)
@@ -39,7 +39,7 @@ desc = char* - text, int - sleep(msec)
 --begin
 type = bin
 command = print_fmt_msg
-exec = plugins/system/libio_lib.so.1.0.0
+exec = system/libs/libio_lib.so.1.0.0
 ret_val = void
 args = int, char*
 desc = aligned text with int from RIGHT, char* - text
@@ -48,7 +48,7 @@ desc = aligned text with int from RIGHT, char* - text
 --begin
 type = bin
 command = print_info_msg
-exec = plugins/system/libio_lib.so.1.0.0
+exec = system/libs/libio_lib.so.1.0.0
 ret_val = void
 args = char*, char*, bool
 desc = print message - title, text, new_line ( true, 1, false, 0 )
@@ -57,7 +57,7 @@ desc = print message - title, text, new_line ( true, 1, false, 0 )
 --begin
 type = bin
 command = ask_yes_no
-exec = plugins/system/libio_lib.so.1.0.0
+exec = system/libs/libio_lib.so.1.0.0
 ret_val = int
 args = char*
 desc = 1 - yes, 0 - no
@@ -66,7 +66,7 @@ desc = 1 - yes, 0 - no
 --begin
 type = bin
 command = is_help_command
-exec = plugins/system/libio_lib.so.1.0.0
+exec = system/libs/libio_lib.so.1.0.0
 ret_val = bool
 args = char*
 desc = search in help list, char* - name of command
@@ -75,7 +75,7 @@ desc = search in help list, char* - name of command
 --begin
 type = bin
 command = get_shell_input
-exec = plugins/system/libio_lib.so.1.0.0
+exec = system/libs/libio_lib.so.1.0.0
 ret_val = char*
 args = no
 desc = get user input, no args
@@ -84,7 +84,7 @@ desc = get user input, no args
 --begin
 type = bin
 command = get_input
-exec = plugins/system/libio_lib.so.1.0.0
+exec = system/libs/libio_lib.so.1.0.0
 ret_val = char*
 args = char*
 desc = char* - text before input

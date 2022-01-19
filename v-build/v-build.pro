@@ -42,9 +42,9 @@ HEADERS += \
         headers/v_build_global.h
 
 DISTFILES += \
-../plugins/autoload.config \
-    ../plugins/io.plug \
-    ../plugins/navigation.plug \
-    ../to_do
+        ../system/autoload.config \
+        ../system/io.plug \
+        ../system/navigation.plug \
+        ../to_do
 
 
