@@ -55,11 +55,11 @@ void export_variables() {
   strcpy(vars[idx], V_BUILD_PKG_DIR);
   ++idx;
 
-  char V_BUILD_SYSTEM[COMMON_TEXT_SIZE] = {"V_BUILD_SYSTEM="};
-  strcat(V_BUILD_SYSTEM, V_BUILD_DIR_PATH);
-  strcat(V_BUILD_SYSTEM, V_BUILD_SYSTEM_NAME);
-  strcpy(vars[idx], V_BUILD_SYSTEM);
-  ++idx;
+  //  char V_BUILD_SYSTEM[COMMON_TEXT_SIZE] = {"V_BUILD_SYSTEM="};
+  //  strcat(V_BUILD_SYSTEM, V_BUILD_DIR_PATH);
+  //  strcat(V_BUILD_SYSTEM, V_BUILD_SYSTEM_NAME);
+  //  strcpy(vars[idx], V_BUILD_SYSTEM);
+  //  ++idx;
 
   char V_BUILD_BUILD_DIR[COMMON_TEXT_SIZE] = {"V_BUILD_BUILD_DIR="};
   strcat(V_BUILD_BUILD_DIR, V_BUILD_DIR_PATH);

@@ -15,7 +15,7 @@ command = export_variables
 exec = system/libs/libosx64_lib.so.1.0.0
 ret_val = void
 args = no
-desc = export variables for building os
+desc = export variables for building os ( ! for CURRENT directory ! )
 --end
 
 --begin
