@@ -1,6 +1,6 @@
 TEMPLATE = lib
 
-TARGET = os_lib
+TARGET = osx64_lib
 
 CONFIG += console
 CONFIG -= app_bundle
@@ -11,8 +11,8 @@ QMAKE_CFLAGS += -ggdb3 -O0 -rdynamic
 INCLUDEPATH += $$PWD
 
 SOURCES += \
-		os.c
+		osx64.c
 
 HEADERS += \
-		os.h
+		osx64.h
 
