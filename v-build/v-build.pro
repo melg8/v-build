@@ -45,6 +45,7 @@ DISTFILES += \
         ../system/autoload.config \
         ../system/io.plug \
         ../system/navigation.plug \
+        ../system/os.plug \
         ../to_do
 
 
