@@ -26,3 +26,12 @@ ret_val = void
 args = no
 desc = prepare directory for os building, create directories
 --end
+
+--begin
+type = script
+command = remove_all_dirs
+exec = /home/user/work/v-build/system/scripts/osx64/common/remove_all_dirs.sh
+ret_val = void
+args = no
+desc = remove all build-related directories
+--end

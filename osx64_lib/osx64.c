@@ -89,7 +89,7 @@ void export_variables() {
 
   char V_BUILD_TOOLS_X86_64[COMMON_TEXT_SIZE] = {"V_BUILD_TOOLS_X86_64="};
   strcat(V_BUILD_TOOLS_X86_64, V_BUILD_DIR_PATH);
-  strcat(V_BUILD_TREE_X86_64, "/");
+  strcat(V_BUILD_TOOLS_X86_64, "/");
   strcat(V_BUILD_TOOLS_X86_64, "tree_x86_64/tools");
   strcpy(vars[idx], V_BUILD_TOOLS_X86_64);
   ++idx;
