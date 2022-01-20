@@ -2,8 +2,8 @@
 
 # Download all archives and patches
 
-PKG_LIST="$V_BUILD_PRIVATE/packages.list"
-PATCH_LIST="$V_BUILD_PRIVATE/patches.list"
+PKG_LIST="$V_BUILD_SYSTEM/scripts/os/packages.list"
+PATCH_LIST="$V_BUILD_SYSTEM/scripts/os/patches.list"
 
 if [ ! -d "$V_BUILD_ARCHIVE_DIR" ]; then
 	mkdir $V_BUILD_ARCHIVE_DIR

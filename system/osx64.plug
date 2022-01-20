@@ -12,8 +12,17 @@
 --begin
 type = bin
 command = export_variables
-exec = system/libs/libos_lib.so.1.0.0
+exec = system/libs/libosx64_lib.so.1.0.0
 ret_val = void
 args = no
 desc = export variables for building os
+--end
+
+--begin
+type = script
+command = create_all_dirs
+exec = /home/user/work/v-build/system/scripts/osx64/common/create_all_dirs.sh
+ret_val = void
+args = no
+desc = prepare directory for os building, create directories
 --end
