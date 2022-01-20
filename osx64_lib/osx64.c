@@ -19,6 +19,15 @@
 //    "3"
 //    "LINUX_KERNEL"
 
+#define V_BUILD_PKG_DIR_NAME "/packages"
+#define V_BUILD_SYSTEM_NAME "/system"
+#define V_BUILD_BUILD_DIR_NAME "/build_dir"
+#define V_BUILD_PATCH_DIR_NAME "/patches"
+#define V_BUILD_ARCHIVE_DIR_NAME "/archives"
+#define V_BUILD_TGT_X86_64_NAME "x86_64-linux-gnu"
+#define V_BUILD_TREE_X86_64_NAME "/tree_x86_64"
+#define V_BUILD_TOOLS_X86_64_NAME "/tree_x86_64/tools"
+
 #define COMMON_TEXT_SIZE 1024
 
 static size_t idx = 0;
@@ -42,55 +51,48 @@ void export_variables() {
 
   char V_BUILD_PKG_DIR[COMMON_TEXT_SIZE] = {"V_BUILD_PKG_DIR="};
   strcat(V_BUILD_PKG_DIR, V_BUILD_DIR_PATH);
-  strcat(V_BUILD_PKG_DIR, "/");
-  strcat(V_BUILD_PKG_DIR, "packages");
+  strcat(V_BUILD_PKG_DIR, V_BUILD_PKG_DIR_NAME);
   strcpy(vars[idx], V_BUILD_PKG_DIR);
   ++idx;
 
   char V_BUILD_SYSTEM[COMMON_TEXT_SIZE] = {"V_BUILD_SYSTEM="};
   strcat(V_BUILD_SYSTEM, V_BUILD_DIR_PATH);
-  strcat(V_BUILD_SYSTEM, "/");
-  strcat(V_BUILD_SYSTEM, "system");
+  strcat(V_BUILD_SYSTEM, V_BUILD_SYSTEM_NAME);
   strcpy(vars[idx], V_BUILD_SYSTEM);
   ++idx;
 
   char V_BUILD_BUILD_DIR[COMMON_TEXT_SIZE] = {"V_BUILD_BUILD_DIR="};
   strcat(V_BUILD_BUILD_DIR, V_BUILD_DIR_PATH);
-  strcat(V_BUILD_BUILD_DIR, "/");
-  strcat(V_BUILD_BUILD_DIR, "build_dir");
+  strcat(V_BUILD_BUILD_DIR, V_BUILD_BUILD_DIR_NAME);
   strcpy(vars[idx], V_BUILD_BUILD_DIR);
   ++idx;
 
   char V_BUILD_PATCH_DIR[COMMON_TEXT_SIZE] = {"V_BUILD_PATCH_DIR="};
   strcat(V_BUILD_PATCH_DIR, V_BUILD_DIR_PATH);
-  strcat(V_BUILD_PATCH_DIR, "/");
-  strcat(V_BUILD_PATCH_DIR, "patches");
+  strcat(V_BUILD_PATCH_DIR, V_BUILD_PATCH_DIR_NAME);
   strcpy(vars[idx], V_BUILD_PATCH_DIR);
   ++idx;
 
   char V_BUILD_ARCHIVE_DIR[COMMON_TEXT_SIZE] = {"V_BUILD_ARCHIVE_DIR="};
   strcat(V_BUILD_ARCHIVE_DIR, V_BUILD_DIR_PATH);
-  strcat(V_BUILD_ARCHIVE_DIR, "/");
-  strcat(V_BUILD_ARCHIVE_DIR, "archives");
+  strcat(V_BUILD_ARCHIVE_DIR, V_BUILD_ARCHIVE_DIR_NAME);
   strcpy(vars[idx], V_BUILD_ARCHIVE_DIR);
   ++idx;
 
   char V_BUILD_TGT_X86_64[COMMON_TEXT_SIZE] = {"V_BUILD_TGT_X86_64="};
-  strcat(V_BUILD_TGT_X86_64, "x86_64-linux-gnu");
+  strcat(V_BUILD_TGT_X86_64, V_BUILD_TGT_X86_64_NAME);
   strcpy(vars[idx], V_BUILD_TGT_X86_64);
   ++idx;
 
   char V_BUILD_TREE_X86_64[COMMON_TEXT_SIZE] = {"V_BUILD_TREE_X86_64="};
   strcat(V_BUILD_TREE_X86_64, V_BUILD_DIR_PATH);
-  strcat(V_BUILD_TREE_X86_64, "/");
-  strcat(V_BUILD_TREE_X86_64, "tree_x86_64");
+  strcat(V_BUILD_TREE_X86_64, V_BUILD_TREE_X86_64_NAME);
   strcpy(vars[idx], V_BUILD_TREE_X86_64);
   ++idx;
 
   char V_BUILD_TOOLS_X86_64[COMMON_TEXT_SIZE] = {"V_BUILD_TOOLS_X86_64="};
   strcat(V_BUILD_TOOLS_X86_64, V_BUILD_DIR_PATH);
-  strcat(V_BUILD_TOOLS_X86_64, "/");
-  strcat(V_BUILD_TOOLS_X86_64, "tree_x86_64/tools");
+  strcat(V_BUILD_TOOLS_X86_64, V_BUILD_TOOLS_X86_64_NAME);
   strcpy(vars[idx], V_BUILD_TOOLS_X86_64);
   ++idx;
 
