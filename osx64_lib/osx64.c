@@ -18,9 +18,20 @@
 
 #define COMMON_TEXT_SIZE 1024
 
+static char V_BUILD_DIR_PATH[COMMON_TEXT_SIZE] = {0};
+
+static void export_var(const char *varname, const char *directory) {
+  char var[COMMON_TEXT_SIZE] = {0};
+  strcpy(var, V_BUILD_DIR_PATH);
+  strcat(var, directory);
+  if (setenv(varname, var, 1) != 0) {
+    printf("setenv error: %s\n", strerror(errno));
+    exit(EXIT_FAILURE);
+  }
+}
+
 void osx64_export_variables() {
 
-  char V_BUILD_DIR_PATH[COMMON_TEXT_SIZE] = {0};
   char V_BUILD_DIR[COMMON_TEXT_SIZE] = {"V_BUILD_DIR"};
 
   if (getcwd(V_BUILD_DIR_PATH, COMMON_TEXT_SIZE) == NULL) {
@@ -33,37 +44,12 @@ void osx64_export_variables() {
     }
   }
 
-  char V_BUILD_PKG_DIR[COMMON_TEXT_SIZE] = {0};
-  strcat(V_BUILD_PKG_DIR, V_BUILD_DIR_PATH);
-  strcat(V_BUILD_PKG_DIR, V_BUILD_PKG_DIR_NAME);
-  if (setenv("V_BUILD_PKG_DIR", V_BUILD_PKG_DIR, 1) != 0) {
-    printf("setenv error: %s\n", strerror(errno));
-    exit(EXIT_FAILURE);
-  }
-
-  char V_BUILD_BUILD_DIR[COMMON_TEXT_SIZE] = {0};
-  strcat(V_BUILD_BUILD_DIR, V_BUILD_DIR_PATH);
-  strcat(V_BUILD_BUILD_DIR, V_BUILD_BUILD_DIR_NAME);
-  if (setenv("V_BUILD_BUILD_DIR", V_BUILD_BUILD_DIR, 1) != 0) {
-    printf("setenv error: %s\n", strerror(errno));
-    exit(EXIT_FAILURE);
-  }
-
-  char V_BUILD_PATCH_DIR[COMMON_TEXT_SIZE] = {0};
-  strcat(V_BUILD_PATCH_DIR, V_BUILD_DIR_PATH);
-  strcat(V_BUILD_PATCH_DIR, V_BUILD_PATCH_DIR_NAME);
-  if (setenv("V_BUILD_PATCH_DIR", V_BUILD_PATCH_DIR, 1) != 0) {
-    printf("setenv error: %s\n", strerror(errno));
-    exit(EXIT_FAILURE);
-  }
-
-  char V_BUILD_ARCHIVE_DIR[COMMON_TEXT_SIZE] = {0};
-  strcat(V_BUILD_ARCHIVE_DIR, V_BUILD_DIR_PATH);
-  strcat(V_BUILD_ARCHIVE_DIR, V_BUILD_ARCHIVE_DIR_NAME);
-  if (setenv("V_BUILD_ARCHIVE_DIR", V_BUILD_ARCHIVE_DIR, 1) != 0) {
-    printf("setenv error: %s\n", strerror(errno));
-    exit(EXIT_FAILURE);
-  }
+  export_var("V_BUILD_PKG_DIR", V_BUILD_PKG_DIR_NAME);
+  export_var("V_BUILD_BUILD_DIR", V_BUILD_BUILD_DIR_NAME);
+  export_var("V_BUILD_PATCH_DIR", V_BUILD_PATCH_DIR_NAME);
+  export_var("V_BUILD_ARCHIVE_DIR", V_BUILD_ARCHIVE_DIR_NAME);
+  export_var("V_BUILD_TREE_X86_64", V_BUILD_TREE_X86_64_NAME);
+  export_var("V_BUILD_TOOLS_X86_64", V_BUILD_TOOLS_X86_64_NAME);
 
   char V_BUILD_TGT_X86_64[COMMON_TEXT_SIZE] = {0};
   strcat(V_BUILD_TGT_X86_64, V_BUILD_TGT_X86_64_NAME);
@@ -72,21 +58,53 @@ void osx64_export_variables() {
     exit(EXIT_FAILURE);
   }
 
-  char V_BUILD_TREE_X86_64[COMMON_TEXT_SIZE] = {0};
-  strcat(V_BUILD_TREE_X86_64, V_BUILD_DIR_PATH);
-  strcat(V_BUILD_TREE_X86_64, V_BUILD_TREE_X86_64_NAME);
-  if (setenv("V_BUILD_TREE_X86_64", V_BUILD_TREE_X86_64, 1) != 0) {
-    printf("setenv error: %s\n", strerror(errno));
-    exit(EXIT_FAILURE);
-  }
+  //  char V_BUILD_PKG_DIR[COMMON_TEXT_SIZE] = {0};
+  //  strcat(V_BUILD_PKG_DIR, V_BUILD_DIR_PATH);
+  //  strcat(V_BUILD_PKG_DIR, V_BUILD_PKG_DIR_NAME);
+  //  if (setenv("V_BUILD_PKG_DIR", V_BUILD_PKG_DIR, 1) != 0) {
+  //    printf("setenv error: %s\n", strerror(errno));
+  //    exit(EXIT_FAILURE);
+  //  }
 
-  char V_BUILD_TOOLS_X86_64[COMMON_TEXT_SIZE] = {0};
-  strcat(V_BUILD_TOOLS_X86_64, V_BUILD_DIR_PATH);
-  strcat(V_BUILD_TOOLS_X86_64, V_BUILD_TOOLS_X86_64_NAME);
-  if (setenv("V_BUILD_TOOLS_X86_64", V_BUILD_TOOLS_X86_64, 1) != 0) {
-    printf("setenv error: %s\n", strerror(errno));
-    exit(EXIT_FAILURE);
-  }
+  //  char V_BUILD_BUILD_DIR[COMMON_TEXT_SIZE] = {0};
+  //  strcat(V_BUILD_BUILD_DIR, V_BUILD_DIR_PATH);
+  //  strcat(V_BUILD_BUILD_DIR, V_BUILD_BUILD_DIR_NAME);
+  //  if (setenv("V_BUILD_BUILD_DIR", V_BUILD_BUILD_DIR, 1) != 0) {
+  //    printf("setenv error: %s\n", strerror(errno));
+  //    exit(EXIT_FAILURE);
+  //  }
+
+  //  char V_BUILD_PATCH_DIR[COMMON_TEXT_SIZE] = {0};
+  //  strcat(V_BUILD_PATCH_DIR, V_BUILD_DIR_PATH);
+  //  strcat(V_BUILD_PATCH_DIR, V_BUILD_PATCH_DIR_NAME);
+  //  if (setenv("V_BUILD_PATCH_DIR", V_BUILD_PATCH_DIR, 1) != 0) {
+  //    printf("setenv error: %s\n", strerror(errno));
+  //    exit(EXIT_FAILURE);
+  //  }
+
+  //  char V_BUILD_ARCHIVE_DIR[COMMON_TEXT_SIZE] = {0};
+  //  strcat(V_BUILD_ARCHIVE_DIR, V_BUILD_DIR_PATH);
+  //  strcat(V_BUILD_ARCHIVE_DIR, V_BUILD_ARCHIVE_DIR_NAME);
+  //  if (setenv("V_BUILD_ARCHIVE_DIR", V_BUILD_ARCHIVE_DIR, 1) != 0) {
+  //    printf("setenv error: %s\n", strerror(errno));
+  //    exit(EXIT_FAILURE);
+  //  }
+
+  //  char V_BUILD_TREE_X86_64[COMMON_TEXT_SIZE] = {0};
+  //  strcat(V_BUILD_TREE_X86_64, V_BUILD_DIR_PATH);
+  //  strcat(V_BUILD_TREE_X86_64, V_BUILD_TREE_X86_64_NAME);
+  //  if (setenv("V_BUILD_TREE_X86_64", V_BUILD_TREE_X86_64, 1) != 0) {
+  //    printf("setenv error: %s\n", strerror(errno));
+  //    exit(EXIT_FAILURE);
+  //  }
+
+  //  char V_BUILD_TOOLS_X86_64[COMMON_TEXT_SIZE] = {0};
+  //  strcat(V_BUILD_TOOLS_X86_64, V_BUILD_DIR_PATH);
+  //  strcat(V_BUILD_TOOLS_X86_64, V_BUILD_TOOLS_X86_64_NAME);
+  //  if (setenv("V_BUILD_TOOLS_X86_64", V_BUILD_TOOLS_X86_64, 1) != 0) {
+  //    printf("setenv error: %s\n", strerror(errno));
+  //    exit(EXIT_FAILURE);
+  //  }
 
   printf("exported.\n");
 }

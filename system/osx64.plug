@@ -96,5 +96,14 @@ command = osx64_construct_tree
 exec = system/scripts/osx64/system/create_os_tree_x86_64.sh
 ret_val = void
 args = no
+desc = create build tree
+--end
+
+--begin
+type = script
+command = osx64_binutils_pass_1
+exec = system/scripts/osx64/system/create_os_tree_x86_64.sh
+ret_val = void
+args = no
 desc = extract archives
 --end
