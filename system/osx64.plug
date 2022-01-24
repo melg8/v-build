@@ -102,8 +102,8 @@ desc = create build tree
 --begin
 type = script
 command = osx64_binutils_pass_1
-exec = system/scripts/osx64/system/create_os_tree_x86_64.sh
+exec = system/scripts/osx64/system/make_binutils_x86_64_pass_1.sh
 ret_val = void
 args = no
-desc = extract archives
+desc = build binutils pass 1
 --end
