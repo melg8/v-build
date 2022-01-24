@@ -53,3 +53,30 @@ ret_val = void
 args = no
 desc = remove all build-related directories
 --end
+
+--begin
+type = script
+command = osx64_check_host
+exec = system/scripts/osx64/common/check_host.sh
+ret_val = void
+args = no
+desc = check host building compatibility
+--end
+
+--begin
+type = script
+command = osx64_check
+exec = system/scripts/osx64/common/check_host.sh
+ret_val = void
+args = no
+desc = check host building compatibility
+--end
+
+--begin
+type = script
+command = osx64_download
+exec = system/scripts/osx64/common/download.sh
+ret_val = void
+args = no
+desc = download packages and patches
+--end
