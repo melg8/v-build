@@ -11,7 +11,7 @@
 
 --begin
 type = bin
-command = export_variables
+command = osx64_export_variables
 exec = system/libs/libosx64_lib.so.1.0.0
 ret_val = void
 args = no
@@ -19,9 +19,27 @@ desc = export variables for building os ( ! for CURRENT directory ! )
 --end
 
 --begin
+type = bin
+command = osx64_export_linux_kernel
+exec = system/libs/libosx64_lib.so.1.0.0
+ret_val = void
+args = char*
+desc = export kernel directory ( absolute path )
+--end
+
+--begin
 type = script
-command = create_all_dirs
-exec = /home/user/work/v-build/system/scripts/osx64/common/create_all_dirs.sh
+command = osx64_check_variables
+exec = system/scripts/osx64/common/check_export_vars.sh
+ret_val = void
+args = no
+desc = check assigned variables
+--end
+
+--begin
+type = script
+command = osx64_create_all_dirs
+exec = system/scripts/osx64/common/create_all_dirs.sh
 ret_val = void
 args = no
 desc = prepare directory for os building, create directories
@@ -29,8 +47,8 @@ desc = prepare directory for os building, create directories
 
 --begin
 type = script
-command = remove_all_dirs
-exec = /home/user/work/v-build/system/scripts/osx64/common/remove_all_dirs.sh
+command = osx64_remove_all_dirs
+exec = system/scripts/osx64/common/remove_all_dirs.sh
 ret_val = void
 args = no
 desc = remove all build-related directories

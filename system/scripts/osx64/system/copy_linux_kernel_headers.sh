@@ -10,10 +10,10 @@ function msg(){ printf "${NC}$1 $2${NC}\n" ; }
 function msg_green(){ printf "\n${NC}$1 ${GREEN}$2${NC}\n\n" ; }
 function msg_red(){ printf "\n${NC}$1 ${RED}$2${NC}\n\n" ; }
 
-LINUX_KERNEL=$1
+V_BUILD_KERNEL_X86_64=$1
 
-if [ -z ${LINUX_KERNEL} ]; then
-	msg_red "Error, path not found:" "\$LINUX_KERNEL"
+if [ -z ${V_BUILD_KERNEL_X86_64} ]; then
+	msg_red "Error, path not found:" "\$V_BUILD_KERNEL_X86_64"
 	msg "Run: make help\n"
 	exit 1
 fi
@@ -24,10 +24,10 @@ if [ ! -d "${V_BUILD_TREE_X86_64}" ]; then
 	exit 1
 fi
 
-msg_green "Copy headers from: " "$LINUX_KERNEL"
+msg_green "Copy headers from: " "$V_BUILD_KERNEL_X86_64"
 
-cd $LINUX_KERNEL && make distclean
-cd $LINUX_KERNEL && make install-hdr HDR_PATH="${V_BUILD_TREE_X86_64}/usr"
+cd $V_BUILD_KERNEL_X86_64 && make distclean
+cd $V_BUILD_KERNEL_X86_64 && make INSTALL_HDR_PATH="${V_BUILD_TREE_X86_64}/usr" headers_install 
 
 msg_green "kernel headers were copied into: " "$V_BUILD_TREE_X86_64/usr/include"
 

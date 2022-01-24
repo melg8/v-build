@@ -45,7 +45,7 @@ DISTFILES += \
         ../system/autoload.config \
         ../system/io.plug \
         ../system/navigation.plug \
-        ../system/os.plug \
+        ../system/osx64.plug \
         ../to_do
 
 
