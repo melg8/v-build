@@ -80,3 +80,21 @@ ret_val = void
 args = no
 desc = download packages and patches
 --end
+
+--begin
+type = script
+command = osx64_extract
+exec = system/scripts/osx64/common/extract_archives.sh
+ret_val = void
+args = no
+desc = extract archives
+--end
+
+--begin
+type = script
+command = osx64_construct_tree
+exec = system/scripts/osx64/system/create_os_tree_x86_64.sh
+ret_val = void
+args = no
+desc = extract archives
+--end
