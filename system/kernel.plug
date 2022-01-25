@@ -35,3 +35,12 @@ ret_val = void
 args = char*, char*
 desc = save kernel config (usage: kernel_save_config kernel_dir config_name)
 --end
+
+--begin
+type = script
+command = kernel_menuconfig
+exec = system/scripts/kernel/menuconfig.sh
+ret_val = void
+args = char*
+desc = run kernel menuconfig (usage: kernel_menuconfig kernel_dir)
+--end
