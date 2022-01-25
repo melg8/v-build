@@ -7,6 +7,11 @@
 
 # -----------------------------------------------------------------------------
 
+if [ $# -ne 2 ]; then
+	printf "Incorrect arguments count, exit.\n"
+	exit 1
+fi
+
 major=$1
 version=$2
 

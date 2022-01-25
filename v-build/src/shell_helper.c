@@ -89,7 +89,7 @@ void exec_help_command(const char *cmd) {
     CLEAR_SCREEN;
   }
 
-  if (strcmp(cmd, "show_loaded") == 0 || strcmp(cmd, "sl") == 0) {
+  if (strcmp(cmd, "list") == 0 || strcmp(cmd, "ll") == 0) {
     print_loaded_functions();
   }
 
