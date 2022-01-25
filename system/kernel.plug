@@ -26,3 +26,12 @@ ret_val = void
 args = char*, char*
 desc = set kernel config (usage: kernel_set_config kernel_dir config_name)
 --end
+
+--begin
+type = script
+command = kernel_save_config
+exec = system/scripts/kernel/save_config.sh
+ret_val = void
+args = char*, char*
+desc = save kernel config (usage: kernel_save_config kernel_dir config_name)
+--end

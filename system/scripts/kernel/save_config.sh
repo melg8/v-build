@@ -16,13 +16,12 @@ function copy_config(){
 		printf "linux directory not found. exit.\n"
 		exit 1
 	else
-		if [ ! -f "${path}" ]; then
-			printf "config file ${config} not found, exit.\n"
+		if [ ! -f "${linux_dir}/.config" ]; then
+			printf "config file in ${linux_dir} not found, exit.\n"
 			exit 1
 		fi
 
-		rm -rf "${linux_dir}/.config"
-		cp "${path}" "${linux_dir}/.config"
+		cp "${linux_dir}/.config" "${path}"
 		printf "done\n"
 	fi
 }
