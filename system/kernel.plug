@@ -17,3 +17,12 @@ ret_val = void
 args = char*, char*
 desc = download kernel in CURRENT directory (usage: kernel_download v5.x 5.2.11)
 --end
+
+--begin
+type = script
+command = kernel_set_config
+exec = system/scripts/kernel/set_config.sh
+ret_val = void
+args = char*, char*
+desc = set kernel config (usage: kernel_set_config kernel_dir config_name)
+--end
