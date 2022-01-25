@@ -125,3 +125,12 @@ ret_val = void
 args = no
 desc = install kernel headers into building tree
 --end
+
+--begin
+type = script
+command = osx64_glibc
+exec = system/scripts/osx64/system/make_glibc_x86_64.sh
+ret_val = void
+args = no
+desc = build glibc
+--end

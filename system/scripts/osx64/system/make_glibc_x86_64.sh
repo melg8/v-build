@@ -118,6 +118,10 @@ function check_env(){
 
 #################################### Main ######################################
 
+if [ ! -d "${V_BUILD_DIR}" ]; then
+	printf "env variables don't set, exit.\n"
+	exit 1
+fi
 
 GLIBC=$(find_package "glibc")
 
