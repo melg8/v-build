@@ -1,0 +1,19 @@
+#   example
+#
+#   --begin
+#   type = bin | script
+#   command = function | script
+#   exec = path from system dir to exec file
+#   ret_val = void || int || bool || char* || text (script)
+#   args = arg1, arg2, argN || no
+#   desc = description
+#   --end
+
+--begin
+type = script
+command = kernel_download
+exec = system/scripts/kernel/download.sh
+ret_val = void
+args = char*, char*
+desc = download kernel in CURRENT directory (usage: kernel_download v5.x 5.2.11)
+--end

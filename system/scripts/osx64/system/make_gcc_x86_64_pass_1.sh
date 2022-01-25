@@ -109,11 +109,9 @@ function install_gcc_pass_1(){
 
 if [ ! -f "${V_BUILD_DIR}/.extracted" ]; then
 	msg_red "Packages are" "not extracted!"
-	msg "Run: make extract\n"
 	exit 1
 elif [ ! -d "${V_BUILD_TREE_X86_64}" ]; then
 	msg_red "V BUILD TREE" "do not exist!"
-	msg "Run: make os-tree-x86_64\n"
 	exit 1
 else
 	GCC=$(find_package "gcc")

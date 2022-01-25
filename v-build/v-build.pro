@@ -46,6 +46,7 @@ DISTFILES += \
         ../system/io.plug \
         ../system/navigation.plug \
         ../system/osx64.plug \
+        ../system/kernel.plug \
         ../to_do
 
 
