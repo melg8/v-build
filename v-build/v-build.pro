@@ -14,18 +14,19 @@ INCLUDEPATH += \
         $$PWD/headers
 
 SOURCES += \
-    src/autoload.c \
-    src/bin_exec.c \
-    src/bin_exec_internal.c \
-    src/column_args_parser.c \
-    src/io.c \
-    src/line_args_parser.c \
+        src/autoload.c \
+        src/bin_exec.c \
+        src/bin_exec_internal.c \
+        src/column_args_parser.c \
+        src/io.c \
+        src/line_args_parser.c \
         src/main.c \
         src/plugin.c \
         src/plugin_parser.c \
-    src/script_exec.c \
+        src/script_exec.c \
         src/shell.c \
-    src/shell_helper.c
+        src/shell_helper.c \
+        src/order.c
 
 HEADERS += \
         headers/autoload.h \
@@ -39,7 +40,8 @@ HEADERS += \
         headers/script_exec.h \
         headers/shell.h \
         headers/shell_helper.h \
-        headers/v_build_global.h
+        headers/v_build_global.h \
+        headers/order.h
 
 DISTFILES += \
         ../system/autoload.config \

@@ -113,6 +113,10 @@ void exec_help_command(const char *cmd) {
     reset_user_args();
   }
 
+  if (strcmp(cmd, "run_order_list") == 0 || strcmp(cmd, "rol") == 0) {
+    print_info_msg(COMPLETE, "order list!", YES);
+  }
+
   if (strcmp(cmd, "set_column_args") == 0 || strcmp(cmd, "sca") == 0) {
     g_conf.is_column_args = true;
     g_conf.is_line_args = false;

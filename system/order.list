@@ -1,0 +1,5 @@
+# automatic commands execution in order one by one
+
+--begin
+osx64_check_variables
+--end
