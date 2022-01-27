@@ -21,5 +21,5 @@ fi
 cp ../v-build_build/v-build/v-build ../v-build_run/v-build
 cp -r ../v-build_build/v-build/system/* ../v-build_run/system
 
-cd ../v-build_run && ./v-build
+cd ../v-build_run && sudo ./v-build
 
