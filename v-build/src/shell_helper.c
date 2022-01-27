@@ -12,6 +12,7 @@
 #include "column_args_parser.h"
 #include "io.h"
 #include "line_args_parser.h"
+#include "order.h"
 #include "plugin.h"
 #include "plugin_parser.h"
 
@@ -114,7 +115,7 @@ void exec_help_command(const char *cmd) {
   }
 
   if (strcmp(cmd, "run_order_list") == 0 || strcmp(cmd, "rol") == 0) {
-    print_info_msg(COMPLETE, "order list!", YES);
+    exec_order_list();
   }
 
   if (strcmp(cmd, "set_column_args") == 0 || strcmp(cmd, "sca") == 0) {
