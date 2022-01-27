@@ -134,3 +134,12 @@ ret_val = void
 args = no
 desc = build glibc
 --end
+
+--begin
+type = script
+command = osx64_gcc_mkheaders
+exec = system/scripts/osx64/system/gcc_mkheaders.sh
+ret_val = void
+args = no
+desc = copy gcc headers
+--end
