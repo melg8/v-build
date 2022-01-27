@@ -51,56 +51,67 @@ function gcc_extract_archive(){
 function install_gcc_pass_2(){
 	msg_green "Pkg found:" $GCC
 
-	rm -rf $V_BUILD_BUILD_DIR/$GCC
-	mkdir -p $V_BUILD_BUILD_DIR/$GCC
+	#rm -rf $V_BUILD_BUILD_DIR/$GCC
+	#mkdir -p $V_BUILD_BUILD_DIR/$GCC
 
-	pushd $V_BUILD_PKG_DIR/$GCC/$GCC
-	rm -rf mpfr gmp mpc
+	#pushd $V_BUILD_PKG_DIR/$GCC/$GCC
+	#rm -rf mpfr gmp mpc
 
-	# C lib, multiple precision floatig point computaion
-	gcc_extract_archive "mpfr"
+	## C lib, multiple precision floatig point computaion
+	#gcc_extract_archive "mpfr"
 
-	# C lib, arbitrary precision floatig point computaion
-	gcc_extract_archive "gmp"
+	## C lib, arbitrary precision floatig point computaion
+	#gcc_extract_archive "gmp"
 
-	# arithmetics of complex numbers
-	gcc_extract_archive "mpc"
+	## arithmetics of complex numbers
+	#gcc_extract_archive "mpc"
 
-	# On x86_64 hosts, set the default directory name for 64-bit libraries to “lib”
-	case $(uname -m) in
-		x86_64)
-			sed -e '/m64=/s/lib64/lib/' \
-			-i.orig gcc/config/i386/t-linux64
-		;;
-	esac
+	## On x86_64 hosts, set the default directory name for 64-bit libraries to “lib”
+	#case $(uname -m) in
+	#	x86_64)
+	#		sed -e '/m64=/s/lib64/lib/' \
+	#		-i.orig gcc/config/i386/t-linux64
+	#	;;
+	#esac
 
-	popd
+	#popd
 
 	pushd $V_BUILD_BUILD_DIR/$GCC
 
-	mkdir -pv $ARCH/libgcc
-	ln -s $V_BUILD_PKG_DIR/$GCC/$GCC/libgcc/gthr-posix.h $ARCH/libgcc/gthr-default.h
+	#mkdir -pv $ARCH/libgcc
+	#ln -s $V_BUILD_PKG_DIR/$GCC/$GCC/libgcc/gthr-posix.h $ARCH/libgcc/gthr-default.h
 
-	sh $V_BUILD_PKG_DIR/$GCC/$GCC/configure \
-		--build=$($V_BUILD_PKG_DIR/$GCC/$GCC/config.guess) \
-		--with-build-sysroot=$V_BUILD_TREE_X86_64 \
-		--host=$ARCH \
-		--prefix=/usr \
-		CC_FOR_TARGET=$ARCH-gcc \
-		--enable-initfini-array \
-		--disable-nls \
-		--disable-multilib \
-		--disable-decimal-float \
-		--disable-libatomic \
-		--disable-libgomp \
-		--disable-libquadmath \
-		--disable-libssp \
-		--disable-libvtv \
-		--disable-libstdcxx \
-		--enable-languages=c,c++ \
-		PATH=${V_BUILD_TOOLS_X86_64}/bin:$PATH
+	#sh $V_BUILD_PKG_DIR/$GCC/$GCC/configure \
+	#	--build=$($V_BUILD_PKG_DIR/$GCC/$GCC/config.guess) \
+	#	--with-build-sysroot=$V_BUILD_TREE_X86_64 \
+	#	--host=$ARCH \
+	#	--prefix=/usr \
+	#	CC_FOR_TARGET=$ARCH-gcc \
+	#	--enable-initfini-array \
+	#	--disable-nls \
+	#	--disable-multilib \
+	#	--disable-decimal-float \
+	#	--disable-libatomic \
+	#	--disable-libgomp \
+	#	--disable-libquadmath \
+	#	--disable-libssp \
+	#	--disable-libvtv \
+	#	--disable-libstdcxx \
+	#	--enable-languages=c,c++ \
+	#	PATH=${V_BUILD_TOOLS_X86_64}/bin:$PATH
 
-	make -j`nproc`
+	#make -j`nproc`
+
+	make DESTDIR=${V_BUILD_TREE_X86_64} install
+
+	cp -v ${V_BUILD_TREE_X86_64}/tools/lib/libcc1.so.0.0.0 \
+		${V_BUILD_BUILD_DIR}/gcc-10.3.0/libcc1/.libs/libcc1.so.0.0.0
+
+	cp -v ${V_BUILD_TOOLS_X86_64}/lib/gcc/x86_64-linux-gnu/10.3.0/plugin/libcc1plugin.so.0.0.0 \
+		${V_BUILD_BUILD_DIR}/gcc-10.3.0/libcc1/.libs/libcc1plugin.so.0.0.0
+
+	cp -v ${V_BUILD_TOOLS_X86_64}/lib/gcc/x86_64-linux-gnu/10.3.0/plugin/libcp1plugin.so.0.0.0 \
+		${V_BUILD_BUILD_DIR}/gcc-10.3.0/libcc1/.libs/libcp1plugin.so.0.0.0
 
 	make DESTDIR=${V_BUILD_TREE_X86_64} install
 

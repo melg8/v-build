@@ -52,10 +52,15 @@ function install_binutils_pass_2(){
 	--disable-nls \
 	--enable-shared \
 	--disable-werror \
-	--enable-64-bit-bfd
+	--enable-64-bit-bfd \
+	--with-build-libsubdir=${V_BUILD_TREE_X86_64}/usr/lib \
+	--libdir=${V_BUILD_TREE_X86_64}/usr/lib \
+	LD_FOR_TARGET=${V_BUILD_TREE_X86_64}/tools/x86_64-linux-gnu/bin/ld
 	
 	make -j`nproc`
-	make DESTDIR=${V_BUILD_TREE_X86_64} install -j1
+	make DESTDIR=${V_BUILD_TREE_X86_64} \
+		LDFLAGS=${V_BUILD_TREE_X86_64}/usr/lib \
+		install -j1
 
 	# workaround of error libctf
 	install -vm755 libctf/.libs/libctf.so.0.0.0 ${V_BUILD_TREE_X86_64}/usr/lib

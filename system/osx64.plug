@@ -143,3 +143,39 @@ ret_val = void
 args = no
 desc = copy gcc headers
 --end
+
+--begin
+type = script
+command = osx64_libstd_cpp
+exec = system/scripts/osx64/system/make_libstdcpp_x86_64.sh
+ret_val = void
+args = no
+desc = build lib std cpp
+--end
+
+--begin
+type = script
+command = osx64_sysutils
+exec = system/scripts/osx64/system/make_sys_utils.sh
+ret_val = void
+args = no
+desc = build system utilities
+--end
+
+--begin
+type = script
+command = osx64_binutils_pass_2
+exec = system/scripts/osx64/system/make_binutils_x86_64_pass_2.sh
+ret_val = void
+args = no
+desc = build binutils pass 2
+--end
+
+--begin
+type = script
+command = osx64_gcc_pass_2
+exec = system/scripts/osx64/system/make_gcc_x86_64_pass_2.sh
+ret_val = void
+args = no
+desc = build gcc pass 2
+--end
