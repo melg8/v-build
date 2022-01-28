@@ -1,5 +1,6 @@
 # automatic commands execution in order one by one
 
 --begin
+createdir osx64
 osx64_check_variables
 --end
