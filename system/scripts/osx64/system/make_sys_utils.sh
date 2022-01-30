@@ -512,6 +512,16 @@ function install_xz(){
 
 ################################### Main #######################################
 
+if [ ! -d "${V_BUILD_DIR}" ]; then
+	printf "env variables don't set, exit.\n"
+	exit 1
+fi
+
+if [ ! -d "${V_BUILD_TOOLS_X86_64}" ]; then
+	printf "env variables don't set, exit.\n"
+	exit 1
+fi
+
 M4=$(find_package "m4")
 NCURSES=$(find_package "ncurses")
 BASHPKG=$(find_package "bash")

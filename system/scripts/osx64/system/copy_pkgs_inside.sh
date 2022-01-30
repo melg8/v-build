@@ -29,7 +29,7 @@ fi
 
 sync
 
-msg_green "status:" "done."
+msg_green "copy packages in tree:" "done."
 
 exit 0
 

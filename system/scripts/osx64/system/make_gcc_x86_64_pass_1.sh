@@ -51,8 +51,8 @@ function gcc_extract_archive(){
 function install_gcc_pass_1(){
 	msg_green "Pkg found:" $GCC
 	
-	rm -rf $V_BUILD_BUILD_DIR/$GCC
-	mkdir -p $V_BUILD_BUILD_DIR/$GCC
+	rm -rf $V_BUILD_PKG_DIR/$GCC/$GCC/build
+	mkdir -pv $V_BUILD_PKG_DIR/$GCC/$GCC/build
 
 	pushd $V_BUILD_PKG_DIR/$GCC/$GCC
 	rm -rf mpfr gmp mpc
@@ -76,8 +76,8 @@ function install_gcc_pass_1(){
 
 	popd
 
-	pushd $V_BUILD_BUILD_DIR/$GCC
-	sh $V_BUILD_PKG_DIR/$GCC/$GCC/configure \
+	pushd $V_BUILD_PKG_DIR/$GCC/$GCC/build
+	sh ../configure \
 	--target=$ARCH \
 	--prefix=$V_BUILD_TOOLS_X86_64 \
 	--with-glibc-version=2.11 \
@@ -100,7 +100,7 @@ function install_gcc_pass_1(){
 	--enable-languages=c,c++
 
 	make -j`nproc`
-	make install -j1
+	make install
 	popd
 
 }

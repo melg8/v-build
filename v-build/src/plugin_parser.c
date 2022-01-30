@@ -107,6 +107,9 @@ static size_t _get_offset(int value) {
   return 0;
 }
 
-void erase_list() { memset(list, 0, sizeof(list)); }
+void erase_list() {
+  memset(list, 0, sizeof(list));
+  _pos = 0;
+}
 
 u_int get_current_list_pos() { return _pos; }

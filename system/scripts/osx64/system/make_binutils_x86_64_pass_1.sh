@@ -36,22 +36,22 @@ function find_package(){
 function install_binutils_pass_1(){
 	msg_green "Pkg found:" $BINUTILS
 
-	rm -rf $V_BUILD_BUILD_DIR/$BINUTILS
-	mkdir -p $V_BUILD_BUILD_DIR/$BINUTILS
+	rm -rfv $V_BUILD_PKG_DIR/$BINUTILS/$BINUTILS/build
+	mkdir -pv $V_BUILD_PKG_DIR/$BINUTILS/$BINUTILS/build
 
 	msg_green "" "PASS - 1"
+	
+	pushd $V_BUILD_PKG_DIR/$BINUTILS/$BINUTILS/build
 
-	pushd $V_BUILD_BUILD_DIR/$BINUTILS
-
-	sh $V_BUILD_PKG_DIR/$BINUTILS/$BINUTILS/configure \
+	sh ../configure \
 	--prefix=$V_BUILD_TOOLS_X86_64 \
 	--with-sysroot=$V_BUILD_TREE_X86_64 \
 	--target=$V_BUILD_TGT_X86_64 \
 	--disable-nls \
 	--disable-werror
-	
-	make -j`nproc`
-	make install -j1
+
+	make
+	make install
 
 	popd
 }

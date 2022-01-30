@@ -12,9 +12,23 @@ function msg_red(){ printf "\n${NC}$1 ${RED}$2${NC}\n\n" ; }
 
 LIBSTDCPP="none"
 GCC="none"
+GCC_VER="none"
 ARCH=$V_BUILD_TGT_X86_64
 
 ############################# Functions ########################################
+
+# find gcc pkg verions in PKG dir
+function find_package_gcc_version(){
+	local search_pkg=$1
+	local res=$(ls ${V_BUILD_PKG_DIR} | grep $search_pkg | sed 's/gcc-//')
+
+	if [ -z "$res" ]; then
+		msg_red "Pkg not found:" "$search_pkg"
+		exit 1
+	else
+		echo $res
+	fi
+}
 
 # find package in PKG dir
 function find_package(){
@@ -64,7 +78,7 @@ function install_libstdcpp(){
 	--disable-multilib \
 	--disable-nls \
 	--disable-libstdcxx-pch \
-	--with-gxx-include-dir=/tools/$V_BUILD_TGT_X86_64/include/c++/10.3.0
+	--with-gxx-include-dir=/tools/$V_BUILD_TGT_X86_64/include/c++/$GCC_VER
 
 	make
 	make DESTDIR=$V_BUILD_TREE_X86_64 install
@@ -74,7 +88,18 @@ function install_libstdcpp(){
 
 #################################### Main ######################################
 
+if [ ! -d "${V_BUILD_DIR}" ]; then
+	printf "env variables don't set, exit.\n"
+	exit 1
+fi
+
+if [ ! -d "${V_BUILD_TOOLS_X86_64}" ]; then
+	printf "env variables don't set, exit.\n"
+	exit 1
+fi
+
 GCC=$(find_package "gcc")
+GCC_VER=$(find_package_gcc_version "gcc")
 LIBSTDCPP=$(find_libstdcpp "libstdc++")
 
 install_libstdcpp

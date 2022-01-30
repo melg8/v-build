@@ -12,6 +12,7 @@ NC='\033[0m'
 COUNTER=1
 
 GCC="none"
+GCC_VER="none"
 
 function msg(){ printf "${NC}$1 $2${NC}\n" ; }
 function msg_green(){ printf "\n${NC}$1 ${GREEN}$2${NC}\n" ; }
@@ -21,6 +22,19 @@ function msg_red(){ printf "\n${NC}$1 ${RED}$2${NC}\n" ; }
 ARCH=$V_BUILD_TGT_X86_64
 
 ################################## Functions ###################################
+
+# find gcc pkg verions in PKG dir
+function find_package_gcc_version(){
+	local search_pkg=$1
+	local res=$(ls ${V_BUILD_PKG_DIR} | grep $search_pkg | sed 's/gcc-//')
+
+	if [ -z "$res" ]; then
+		msg_red "Pkg not found:" "$search_pkg"
+		exit 1
+	else
+		echo $res
+	fi
+}
 
 # find package in PKG dir
 function find_package(){
@@ -79,7 +93,7 @@ function install_gcc_pass_2(){
 	pushd $V_BUILD_BUILD_DIR/$GCC
 
 	mkdir -pv $ARCH/libgcc
-	ln -s $V_BUILD_PKG_DIR/$GCC/$GCC/libgcc/gthr-posix.h $ARCH/libgcc/gthr-default.h
+	ln -sv $V_BUILD_PKG_DIR/$GCC/$GCC/libgcc/gthr-posix.h $ARCH/libgcc/gthr-default.h
 
 	sh $V_BUILD_PKG_DIR/$GCC/$GCC/configure \
 		--build=$($V_BUILD_PKG_DIR/$GCC/$GCC/config.guess) \
@@ -97,23 +111,9 @@ function install_gcc_pass_2(){
 		--disable-libssp \
 		--disable-libvtv \
 		--disable-libstdcxx \
-		--enable-languages=c,c++ \
-		PATH=${V_BUILD_TOOLS_X86_64}/bin:$PATH
+		--enable-languages=c,c++
 
 	make -j`nproc`
-
-	make DESTDIR=${V_BUILD_TREE_X86_64} install
-
-	cp -v ${V_BUILD_TREE_X86_64}/tools/lib/libcc1.so.0.0.0 \
-		${V_BUILD_BUILD_DIR}/gcc-10.3.0/libcc1/.libs/libcc1.so.0.0.0
-
-	cp -v ${V_BUILD_TOOLS_X86_64}/lib/gcc/x86_64-linux-gnu/10.3.0/plugin/libcc1plugin.so.0.0.0 \
-		${V_BUILD_BUILD_DIR}/gcc-10.3.0/libcc1/.libs/libcc1plugin.so.0.0.0
-
-	cp -v ${V_BUILD_TOOLS_X86_64}/lib/gcc/x86_64-linux-gnu/10.3.0/plugin/libcp1plugin.so.0.0.0 \
-		${V_BUILD_BUILD_DIR}/gcc-10.3.0/libcc1/.libs/libcp1plugin.so.0.0.0
-
-	# workaround of gcc libcc1 dir, it deleted after installation
 	make DESTDIR=${V_BUILD_TREE_X86_64} install
 
 	popd
@@ -125,9 +125,20 @@ function install_gcc_pass_2(){
 
 ################################## Main ########################################
 
+if [ ! -d "${V_BUILD_DIR}" ]; then
+	printf "env variables don't set, exit.\n"
+	exit 1
+fi
+
+if [ ! -d "${V_BUILD_TOOLS_X86_64}" ]; then
+	printf "env variables don't set, exit.\n"
+	exit 1
+fi
+
 msg_green "Making GCC" "PASS 2"
 
 GCC=$(find_package "gcc")
+GCC_VER=$(find_package_gcc_version "gcc")
 
 msg "$GCC"
 

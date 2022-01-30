@@ -11,6 +11,7 @@ function msg_green(){ printf "${NC}$1 ${GREEN}$2${NC}\n" ; }
 function msg_red(){ printf "${NC}$1 ${RED}$2${NC}\n" ; }
 
 declare -a vars=(
+"PATH"
 "V_BUILD_DIR"
 "V_BUILD_PKG_DIR"
 "V_BUILD_SYSTEM"

@@ -188,3 +188,12 @@ ret_val = void
 args = no
 desc = copy packages for chrooting
 --end
+
+--begin
+type = script
+command = osx64_set_machine_name
+exec = system/scripts/osx64/system/set_name_x86_64.sh
+ret_val = void
+args = no
+desc = set proper TGT name, saved in .machine_name
+--end

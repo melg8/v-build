@@ -39,28 +39,24 @@ function find_package(){
 function install_binutils_pass_2(){
 	msg_green "Pkg found:" $BINUTILS
 
-	rm -rf $V_BUILD_BUILD_DIR/$BINUTILS
-	mkdir -p $V_BUILD_BUILD_DIR/$BINUTILS
+	rm -rf $V_BUILD_PKG_DIR/$BINUTILS/$BINUTILS/build
+	mkdir -p $V_BUILD_PKG_DIR/$BINUTILS/$BINUTILS/build
 
 	msg_green "" "PASS - 2"
 
-	pushd $V_BUILD_BUILD_DIR/$BINUTILS
-	sh $V_BUILD_PKG_DIR/$BINUTILS/$BINUTILS/configure \
+	pushd $V_BUILD_PKG_DIR/$BINUTILS/$BINUTILS/build
+	sh ../configure \
 	--prefix=/usr \
-	--build=$($V_BUILD_PKG_DIR/$BINUTILS/$BINUTILS/config.guess) \
+	--build=$(../config.guess) \
 	--host=$ARCH \
 	--disable-nls \
 	--enable-shared \
 	--disable-werror \
-	--enable-64-bit-bfd \
-	--with-build-libsubdir=${V_BUILD_TREE_X86_64}/usr/lib \
-	--libdir=${V_BUILD_TREE_X86_64}/usr/lib \
-	LD_FOR_TARGET=${V_BUILD_TREE_X86_64}/tools/x86_64-linux-gnu/bin/ld
-	
+	--enable-64-bit-bfd
+
 	make -j`nproc`
-	make DESTDIR=${V_BUILD_TREE_X86_64} \
-		LDFLAGS=${V_BUILD_TREE_X86_64}/usr/lib \
-		install -j1
+	exit 0
+	make DESTDIR=${V_BUILD_TREE_X86_64} install -j1
 
 	# workaround of error libctf
 	install -vm755 libctf/.libs/libctf.so.0.0.0 ${V_BUILD_TREE_X86_64}/usr/lib
@@ -69,6 +65,16 @@ function install_binutils_pass_2(){
 }
 
 ################################## Main ########################################
+
+if [ ! -d "${V_BUILD_DIR}" ]; then
+	printf "env variables don't set, exit.\n"
+	exit 1
+fi
+
+if [ ! -d "${V_BUILD_TOOLS_X86_64}" ]; then
+	printf "env variables don't set, exit.\n"
+	exit 1
+fi
 
 msg_green "Making binutils" "PASS 2"
 

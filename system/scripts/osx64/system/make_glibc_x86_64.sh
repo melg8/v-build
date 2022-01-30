@@ -48,14 +48,14 @@ function make_patch(){
 function install_glibc(){	
 	msg_green "Package found: " "$GLIBC"
 
-	if [ -d "${V_BUILD_BUILD_DIR}/${GLIBC}" ]; then
-		pushd ${V_BUILD_PKG_DIR}/$GLIBC/$GLIBC > /dev/null 2>&1
+	if [ -d "${V_BUILD_PKG_DIR}/${GLIBC}/${GLIBC}/build" ]; then
+		pushd ${V_BUILD_PKG_DIR}/$GLIBC/$GLIBC/build > /dev/null 2>&1
 		make uninstall
 		popd > /dev/null 2>&1
 	fi
 
-	rm -rf ${V_BUILD_BUILD_DIR}/${GLIBC}
-	mkdir ${V_BUILD_BUILD_DIR}/${GLIBC}
+	rm -rfv ${V_BUILD_PKG_DIR}/${GLIBC}/${GLIBC}/build
+	mkdir -pv ${V_BUILD_PKG_DIR}/${GLIBC}/${GLIBC}/build
 
 	pushd ${V_BUILD_PKG_DIR}/$GLIBC/$GLIBC > /dev/null 2>&1
 	make_patch
@@ -70,14 +70,14 @@ function install_glibc(){
 
 	popd > /dev/null 2>&1
 
-	pushd ${V_BUILD_BUILD_DIR}/${GLIBC} > /dev/null 2>&1
+	pushd ${V_BUILD_PKG_DIR}/${GLIBC}/${GLIBC}/build > /dev/null 2>&1
 
 	echo "rootsbindir=/usr/sbin" > configparams
 
-	sh ${V_BUILD_PKG_DIR}/$GLIBC/$GLIBC/configure \
+	sh ../configure \
 	--prefix=/usr \
 	--host=${V_BUILD_TGT_X86_64} \
-	--build=$(${V_BUILD_PKG_DIR}/${GLIBC}/$GLIBC/config.guess) \
+	--build=$(../scripts/config.guess) \
 	--enable-kernel=3.2 \
 	--without-selinux \
 	--with-headers=${V_BUILD_TREE_X86_64}/usr/include \
@@ -93,10 +93,10 @@ function install_glibc(){
 }
 
 function check_env(){
-	pushd ${V_BUILD_TOOLS_X86_64} > /dev/null 2>&1
+	pushd ${V_BUILD_TREE_X86_64} > /dev/null 2>&1
 
 	echo "int main(){}" > check.c
-	bin/$V_BUILD_TGT_X86_64-gcc check.c
+	$V_BUILD_TGT_X86_64-gcc check.c
 	
 	local temp=$(readelf -l a.out | grep '/ld-linux')
 	# remove trailing space at the begining
@@ -118,7 +118,7 @@ function check_env(){
 
 #################################### Main ######################################
 
-if [ ! -d "${V_BUILD_DIR}" ]; then
+if [ ! -d "${V_BUILD_TOOLS_X86_64}" ]; then
 	printf "env variables don't set, exit.\n"
 	exit 1
 fi
