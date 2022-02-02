@@ -15,7 +15,7 @@ void exec_script(const plugin_element *elem) {
 
   char script_path[COMMON_TEXT_SIZE] = {0};
 
-  strcpy(script_path, exec_dir);
+  strcpy(script_path, start_exec_dir);
   strcat(script_path, "/");
   strcat(script_path, elem->descriptor.exec);
 

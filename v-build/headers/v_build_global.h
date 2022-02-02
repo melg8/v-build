@@ -65,6 +65,6 @@ typedef struct global_conf {
 } global_conf;
 
 extern global_conf g_conf;
-extern char exec_dir[COMMON_TEXT_SIZE];
+extern char start_exec_dir[COMMON_TEXT_SIZE];
 
 #endif // V_BUILD_GLOBAL_H

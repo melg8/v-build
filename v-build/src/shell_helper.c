@@ -151,9 +151,8 @@ void print_loaded_functions() {
   for (u_int i = 0; i < get_current_list_pos(); ++i) {
     plugin_element *elem = &list[i];
 
-    /*    if (strstr(elem->plugin_name, "system/io.plug") != NULL)
-          continue*/
-    ;
+    if (strstr(elem->plugin_name, "system/io.plug") != NULL)
+      continue;
 
     if (strcmp(name_comparator, elem->plugin_name) != 0) {
       char temp[COMMON_TEXT_SIZE] = {0};
@@ -201,7 +200,10 @@ void print_loaded_functions() {
 }
 
 void view_all_plugins() {
-  DIR *d = opendir("system");
+  char system_dir[COMMON_TEXT_SIZE] = {0};
+  strcpy(system_dir, start_exec_dir);
+  strcat(system_dir, "/system");
+  DIR *d = opendir(system_dir);
   struct dirent *dp = NULL;
   char plugins[COMMON_TEXT_SIZE * 2] = {0};
   strcpy(plugins, "\n");

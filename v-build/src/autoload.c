@@ -9,18 +9,18 @@
 #include "plugin.h"
 #include "v_build_global.h"
 
-char exec_dir[COMMON_TEXT_SIZE] = {0};
+char start_exec_dir[COMMON_TEXT_SIZE] = {0};
 
 static bool _is_eq(const char *line, const char *cmp);
 static bool _ready_to_load = false;
 
 void autoload_plugins() {
 
-  getcwd(exec_dir, COMMON_TEXT_SIZE);
+  getcwd(start_exec_dir, COMMON_TEXT_SIZE);
 
   char autoload_path[COMMON_TEXT_SIZE] = {0};
 
-  strcpy(autoload_path, exec_dir);
+  strcpy(autoload_path, start_exec_dir);
   strcat(autoload_path, "/");
   strcat(autoload_path, AUTOLOAD_FILE);
 

@@ -44,7 +44,7 @@ int load_plugin(const char *plugin_name) {
 static void *_get_binary_func_internal(const plugin_element *restrict elem) {
   void *func = NULL;
   char exec_path[COMMON_TEXT_SIZE] = {0};
-  strcpy(exec_path, exec_dir);
+  strcpy(exec_path, start_exec_dir);
   strcat(exec_path, "/");
   strcat(exec_path, elem->descriptor.exec);
   plugin_handle = dlopen(exec_path, RTLD_NOW | RTLD_DEEPBIND);
