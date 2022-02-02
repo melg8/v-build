@@ -10,6 +10,15 @@
 #   --end
 
 --begin
+type = script
+command = osx64_set_machine_name
+exec = system/scripts/osx64/toolchain/set_name_x86_64.sh
+ret_val = void
+args = no
+desc = set proper TGT name, saved in .machine_name
+--end
+
+--begin
 type = bin
 command = osx64_export_variables
 exec = system/libs/libosx64_lib.so.1.0.0
@@ -191,8 +200,8 @@ desc = copy packages for chrooting
 
 --begin
 type = script
-command = osx64_set_machine_name
-exec = system/scripts/osx64/toolchain/set_name_x86_64.sh
+command = chown_tree_to_root
+exec = system/scripts/osx64/root_deps/chown_tree.sh
 ret_val = void
 args = no
 desc = set proper TGT name, saved in .machine_name
