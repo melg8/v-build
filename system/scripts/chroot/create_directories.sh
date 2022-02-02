@@ -8,7 +8,7 @@ function msg(){ printf "${NC}$1 $2${NC}\n" ; }
 function msg_green(){ printf "\n${NC}$1 ${GREEN}$2${NC}\n\n" ; }
 function msg_red(){ printf "\n${NC}$1 ${RED}$2${NC}\n\n" ; }
 
-msg_green "status: " "creating directories"
+msg_green "status: " "creating directories according with FHS"
 
 mkdir -pv /{boot,home,mnt,opt,srv}
 mkdir -pv /etc/{opt,sysconfig}
