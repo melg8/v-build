@@ -204,5 +204,23 @@ command = chown_tree_to_root
 exec = system/scripts/osx64/root_deps/chown_tree.sh
 ret_val = void
 args = no
-desc = set proper TGT name, saved in .machine_name
+desc = change ownership of tree
+--end
+
+--begin
+type = script
+command = prepare_vkfs
+exec = system/scripts/osx64/root_deps/prepare_vkfs.sh
+ret_val = void
+args = no
+desc = mount virtual kernel file system
+--end
+
+--begin
+type = script
+command = unmount_vkfs
+exec = system/scripts/osx64/root_deps/unmount_vkfs.sh
+ret_val = void
+args = no
+desc = unmount virtual kernel file system
 --end
