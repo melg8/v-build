@@ -1,7 +1,6 @@
 # automatic commands execution in order one by one
 
 --begin
-osx64_export_variables
 osx64_check_variables
 osx64_gcc_pass_1
 osx64_install_kernel_headers
@@ -9,4 +8,6 @@ osx64_glibc
 osx64_gcc_mkheaders
 osx64_libstd_cpp
 osx64_sysutils
+osx64_binutils_pass_2
+osx64_gcc_pass_2
 --end

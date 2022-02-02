@@ -93,7 +93,7 @@ desc = extract archives
 --begin
 type = script
 command = osx64_construct_tree
-exec = system/scripts/osx64/system/create_os_tree_x86_64.sh
+exec = system/scripts/osx64/toolchain/create_os_tree_x86_64.sh
 ret_val = void
 args = no
 desc = create build tree
@@ -102,7 +102,7 @@ desc = create build tree
 --begin
 type = script
 command = osx64_binutils_pass_1
-exec = system/scripts/osx64/system/make_binutils_x86_64_pass_1.sh
+exec = system/scripts/osx64/toolchain/make_binutils_x86_64_pass_1.sh
 ret_val = void
 args = no
 desc = build binutils pass 1
@@ -111,7 +111,7 @@ desc = build binutils pass 1
 --begin
 type = script
 command = osx64_gcc_pass_1
-exec = system/scripts/osx64/system/make_gcc_x86_64_pass_1.sh
+exec = system/scripts/osx64/toolchain/make_gcc_x86_64_pass_1.sh
 ret_val = void
 args = no
 desc = build gcc pass 1
@@ -120,7 +120,7 @@ desc = build gcc pass 1
 --begin
 type = script
 command = osx64_install_kernel_headers
-exec = system/scripts/osx64/system/install_kernel_headers.sh
+exec = system/scripts/osx64/toolchain/install_kernel_headers.sh
 ret_val = void
 args = no
 desc = install kernel headers into building tree
@@ -129,7 +129,7 @@ desc = install kernel headers into building tree
 --begin
 type = script
 command = osx64_glibc
-exec = system/scripts/osx64/system/make_glibc_x86_64.sh
+exec = system/scripts/osx64/toolchain/make_glibc_x86_64.sh
 ret_val = void
 args = no
 desc = build glibc
@@ -138,7 +138,7 @@ desc = build glibc
 --begin
 type = script
 command = osx64_gcc_mkheaders
-exec = system/scripts/osx64/system/gcc_mkheaders.sh
+exec = system/scripts/osx64/toolchain/gcc_mkheaders.sh
 ret_val = void
 args = no
 desc = copy gcc headers
@@ -147,7 +147,7 @@ desc = copy gcc headers
 --begin
 type = script
 command = osx64_libstd_cpp
-exec = system/scripts/osx64/system/make_libstdcpp_x86_64.sh
+exec = system/scripts/osx64/toolchain/make_libstdcpp_x86_64.sh
 ret_val = void
 args = no
 desc = build lib std cpp
@@ -156,7 +156,7 @@ desc = build lib std cpp
 --begin
 type = script
 command = osx64_sysutils
-exec = system/scripts/osx64/system/make_sys_utils.sh
+exec = system/scripts/osx64/toolchain/make_sys_utils.sh
 ret_val = void
 args = no
 desc = build system utilities
@@ -165,7 +165,7 @@ desc = build system utilities
 --begin
 type = script
 command = osx64_binutils_pass_2
-exec = system/scripts/osx64/system/make_binutils_x86_64_pass_2.sh
+exec = system/scripts/osx64/toolchain/make_binutils_x86_64_pass_2.sh
 ret_val = void
 args = no
 desc = build binutils pass 2
@@ -174,7 +174,7 @@ desc = build binutils pass 2
 --begin
 type = script
 command = osx64_gcc_pass_2
-exec = system/scripts/osx64/system/make_gcc_x86_64_pass_2.sh
+exec = system/scripts/osx64/toolchain/make_gcc_x86_64_pass_2.sh
 ret_val = void
 args = no
 desc = build gcc pass 2
@@ -183,7 +183,7 @@ desc = build gcc pass 2
 --begin
 type = script
 command = osx64_copy_pkg_in_tree
-exec = system/scripts/osx64/system/copy_pkgs_inside.sh
+exec = system/scripts/osx64/toolchain/copy_pkgs_inside.sh
 ret_val = void
 args = no
 desc = copy packages for chrooting
@@ -192,7 +192,7 @@ desc = copy packages for chrooting
 --begin
 type = script
 command = osx64_set_machine_name
-exec = system/scripts/osx64/system/set_name_x86_64.sh
+exec = system/scripts/osx64/toolchain/set_name_x86_64.sh
 ret_val = void
 args = no
 desc = set proper TGT name, saved in .machine_name
