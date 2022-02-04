@@ -9,6 +9,7 @@ NC='\033[0m'
 function msg(){ printf "${NC}$1 $2${NC}\n" ; }
 function msg_green(){ printf "\n${NC}$1 ${GREEN}$2${NC}\n\n" ; }
 function msg_red(){ printf "\n${NC}$1 ${RED}$2${NC}\n\n" ; }
+function press_any_key() { read -n 1 -s -r -p "Press any key to continue" ; }
 
 # utils list
 
@@ -47,21 +48,17 @@ function find_package(){
 function install_m4(){
 	msg_green "Package found: " "$M4"
 
-	if [ -e "${V_BUILD_BUILD_DIR}/$M4/Makefile" ]; then
-		pushd ${V_BUILD_BUILD_DIR}/$M4
-		make DESTDIR=${V_BUILD_TREE_X86_64} uninstall
-		popd
-	fi
+	rm -rf ${V_BUILD_PKG_DIR}/$M4/$M4/build
+	mkdir ${V_BUILD_PKG_DIR}/$M4/$M4/build
 
-	rm -rf ${V_BUILD_BUILD_DIR}/${M4}
-	mkdir ${V_BUILD_BUILD_DIR}/${M4}
+	pushd ${V_BUILD_PKG_DIR}/$M4/$M4/build
 
-	pushd ${V_BUILD_BUILD_DIR}/$M4
-
-	sh ${V_BUILD_PKG_DIR}/$M4/$M4/configure \
+	sh ../configure \
 	--prefix=/usr \
 	--host=${V_BUILD_TGT_X86_64} \
-	--build=$(${V_BUILD_PKG_DIR}/$M4/$M4/build-aux/config.guess)
+	--build=$(../build-aux/config.guess)
+
+	press_any_key
 
 	make -j`nproc`
 	make DESTDIR=${V_BUILD_TREE_X86_64} install
@@ -74,20 +71,15 @@ function install_m4(){
 function install_ncurses() {
 	msg_green "Package found: " "$NCURSES"
 
-	if [ -e "${V_BUILD_BUILD_DIR}/$NCURSES/Makefile" ]; then
-		pushd ${V_BUILD_BUILD_DIR}/$NCURSES
-		make DESTDIR=${V_BUILD_TREE_X86_64} uninstall
-		popd
-	fi
 
-	rm -rf ${V_BUILD_BUILD_DIR}/${NCURSES}
-	mkdir ${V_BUILD_BUILD_DIR}/${NCURSES}
+	pushd ${V_BUILD_PKG_DIR}/$NCURSES/$NCURSES
+	sed -i s/mawk// configure
 
-	pushd ${V_BUILD_BUILD_DIR}/$NCURSES
+	sh configure
 
-	sh ${V_BUILD_PKG_DIR}/$NCURSES/$NCURSES/configure
+	press_any_key
 
-	make -C inslude
+	make -C include
 	make -C progs tic
 
 	sh configure \
@@ -100,10 +92,15 @@ function install_ncurses() {
 	--without-debug \
 	--without-ada \
 	--without-normal \
-	--enable-widec
+	--enable-widec \
 
-	make -j`nproc`
-	make DESTDIR=${V_BUILD_TREE_X86_64} TIC_PATH=${pwd}/build/progs/tic install
+	press_any_key
+
+	make -j1
+
+	press_any_key
+
+	make DESTDIR=${V_BUILD_TREE_X86_64} TIC_PATH= ${V_BUILD_TREE_X86_64}/bin/tic install
 
 	echo "INPUT(-lncursesw)" > ${V_BUILD_TREE_X86_64}/usr/lib/libncurses.so
 
@@ -115,23 +112,18 @@ function install_ncurses() {
 function install_bash(){
 	msg_green "Package found: " "$BASHPKG"
 
-	if [ -e "${V_BUILD_BUILD_DIR}/$BASHPKG/Makefile" ]; then
-		pushd ${V_BUILD_BUILD_DIR}/$BASHPKG
-		make DESTDIR=${V_BUILD_TREE_X86_64} uninstall
-		unlink ${V_BUILD_TREE_X86_64}/usr/bin/sh
-		popd
-	fi
+	rm -rf ${V_BUILD_PKG_DIR}/$BASHPKG/$BASHPKG/build
+	mkdir ${V_BUILD_PKG_DIR}/$BASHPKG/$BASHPKG/build
 
-	rm -rf ${V_BUILD_BUILD_DIR}/${BASHPKG}
-	mkdir ${V_BUILD_BUILD_DIR}/${BASHPKG}
+	pushd ${V_BUILD_PKG_DIR}/$BASHPKG/$BASHPKG/build
 
-	pushd ${V_BUILD_BUILD_DIR}/$BASHPKG
-
-	sh ${V_BUILD_PKG_DIR}/$BASHPKG/$BASHPKG/configure \
+	sh ../configure \
 	--prefix=/usr \
-	--build=$(${V_BUILD_PKG_DIR}/$BASHPKG/$BASHPKG/support/config.guess) \
+	--build=$(../support/config.guess) \
 	--host=$V_BUILD_TGT_X86_64 \
 	--without-bash-malloc
+
+	press_any_key
 
 	make -j`nproc`
 	make DESTDIR=${V_BUILD_TREE_X86_64} install
@@ -148,24 +140,19 @@ function install_bash(){
 function install_coreutils(){
 	msg_green "Package found: " "$COREUTILS"
 
-	if [ -e "${V_BUILD_BUILD_DIR}/$COREUTILS/Makefile" ]; then
-		pushd ${V_BUILD_BUILD_DIR}/$COREUTILS
-		make DESTDIR=${V_BUILD_TREE_X86_64} uninstall
-		unlink ${V_BUILD_TREE_X86_64}/usr/bin/sh
-		popd
-	fi
+	rm -rf ${V_BUILD_PKG_DIR}/$COREUTILS/$COREUTILS/build
+	mkdir ${V_BUILD_PKG_DIR}/$COREUTILS/$COREUTILS/build
 
-	rm -rf ${V_BUILD_BUILD_DIR}/${COREUTILS}
-	mkdir ${V_BUILD_BUILD_DIR}/${COREUTILS}
+	pushd ${V_BUILD_PKG_DIR}/$COREUTILS/$COREUTILS/build
 
-	pushd ${V_BUILD_BUILD_DIR}/$COREUTILS
-
-	sh ${V_BUILD_PKG_DIR}/$COREUTILS/$COREUTILS/configure \
+	sh ../configure \
 	--prefix=/usr \
 	--host=$V_BUILD_TGT_X86_64 \
-	--build=$(${V_BUILD_PKG_DIR}/$COREUTILS/$COREUTILS/build-aux/config.guess)  \
+	--build=$(../build-aux/config.guess)  \
 	--enable-install-program=hostname \
 	--enable-no-install-program=kill,uptime
+
+	press_any_key
 
 	make -j`nproc`
 	make DESTDIR=${V_BUILD_TREE_X86_64} install
@@ -188,21 +175,16 @@ function install_coreutils(){
 function install_diffutils(){
 	msg_green "Package found: " "$DIFFUTILS"
 
-	if [ -e "${V_BUILD_BUILD_DIR}/$DIFFUTILS/Makefile" ]; then
-		pushd ${V_BUILD_BUILD_DIR}/$DIFFUTILS
-		make DESTDIR=${V_BUILD_TREE_X86_64} uninstall
-		unlink ${V_BUILD_TREE_X86_64}/usr/bin/sh
-		popd
-	fi
+	rm -rf ${V_BUILD_PKG_DIR}/$DIFFUTILS/$DIFFUTILS/build
+	mkdir ${V_BUILD_PKG_DIR}/$DIFFUTILS/$DIFFUTILS/build
 
-	rm -rf ${V_BUILD_BUILD_DIR}/${DIFFUTILS}
-	mkdir ${V_BUILD_BUILD_DIR}/${DIFFUTILS}
+	pushd ${V_BUILD_PKG_DIR}/$DIFFUTILS/$DIFFUTILS/build
 
-	pushd ${V_BUILD_BUILD_DIR}/$DIFFUTILS
-
-	sh ${V_BUILD_PKG_DIR}/$DIFFUTILS/$DIFFUTILS/configure \
+	sh ../configure \
 	--prefix=/usr \
 	--host=$V_BUILD_TGT_X86_64
+
+	press_any_key
 
 	make -j`nproc`
 	make DESTDIR=${V_BUILD_TREE_X86_64} install
@@ -215,32 +197,33 @@ function install_diffutils(){
 function install_file(){
 	msg_green "Package found: " "$FILEPKG"
 
-	if [ -e "${V_BUILD_BUILD_DIR}/$FILEPKG/Makefile" ]; then
-		pushd ${V_BUILD_BUILD_DIR}/$FILEPKG
-		make DESTDIR=${V_BUILD_TREE_X86_64} uninstall
-		unlink ${V_BUILD_TREE_X86_64}/usr/bin/sh
-		popd
-	fi
+	rm -rf ${V_BUILD_PKG_DIR}/$FILEPKG/$FILEPKG/build
+	mkdir ${V_BUILD_PKG_DIR}/$FILEPKG/$FILEPKG/build
 
-	rm -rf ${V_BUILD_BUILD_DIR}/${FILEPKG}
-	mkdir ${V_BUILD_BUILD_DIR}/${FILEPKG}
+	pushd ${V_BUILD_PKG_DIR}/$FILEPKG/$FILEPKG/build
 
-	pushd ${V_BUILD_BUILD_DIR}/$FILEPKG
-
-	sh ${V_BUILD_PKG_DIR}/$FILEPKG/$FILEPKG/configure \
+	sh ../configure \
 	--disable-bzlib \
 	--disable-libseccomp \
 	--disable-xzlib \
 	--disable-zlib
 
+	press_any_key
+
 	make -j`nproc`
+
+	popd
+
+	pushd ${V_BUILD_PKG_DIR}/$FILEPKG/$FILEPKG
 
 	sh configure \
 	--prefix=/usr \
 	--host=$V_BUILD_TGT_X86_64 \
 	--build=$(./config.guess)
 
-	make FILE_COMPILE=$(pwd)/src/file
+	press_any_key
+
+	make FILE_COMPILE=$(pwd)/build/src/file
 	make DESTDIR=${V_BUILD_TREE_X86_64} install
 
 	popd
@@ -251,23 +234,18 @@ function install_file(){
 function install_find(){
 	msg_green "Package found: " "$FINDPKG"
 
-	if [ -e "${V_BUILD_BUILD_DIR}/$FINDPKG/Makefile" ]; then
-		pushd ${V_BUILD_BUILD_DIR}/$FINDPKG
-		make DESTDIR=${V_BUILD_TREE_X86_64} uninstall
-		unlink ${V_BUILD_TREE_X86_64}/usr/bin/sh
-		popd
-	fi
+	rm -rf ${V_BUILD_PKG_DIR}/$FINDPKG/$FINDPKG/build
+	mkdir ${V_BUILD_PKG_DIR}/$FINDPKG/$FINDPKG/build
 
-	rm -rf ${V_BUILD_BUILD_DIR}/${FINDPKG}
-	mkdir ${V_BUILD_BUILD_DIR}/${FINDPKG}
+	pushd ${V_BUILD_PKG_DIR}/$FINDPKG/$FINDPKG/build
 
-	pushd ${V_BUILD_BUILD_DIR}/$FINDPKG
-
-	sh ${V_BUILD_PKG_DIR}/$FINDPKG/$FINDPKG/configure \
+	sh ../configure \
 	--prefix=/usr \
 	--localstatedir=/var/lib/locate \
 	--host=$V_BUILD_TGT_X86_64 \
-	--build=$(${V_BUILD_PKG_DIR}/$FINDPKG/$FINDPKG/build-aux/config.guess)
+	--build=$(../build-aux/config.guess)
+
+	press_any_key
 
 	make -j`nproc`
 
@@ -281,22 +259,17 @@ function install_find(){
 function install_gawk(){
 	msg_green "Package found: " "$GAWK"
 
-	if [ -e "${V_BUILD_BUILD_DIR}/$GAWK/Makefile" ]; then
-		pushd ${V_BUILD_BUILD_DIR}/$GAWK
-		make DESTDIR=${V_BUILD_TREE_X86_64} uninstall
-		unlink ${V_BUILD_TREE_X86_64}/usr/bin/sh
-		popd
-	fi
+	rm -rf ${V_BUILD_PKG_DIR}/$GAWK/$GAWK/build
+	mkdir ${V_BUILD_PKG_DIR}/$GAWK/$GAWK/build
 
-	rm -rf ${V_BUILD_BUILD_DIR}/${GAWK}
-	mkdir ${V_BUILD_BUILD_DIR}/${GAWK}
+	pushd ${V_BUILD_PKG_DIR}/$GAWK/$GAWK/build
 
-	pushd ${V_BUILD_BUILD_DIR}/$GAWK
-
-	sh ${V_BUILD_PKG_DIR}/$GAWK/$GAWK/configure \
+	sh ../configure \
 	--prefix=/usr \
 	--host=$V_BUILD_TGT_X86_64 \
-	--build=$(${V_BUILD_PKG_DIR}/$GAWK/$GAWK/config.guess)
+	--build=$(../config.guess)
+
+	press_any_key
 
 	make -j`nproc`
 
@@ -310,21 +283,16 @@ function install_gawk(){
 function install_grep(){
 	msg_green "Package found: " "$GREPPKG"
 
-	if [ -e "${V_BUILD_BUILD_DIR}/$GREPPKG/Makefile" ]; then
-		pushd ${V_BUILD_BUILD_DIR}/$GREPPKG
-		make DESTDIR=${V_BUILD_TREE_X86_64} uninstall
-		unlink ${V_BUILD_TREE_X86_64}/usr/bin/sh
-		popd
-	fi
+	rm -rf ${V_BUILD_PKG_DIR}/$GREPPKG/$GREPPKG/build
+	mkdir ${V_BUILD_PKG_DIR}/$GREPPKG/$GREPPKG/build
 
-	rm -rf ${V_BUILD_BUILD_DIR}/${GREPPKG}
-	mkdir ${V_BUILD_BUILD_DIR}/${GREPPKG}
+	pushd ${V_BUILD_PKG_DIR}/$GREPPKG/$GREPPKG/build
 
-	pushd ${V_BUILD_BUILD_DIR}/$GREPPKG
-
-	sh ${V_BUILD_PKG_DIR}/$GREPPKG/$GREPPKG/configure \
+	sh ../configure \
 	--prefix=/usr \
 	--host=$V_BUILD_TGT_X86_64
+
+	press_any_key
 
 	make -j`nproc`
 
@@ -338,21 +306,16 @@ function install_grep(){
 function install_gzip(){
 	msg_green "Package found: " "$GZIP"
 
-	if [ -e "${V_BUILD_BUILD_DIR}/$GZIP/Makefile" ]; then
-		pushd ${V_BUILD_BUILD_DIR}/$GZIP
-		make DESTDIR=${V_BUILD_TREE_X86_64} uninstall
-		unlink ${V_BUILD_TREE_X86_64}/usr/bin/sh
-		popd
-	fi
+	rm -rf ${V_BUILD_PKG_DIR}/$GZIP/$GZIP/build
+	mkdir ${V_BUILD_PKG_DIR}/$GZIP/$GZIP/build
 
-	rm -rf ${V_BUILD_BUILD_DIR}/${GZIP}
-	mkdir ${V_BUILD_BUILD_DIR}/${GZIP}
+	pushd ${V_BUILD_PKG_DIR}/$GZIP/$GZIP/build
 
-	pushd ${V_BUILD_BUILD_DIR}/$GZIP
-
-	sh ${V_BUILD_PKG_DIR}/$GZIP/$GZIP/configure \
+	sh ../configure \
 	--prefix=/usr \
 	--host=$V_BUILD_TGT_X86_64
+
+	press_any_key
 
 	make -j`nproc`
 
@@ -366,23 +329,18 @@ function install_gzip(){
 function install_make(){
 	msg_green "Package found: " "$MAKEPKG"
 
-	if [ -e "${V_BUILD_BUILD_DIR}/$MAKEPKG/Makefile" ]; then
-		pushd ${V_BUILD_BUILD_DIR}/$MAKEPKG
-		make DESTDIR=${V_BUILD_TREE_X86_64} uninstall
-		unlink ${V_BUILD_TREE_X86_64}/usr/bin/sh
-		popd
-	fi
+	rm -rf ${V_BUILD_PKG_DIR}/$MAKEPKG/$MAKEPKG/build
+	mkdir ${V_BUILD_PKG_DIR}/$MAKEPKG/$MAKEPKG/build
 
-	rm -rf ${V_BUILD_BUILD_DIR}/${MAKEPKG}
-	mkdir ${V_BUILD_BUILD_DIR}/${MAKEPKG}
+	pushd ${V_BUILD_PKG_DIR}/$MAKEPKG/$MAKEPKG/build
 
-	pushd ${V_BUILD_BUILD_DIR}/${MAKEPKG}
-
-	sh ${V_BUILD_PKG_DIR}/$MAKEPKG/$MAKEPKG/configure \
+	sh ../configure \
 	--prefix=/usr \
-	--without-guild \
+	--without-guile \
 	--host=$V_BUILD_TGT_X86_64 \
-	--build=$(${V_BUILD_PKG_DIR}/$MAKEPKG/$MAKEPKG/build-aux/config.guess)
+	--build=$(../build-aux/config.guess)
+
+	press_any_key
 
 	make -j`nproc`
 
@@ -396,22 +354,17 @@ function install_make(){
 function install_patch(){
 	msg_green "Package found: " "$PATCHPKG"
 
-	if [ -e "${V_BUILD_BUILD_DIR}/$PATCHPKG/Makefile" ]; then
-		pushd ${V_BUILD_BUILD_DIR}/$PATCHPKG
-		make DESTDIR=${V_BUILD_TREE_X86_64} uninstall
-		unlink ${V_BUILD_TREE_X86_64}/usr/bin/sh
-		popd
-	fi
+	rm -rf ${V_BUILD_PKG_DIR}/$PATCHPKG/$PATCHPKG/build
+	mkdir ${V_BUILD_PKG_DIR}/$PATCHPKG/$PATCHPKG/build
 
-	rm -rf ${V_BUILD_BUILD_DIR}/${PATCHPKG}
-	mkdir ${V_BUILD_BUILD_DIR}/${PATCHPKG}
+	pushd ${V_BUILD_PKG_DIR}/$PATCHPKG/$PATCHPKG/build
 
-	pushd ${V_BUILD_BUILD_DIR}/${PATCHPKG}
-
-	sh ${V_BUILD_PKG_DIR}/$PATCHPKG/$PATCHPKG/configure \
+	sh ../configure \
 	--prefix=/usr \
 	--host=$V_BUILD_TGT_X86_64 \
-	--build=$(${V_BUILD_PKG_DIR}/$PATCHPKG/$PATCHPKG/build-aux/config.guess)
+	--build=$(../build-aux/config.guess)
+
+	press_any_key
 
 	make -j`nproc`
 
@@ -425,21 +378,16 @@ function install_patch(){
 function install_sed(){
 	msg_green "Package found: " "$SEDPKG"
 
-	if [ -e "${V_BUILD_BUILD_DIR}/$SEDPKG/Makefile" ]; then
-		pushd ${V_BUILD_BUILD_DIR}/$SEDPKG
-		make DESTDIR=${V_BUILD_TREE_X86_64} uninstall
-		unlink ${V_BUILD_TREE_X86_64}/usr/bin/sh
-		popd
-	fi
+	rm -rf ${V_BUILD_PKG_DIR}/$SEDPKG/$SEDPKG/build
+	mkdir ${V_BUILD_PKG_DIR}/$SEDPKG/$SEDPKG/build
 
-	rm -rf ${V_BUILD_BUILD_DIR}/${SEDPKG}
-	mkdir ${V_BUILD_BUILD_DIR}/${SEDPKG}
+	pushd ${V_BUILD_PKG_DIR}/$SEDPKG/$SEDPKG/build
 
-	pushd ${V_BUILD_BUILD_DIR}/${SEDPKG}
-
-	sh ${V_BUILD_PKG_DIR}/$SEDPKG/$SEDPKG/configure \
+	sh ../configure \
 	--prefix=/usr \
 	--host=$V_BUILD_TGT_X86_64
+
+	press_any_key
 
 	make -j`nproc`
 
@@ -453,22 +401,17 @@ function install_sed(){
 function install_tar(){
 	msg_green "Package found: " "$TARPKG"
 
-	if [ -e "${V_BUILD_BUILD_DIR}/$TARPKG/Makefile" ]; then
-		pushd ${V_BUILD_BUILD_DIR}/$TARPKG
-		make DESTDIR=${V_BUILD_TREE_X86_64} uninstall
-		unlink ${V_BUILD_TREE_X86_64}/usr/bin/sh
-		popd
-	fi
+	rm -rf ${V_BUILD_PKG_DIR}/$TARPKG/$TARPKG/build
+	mkdir ${V_BUILD_PKG_DIR}/$TARPKG/$TARPKG/build
 
-	rm -rf ${V_BUILD_BUILD_DIR}/${TARPKG}
-	mkdir ${V_BUILD_BUILD_DIR}/${TARPKG}
+	pushd ${V_BUILD_PKG_DIR}/$TARPKG/$TARPKG/build
 
-	pushd ${V_BUILD_BUILD_DIR}/${TARPKG}
-
-	sh ${V_BUILD_PKG_DIR}/$TARPKG/$TARPKG/configure \
+	sh ../configure \
 	--prefix=/usr \
 	--host=$V_BUILD_TGT_X86_64 \
-	--build=$(${V_BUILD_PKG_DIR}/$TARPKG/$TARPKG/build-aux/config.guess)
+	--build=$(../build-aux/config.guess)
+
+	press_any_key
 
 	make -j`nproc`
 
@@ -482,24 +425,19 @@ function install_tar(){
 function install_xz(){
 	msg_green "Package found: " "$XZPKG"
 
-	if [ -e "${V_BUILD_BUILD_DIR}/$XZPKG/Makefile" ]; then
-		pushd ${V_BUILD_BUILD_DIR}/$XZPKG
-		make DESTDIR=${V_BUILD_TREE_X86_64} uninstall
-		unlink ${V_BUILD_TREE_X86_64}/usr/bin/sh
-		popd
-	fi
+	rm -rf ${V_BUILD_PKG_DIR}/$XZPKG/$XZPKG/build
+	mkdir ${V_BUILD_PKG_DIR}/$XZPKG/$XZPKG/build
 
-	rm -rf ${V_BUILD_BUILD_DIR}/${XZPKG}
-	mkdir ${V_BUILD_BUILD_DIR}/${XZPKG}
+	pushd ${V_BUILD_PKG_DIR}/$XZPKG/$XZPKG/build
 
-	pushd ${V_BUILD_BUILD_DIR}/${XZPKG}
-
-	sh ${V_BUILD_PKG_DIR}/$XZPKG/$XZPKG/configure \
+	sh ../configure \
 	--prefix=/usr \
 	--host=$V_BUILD_TGT_X86_64 \
-	--build=$(${V_BUILD_PKG_DIR}/$XZPKG/$XZPKG/build-aux/config.guess) \
+	--build=$(../build-aux/config.guess) \
 	--disable-static \
 	--docdir=/usr/share/doc/$XZPKG
+
+	press_any_key
 
 	make -j`nproc`
 

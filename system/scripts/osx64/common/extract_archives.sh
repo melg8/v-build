@@ -25,14 +25,12 @@ if [ -e "$V_BUILD_PKG_DIR" ]; then
 
 		# remove 'tar.*' extension
 		dirname=$(echo "$V_BUILD_PKG_DIR/$pkg_name" | sed 's/\.tar.*//')
-		build_dir=$(echo "$V_BUILD_BUILD_DIR/$pkg_name" | sed 's/\.tar.*//')
 
 		if [ -d "$dirname" ]; then
 			msg_green "Directory $dirname already" "exist\n"
 			continue
 		else
 			mkdir $dirname
-			mkdir $build_dir
 			# untar into pkg dir
 			msg_green "- $PKG_COUNTER - $(basename "$dirname")" " "
 			tar -xf $archive -C "$dirname" > /dev/null 2>&1

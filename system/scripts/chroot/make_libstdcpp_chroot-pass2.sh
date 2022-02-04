@@ -53,9 +53,6 @@ function install_libstdcpp(){
     --host=$ARCH                     \
     --disable-libstdcxx-pch
 
-	popd > /dev/null 2>&1
-	exit 0
-
 	make -j`nproc`
 	make install
 

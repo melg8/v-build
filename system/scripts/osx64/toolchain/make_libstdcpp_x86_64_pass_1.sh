@@ -9,6 +9,7 @@ NC='\033[0m'
 function msg(){ printf "${NC}$1 $2${NC}\n" ; }
 function msg_green(){ printf "\n${NC}$1 ${GREEN}$2${NC}\n\n" ; }
 function msg_red(){ printf "\n${NC}$1 ${RED}$2${NC}\n\n" ; }
+function press_any_key() { read -n 1 -s -r -p "Press any key to continue" ; }
 
 LIBSTDCPP="none"
 GCC="none"
@@ -60,25 +61,21 @@ function find_libstdcpp(){
 function install_libstdcpp(){	
 	msg_green "Package found: " "$LIBSTDCPP"
 
-	if [ -d ${V_BUILD_BUILD_DIR}/${LIBSTDCPP} ]; then
-		pushd ${V_BUILD_BUILD_DIR}/${LIBSTDCPP} > /dev/null 2>&1
-		make uninstall
-		popd > /dev/null 2>&1
-	fi
+	rm -rf ${V_BUILD_PKG_DIR}/$GCC/$GCC/build
+	mkdir ${V_BUILD_PKG_DIR}/$GCC/$GCC/build
 
-	rm -rf ${V_BUILD_BUILD_DIR}/${LIBSTDCPP}
-	mkdir ${V_BUILD_BUILD_DIR}/${LIBSTDCPP}
+	pushd ${V_BUILD_PKG_DIR}/$GCC/$GCC/build
 
-	pushd ${V_BUILD_BUILD_DIR}/${LIBSTDCPP} > /dev/null 2>&1
-
-	sh ${V_BUILD_PKG_DIR}/$GCC/$GCC/$LIBSTDCPP/configure \
+	sh ../libstdc++-v3/configure \
 	--host=$V_BUILD_TGT_X86_64 \
-	--build=$(${V_BUILD_PKG_DIR}/$GCC/$GCC/config.guess) \
+	--build=$(../config.guess) \
 	--prefix=/usr \
 	--disable-multilib \
 	--disable-nls \
 	--disable-libstdcxx-pch \
 	--with-gxx-include-dir=/tools/$V_BUILD_TGT_X86_64/include/c++/$GCC_VER
+
+	press_any_key
 
 	make
 	make DESTDIR=$V_BUILD_TREE_X86_64 install

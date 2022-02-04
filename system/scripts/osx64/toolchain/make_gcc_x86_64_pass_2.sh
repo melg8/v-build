@@ -17,6 +17,7 @@ GCC_VER="none"
 function msg(){ printf "${NC}$1 $2${NC}\n" ; }
 function msg_green(){ printf "\n${NC}$1 ${GREEN}$2${NC}\n" ; }
 function msg_red(){ printf "\n${NC}$1 ${RED}$2${NC}\n" ; }
+function press_any_key() { read -n 1 -s -r -p "Press any key to continue" ; }
 
 # determind arch type
 ARCH=$V_BUILD_TGT_X86_64
@@ -65,11 +66,8 @@ function gcc_extract_archive(){
 function install_gcc_pass_2(){
 	msg_green "Pkg found:" $GCC
 
-	rm -rf $V_BUILD_BUILD_DIR/$GCC
-	mkdir -p $V_BUILD_BUILD_DIR/$GCC
-
 	pushd $V_BUILD_PKG_DIR/$GCC/$GCC
-	rm -rf mpfr gmp mpc
+	rm -rf mpfr gmp mpc build
 
 	# C lib, multiple precision floatig point computaion
 	gcc_extract_archive "mpfr"
@@ -88,15 +86,17 @@ function install_gcc_pass_2(){
 		;;
 	esac
 
+	mkdir build
+
 	popd
 
-	pushd $V_BUILD_BUILD_DIR/$GCC
+	pushd $V_BUILD_PKG_DIR/$GCC/$GCC/build
 
 	mkdir -pv $ARCH/libgcc
 	ln -sv $V_BUILD_PKG_DIR/$GCC/$GCC/libgcc/gthr-posix.h $ARCH/libgcc/gthr-default.h
 
-	sh $V_BUILD_PKG_DIR/$GCC/$GCC/configure \
-		--build=$($V_BUILD_PKG_DIR/$GCC/$GCC/config.guess) \
+	sh ../configure \
+		--build=$(../config.guess) \
 		--with-build-sysroot=$V_BUILD_TREE_X86_64 \
 		--host=$ARCH \
 		--prefix=/usr \
@@ -112,6 +112,8 @@ function install_gcc_pass_2(){
 		--disable-libvtv \
 		--disable-libstdcxx \
 		--enable-languages=c,c++
+
+	press_any_key
 
 	make -j`nproc`
 	make DESTDIR=${V_BUILD_TREE_X86_64} install

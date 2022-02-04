@@ -13,6 +13,7 @@ GLIBC="none"
 function msg(){ printf "${NC}$1 $2${NC}\n" ; }
 function msg_green(){ printf "\n${NC}$1 ${GREEN}$2${NC}\n" ; }
 function msg_red(){ printf "\n${NC}$1 ${RED}$2${NC}\n" ; }
+function press_any_key() { read -n 1 -s -r -p "Press any key to continue" ; }
 
 # find package in PKG dir
 function find_package(){
@@ -48,42 +49,38 @@ function make_patch(){
 function install_glibc(){	
 	msg_green "Package found: " "$GLIBC"
 
-	if [ -d "${V_BUILD_PKG_DIR}/${GLIBC}/${GLIBC}/build" ]; then
-		pushd ${V_BUILD_PKG_DIR}/$GLIBC/$GLIBC/build > /dev/null 2>&1
-		make uninstall
-		popd > /dev/null 2>&1
-	fi
-
 	rm -rfv ${V_BUILD_PKG_DIR}/${GLIBC}/${GLIBC}/build
 	mkdir -pv ${V_BUILD_PKG_DIR}/${GLIBC}/${GLIBC}/build
 
 	pushd ${V_BUILD_PKG_DIR}/$GLIBC/$GLIBC > /dev/null 2>&1
-	make_patch
 
 	case $(uname -m) in
-		i?86)   ln -sfv ld-linux.so.2 $LFS/lib/ld-lsb.so.3
+		i?86)   ln -sfv ld-linux.so.2 $V_BUILD_TREE_X86_64/lib/ld-lsb.so.3
 		;;
 		x86_64) ln -sfv ../lib/ld-linux-x86-64.so.2 $V_BUILD_TREE_X86_64/lib64
 				ln -sfv ../lib/ld-linux-x86-64.so.2 $V_BUILD_TREE_X86_64/lib64/ld-lsb-x86-64.so.3
 		;;
 	esac
 
+	make_patch
+
 	popd > /dev/null 2>&1
 
 	pushd ${V_BUILD_PKG_DIR}/${GLIBC}/${GLIBC}/build > /dev/null 2>&1
 
-	echo "rootsbindir=/usr/sbin" > configparams
+	echo "rootsbindir=/usr/sbin" > configparms
 
 	sh ../configure \
 	--prefix=/usr \
 	--host=${V_BUILD_TGT_X86_64} \
 	--build=$(../scripts/config.guess) \
 	--enable-kernel=3.2 \
-	--without-selinux \
 	--with-headers=${V_BUILD_TREE_X86_64}/usr/include \
 	libc_cv_slibdir=/usr/lib
 
-	make -j`nproc`
+	press_any_key
+
+	make
 	make DESTDIR=${V_BUILD_TREE_X86_64} install
 
 	# fix hardcoded path to executable loader in ldd script

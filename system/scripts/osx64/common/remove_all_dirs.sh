@@ -11,10 +11,6 @@ function msg_green(){ printf "${NC}$1 ${GREEN}$2${NC}\n" ; }
 
 msg_green "Removing build-related directories" "running\n"
 
-rm -rfv "$V_BUILD_PKG_DIR"
-rm -rfv "$V_BUILD_BUILD_DIR" 
-rm -rfv "$V_BUILD_PATCH_DIR"
-rm -rfv "$V_BUILD_ARCHIVE_DIR"
 rm -rfv "$V_BUILD_TREE_X86_64"
 
 sleep 0.5

@@ -8,8 +8,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#define V_BUILD_PKG_DIR_NAME "/packages"
-#define V_BUILD_BUILD_DIR_NAME "/build_dir"
+#define V_BUILD_PKG_DIR_NAME "/tree_x86_64/packages"
 #define V_BUILD_PATCH_DIR_NAME "/patches"
 #define V_BUILD_ARCHIVE_DIR_NAME "/archives"
 #define V_BUILD_TGT_X86_64_NAME "-lfs-linux-gnu"
@@ -83,7 +82,6 @@ void osx64_export_variables() {
   }
 
   export_var("V_BUILD_PKG_DIR", V_BUILD_PKG_DIR_NAME);
-  export_var("V_BUILD_BUILD_DIR", V_BUILD_BUILD_DIR_NAME);
   export_var("V_BUILD_PATCH_DIR", V_BUILD_PATCH_DIR_NAME);
   export_var("V_BUILD_ARCHIVE_DIR", V_BUILD_ARCHIVE_DIR_NAME);
   export_var("V_BUILD_TREE_X86_64", V_BUILD_TREE_X86_64_NAME);

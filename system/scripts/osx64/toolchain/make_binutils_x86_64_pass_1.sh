@@ -16,6 +16,7 @@ BINUTILS="none"
 function msg(){ printf "${NC}$1 $2${NC}\n" ; }
 function msg_green(){ printf "\n${NC}$1 ${GREEN}$2${NC}\n" ; }
 function msg_red(){ printf "\n${NC}$1 ${RED}$2${NC}\n" ; }
+function press_any_key() { read -n 1 -s -r -p "Press any key to continue" ; }
 
 ################################## Functions ###################################
 
@@ -49,6 +50,8 @@ function install_binutils_pass_1(){
 	--target=$V_BUILD_TGT_X86_64 \
 	--disable-nls \
 	--disable-werror
+
+	press_any_key
 
 	make
 	make install

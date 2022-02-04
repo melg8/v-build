@@ -74,15 +74,6 @@ desc = check host building compatibility
 
 --begin
 type = script
-command = osx64_check
-exec = system/scripts/osx64/common/check_host.sh
-ret_val = void
-args = no
-desc = check host building compatibility
---end
-
---begin
-type = script
 command = osx64_download
 exec = system/scripts/osx64/common/download.sh
 ret_val = void
@@ -155,8 +146,8 @@ desc = copy gcc headers
 
 --begin
 type = script
-command = osx64_libstd_cpp
-exec = system/scripts/osx64/toolchain/make_libstdcpp_x86_64.sh
+command = osx64_libstd_cpp_pass_1
+exec = system/scripts/osx64/toolchain/make_libstdcpp_x86_64_pass_1.sh
 ret_val = void
 args = no
 desc = build lib std cpp
@@ -191,8 +182,8 @@ desc = build gcc pass 2
 
 --begin
 type = script
-command = osx64_copy_pkg_in_tree
-exec = system/scripts/osx64/toolchain/copy_pkgs_inside.sh
+command = osx64_copy_kernel_into_tree
+exec = system/scripts/osx64/toolchain/copy_kernel_inside.sh
 ret_val = void
 args = no
 desc = copy packages for chrooting

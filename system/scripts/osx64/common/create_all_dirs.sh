@@ -11,12 +11,11 @@ function msg_green(){ printf "${NC}$1 ${GREEN}$2${NC}\n" ; }
 
 msg_green "Preparing current directory" "running\n"
 
-mkdir -v "$V_BUILD_PKG_DIR"
-mkdir -v "$V_BUILD_BUILD_DIR" 
 mkdir -v "$V_BUILD_PATCH_DIR"
 mkdir -v "$V_BUILD_ARCHIVE_DIR"
 mkdir -v "$V_BUILD_TREE_X86_64"
 mkdir -v "$V_BUILD_TOOLS_X86_64"
+mkdir -v "$V_BUILD_PKG_DIR"
 
 sleep 0.5
 exit 0
