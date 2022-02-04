@@ -13,7 +13,6 @@ GLIBC="none"
 function msg(){ printf "${NC}$1 $2${NC}\n" ; }
 function msg_green(){ printf "\n${NC}$1 ${GREEN}$2${NC}\n" ; }
 function msg_red(){ printf "\n${NC}$1 ${RED}$2${NC}\n" ; }
-function press_any_key() { read -n 1 -s -r -p "Press any key to continue" ; }
 
 # find package in PKG dir
 function find_package(){
@@ -77,8 +76,6 @@ function install_glibc(){
 	--enable-kernel=3.2 \
 	--with-headers=${V_BUILD_TREE_X86_64}/usr/include \
 	libc_cv_slibdir=/usr/lib
-
-	press_any_key
 
 	make
 	make DESTDIR=${V_BUILD_TREE_X86_64} install

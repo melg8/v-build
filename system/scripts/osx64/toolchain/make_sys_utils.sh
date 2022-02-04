@@ -9,7 +9,6 @@ NC='\033[0m'
 function msg(){ printf "${NC}$1 $2${NC}\n" ; }
 function msg_green(){ printf "\n${NC}$1 ${GREEN}$2${NC}\n\n" ; }
 function msg_red(){ printf "\n${NC}$1 ${RED}$2${NC}\n\n" ; }
-function press_any_key() { read -n 1 -s -r -p "Press any key to continue" ; }
 
 # utils list
 
@@ -58,8 +57,6 @@ function install_m4(){
 	--host=${V_BUILD_TGT_X86_64} \
 	--build=$(../build-aux/config.guess)
 
-	press_any_key
-
 	make -j`nproc`
 	make DESTDIR=${V_BUILD_TREE_X86_64} install
 
@@ -77,8 +74,6 @@ function install_ncurses() {
 
 	sh configure
 
-	press_any_key
-
 	make -C include
 	make -C progs tic
 
@@ -94,11 +89,7 @@ function install_ncurses() {
 	--without-normal \
 	--enable-widec \
 
-	press_any_key
-
 	make -j1
-
-	press_any_key
 
 	make DESTDIR=${V_BUILD_TREE_X86_64} TIC_PATH= ${V_BUILD_TREE_X86_64}/bin/tic install
 
@@ -122,8 +113,6 @@ function install_bash(){
 	--build=$(../support/config.guess) \
 	--host=$V_BUILD_TGT_X86_64 \
 	--without-bash-malloc
-
-	press_any_key
 
 	make -j`nproc`
 	make DESTDIR=${V_BUILD_TREE_X86_64} install
@@ -151,8 +140,6 @@ function install_coreutils(){
 	--build=$(../build-aux/config.guess)  \
 	--enable-install-program=hostname \
 	--enable-no-install-program=kill,uptime
-
-	press_any_key
 
 	make -j`nproc`
 	make DESTDIR=${V_BUILD_TREE_X86_64} install
@@ -184,8 +171,6 @@ function install_diffutils(){
 	--prefix=/usr \
 	--host=$V_BUILD_TGT_X86_64
 
-	press_any_key
-
 	make -j`nproc`
 	make DESTDIR=${V_BUILD_TREE_X86_64} install
 
@@ -208,8 +193,6 @@ function install_file(){
 	--disable-xzlib \
 	--disable-zlib
 
-	press_any_key
-
 	make -j`nproc`
 
 	popd
@@ -220,8 +203,6 @@ function install_file(){
 	--prefix=/usr \
 	--host=$V_BUILD_TGT_X86_64 \
 	--build=$(./config.guess)
-
-	press_any_key
 
 	make FILE_COMPILE=$(pwd)/build/src/file
 	make DESTDIR=${V_BUILD_TREE_X86_64} install
@@ -245,8 +226,6 @@ function install_find(){
 	--host=$V_BUILD_TGT_X86_64 \
 	--build=$(../build-aux/config.guess)
 
-	press_any_key
-
 	make -j`nproc`
 
 	make DESTDIR=${V_BUILD_TREE_X86_64} install
@@ -269,8 +248,6 @@ function install_gawk(){
 	--host=$V_BUILD_TGT_X86_64 \
 	--build=$(../config.guess)
 
-	press_any_key
-
 	make -j`nproc`
 
 	make DESTDIR=${V_BUILD_TREE_X86_64} install
@@ -292,8 +269,6 @@ function install_grep(){
 	--prefix=/usr \
 	--host=$V_BUILD_TGT_X86_64
 
-	press_any_key
-
 	make -j`nproc`
 
 	make DESTDIR=${V_BUILD_TREE_X86_64} install
@@ -314,8 +289,6 @@ function install_gzip(){
 	sh ../configure \
 	--prefix=/usr \
 	--host=$V_BUILD_TGT_X86_64
-
-	press_any_key
 
 	make -j`nproc`
 
@@ -340,8 +313,6 @@ function install_make(){
 	--host=$V_BUILD_TGT_X86_64 \
 	--build=$(../build-aux/config.guess)
 
-	press_any_key
-
 	make -j`nproc`
 
 	make DESTDIR=${V_BUILD_TREE_X86_64} install
@@ -364,8 +335,6 @@ function install_patch(){
 	--host=$V_BUILD_TGT_X86_64 \
 	--build=$(../build-aux/config.guess)
 
-	press_any_key
-
 	make -j`nproc`
 
 	make DESTDIR=${V_BUILD_TREE_X86_64} install
@@ -386,8 +355,6 @@ function install_sed(){
 	sh ../configure \
 	--prefix=/usr \
 	--host=$V_BUILD_TGT_X86_64
-
-	press_any_key
 
 	make -j`nproc`
 
@@ -410,8 +377,6 @@ function install_tar(){
 	--prefix=/usr \
 	--host=$V_BUILD_TGT_X86_64 \
 	--build=$(../build-aux/config.guess)
-
-	press_any_key
 
 	make -j`nproc`
 
@@ -436,8 +401,6 @@ function install_xz(){
 	--build=$(../build-aux/config.guess) \
 	--disable-static \
 	--docdir=/usr/share/doc/$XZPKG
-
-	press_any_key
 
 	make -j`nproc`
 

@@ -16,7 +16,6 @@ BINUTILS="none"
 function msg(){ printf "${NC}$1 $2${NC}\n" ; }
 function msg_green(){ printf "\n${NC}$1 ${GREEN}$2${NC}\n" ; }
 function msg_red(){ printf "\n${NC}$1 ${RED}$2${NC}\n" ; }
-function press_any_key() { read -n 1 -s -r -p "Press any key to continue" ; }
 
 # determind arch type
 ARCH=$V_BUILD_TGT_X86_64
@@ -54,8 +53,6 @@ function install_binutils_pass_2(){
 	--enable-shared \
 	--disable-werror \
 	--enable-64-bit-bfd
-
-	press_any_key
 
 	make -j`nproc`
 	make DESTDIR=${V_BUILD_TREE_X86_64} install -j1

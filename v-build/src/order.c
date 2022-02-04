@@ -88,6 +88,7 @@ static void _parse_order_list() {
         execute();
       }
     }
+    sleep(5);
   }
 
   free(line);

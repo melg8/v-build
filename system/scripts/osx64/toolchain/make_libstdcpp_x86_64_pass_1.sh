@@ -9,7 +9,6 @@ NC='\033[0m'
 function msg(){ printf "${NC}$1 $2${NC}\n" ; }
 function msg_green(){ printf "\n${NC}$1 ${GREEN}$2${NC}\n\n" ; }
 function msg_red(){ printf "\n${NC}$1 ${RED}$2${NC}\n\n" ; }
-function press_any_key() { read -n 1 -s -r -p "Press any key to continue" ; }
 
 LIBSTDCPP="none"
 GCC="none"
@@ -74,8 +73,6 @@ function install_libstdcpp(){
 	--disable-nls \
 	--disable-libstdcxx-pch \
 	--with-gxx-include-dir=/tools/$V_BUILD_TGT_X86_64/include/c++/$GCC_VER
-
-	press_any_key
 
 	make
 	make DESTDIR=$V_BUILD_TREE_X86_64 install
