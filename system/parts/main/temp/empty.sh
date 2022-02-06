@@ -8,11 +8,20 @@ function msg(){ printf "${NC}$1 $2${NC}\n" ; }
 function msg_green(){ printf "\n${NC}$1 ${GREEN}$2${NC}\n\n" ; }
 function msg_red(){ printf "\n${NC}$1 ${RED}$2${NC}\n\n" ; }
 
-sh create_directories.sh
-sleep 1
-sh essential_files_and_symlinks.sh
-sleep 1
-sh make_libstdcpp_chroot-pass2.sh
+search_pkg=`sh /parts/main/temp/find_package.sh "perl"`
+
+if [ ! -z "${search_pkg}" ]; then
+	msg_green "package found:" "$search_pkg"
+else
+	msg_res "package not found:" "$search_pkg"
+	exit 1
+fi
+
+pushd /packages/${search_pkg}/${search_pkg}
+
+
+
+popd
 
 exit 0
 

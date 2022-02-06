@@ -224,3 +224,14 @@ ret_val = void
 args = no
 desc = chroot into tree
 --end
+
+--begin
+type = script
+command = save_tree
+exec = system/scripts/osx64/common/save_tree.sh
+ret_val = void
+args = no
+desc = save temp tree in $V_BUILD_DIR
+--end
+
+
