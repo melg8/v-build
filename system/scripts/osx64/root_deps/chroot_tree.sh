@@ -22,6 +22,7 @@ msg_green "Copy part scripts into:" "${V_BUILD_TREE_X86_64}"
 
 rm -rf "${V_BUILD_TREE_X86_64}/parts"
 cp -vr "${V_BUILD_SYSTEM}/parts" "${V_BUILD_TREE_X86_64}/"
+cp -vr "${V_BUILD_DIR}/patches" "${V_BUILD_TREE_X86_64}/"
 
 msg_green "chroot into: " "${V_BUILD_TREE_X86_64}"
 
