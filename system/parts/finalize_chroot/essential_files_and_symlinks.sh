@@ -64,8 +64,8 @@ chgrp -v utmp /var/log/lastlog
 chmod -v 664  /var/log/lastlog
 chmod -v 600  /var/log/btmp
 
-cp /parts/main/inputrc /etc
-cp /parts/main/bashrc /root/.bashrc
+cp /parts/temp_system/inputrc /etc
+cp /parts/temp_system/bashrc /root/.bashrc
 
 source /root/.bashrc
 

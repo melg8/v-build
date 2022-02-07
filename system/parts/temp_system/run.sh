@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pushd /parts/main/temp
+pushd /parts/temp_system
 #./gettext.sh
 #./bison.sh
 #./perl.sh

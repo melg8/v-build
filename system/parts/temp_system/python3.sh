@@ -8,7 +8,7 @@ function msg(){ printf "${NC}$1 $2${NC}\n" ; }
 function msg_green(){ printf "\n${NC}$1 ${GREEN}$2${NC}\n\n" ; }
 function msg_red(){ printf "\n${NC}$1 ${RED}$2${NC}\n\n" ; }
 
-search_pkg=`sh /parts/main/temp/find_package.sh "perl"`
+search_pkg=`sh /parts/temp_system/find_package.sh "Python"`
 
 if [ ! -z "${search_pkg}" ]; then
 	msg_green "package found:" "$search_pkg"
@@ -19,7 +19,12 @@ fi
 
 pushd /packages/${search_pkg}/${search_pkg}
 
+./configure --prefix=/usr   \
+            --enable-shared \
+            --without-ensurepip
 
+make
+make install
 
 popd
 
