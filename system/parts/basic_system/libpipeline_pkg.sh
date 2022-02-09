@@ -8,7 +8,7 @@ function msg(){ printf "${NC}$1 $2${NC}\n" ; }
 function msg_green(){ printf "\n${NC}$1 ${GREEN}$2${NC}\n\n" ; }
 function msg_red(){ printf "\n${NC}$1 ${RED}$2${NC}\n\n" ; }
 
-search_pkg=`sh /parts/basic_system/find_package.sh ""`
+search_pkg=`sh /parts/basic_system/find_package.sh "libpipeline"`
 
 if [ ! -z "${search_pkg}" ]; then
 	msg_green "package found:" "$search_pkg"
@@ -19,6 +19,11 @@ fi
 
 pushd /packages/${search_pkg}/${search_pkg}
 
+./configure --prefix=/usr
+
+make
+
+make install
 
 popd
 

@@ -218,8 +218,17 @@ desc = unmount virtual kernel file system
 
 --begin
 type = script
-command = chroot_tree
-exec = system/scripts/osx64/root_deps/chroot_tree.sh
+command = chroot_tree_basic
+exec = system/scripts/osx64/root_deps/chroot_tree_basic.sh
+ret_val = void
+args = no
+desc = chroot into tree
+--end
+
+--begin
+type = script
+command = chroot_tree_config
+exec = system/scripts/osx64/root_deps/chroot_tree_config.sh
 ret_val = void
 args = no
 desc = chroot into tree

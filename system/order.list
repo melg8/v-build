@@ -17,5 +17,5 @@ osx64_export_variables
 #osx64_copy_kernel_into_tree
 #chown_tree_to_root
 #prepare_vkfs
-chroot_tree
+chroot_tree_config
 --end
