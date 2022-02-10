@@ -28,7 +28,7 @@ msg_green "chroot into: " "${V_BUILD_TREE_X86_64}"
 
 sudo chroot "${V_BUILD_TREE_X86_64}" /usr/bin/env -i   \
 							HOME=/root                  \
-							TERM="$TERM"                \
+							TERM="vt100"                \
 							PS1='(v-build chroot) \u:\w\$ ' \
 							PATH=/usr/bin:/usr/sbin     \
 							/bin/bash --login
