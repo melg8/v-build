@@ -8,7 +8,7 @@ function msg(){ printf "${NC}$1 $2${NC}\n" ; }
 function msg_green(){ printf "\n${NC}$1 ${GREEN}$2${NC}\n\n" ; }
 function msg_red(){ printf "\n${NC}$1 ${RED}$2${NC}\n\n" ; }
 
-search_pkg=`sh /parts/basic_system/find_package.sh "bc"`
+search_pkg=`sh /parts/basic_system/find_package.sh "bc-5"`
 
 if [ ! -z "${search_pkg}" ]; then
 	msg_green "package found:" "$search_pkg"
