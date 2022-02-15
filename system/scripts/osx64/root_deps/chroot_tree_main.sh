@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# this chroot must be used when you're build basic system after temp system
+# when basic system is complete, chroot using this script
+# login without hashing
 
 GREEN='\033[0;32m'
 RED='\033[0;31m'
@@ -30,10 +31,10 @@ msg_green "chroot into: " "${V_BUILD_TREE_X86_64}"
 
 sudo chroot "${V_BUILD_TREE_X86_64}" /usr/bin/env -i   \
 							HOME=/root                  \
-							TERM="$TERM"                \
+							TERM="vt100"                \
 							PS1='(v-build chroot) \u:\w\$ ' \
 							PATH=/usr/bin:/usr/sbin     \
-							/bin/bash --login +h
+							/bin/bash --login
 
 msg_green "status:" "exit chroot"
 

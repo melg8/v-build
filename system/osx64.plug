@@ -222,16 +222,16 @@ command = chroot_tree_basic
 exec = system/scripts/osx64/root_deps/chroot_tree_basic.sh
 ret_val = void
 args = no
-desc = chroot into tree
+desc = chroot into tree for build basic system
 --end
 
 --begin
 type = script
-command = chroot_tree_config
-exec = system/scripts/osx64/root_deps/chroot_tree_config.sh
+command = chroot_tree_main
+exec = system/scripts/osx64/root_deps/chroot_tree_main.sh
 ret_val = void
 args = no
-desc = chroot into tree
+desc = chroot into tree without hashing
 --end
 
 --begin
