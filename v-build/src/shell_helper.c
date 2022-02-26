@@ -147,46 +147,47 @@ void exec_help_command(const char *cmd) {
 
 void print_loaded_functions() {
   char name_comparator[COMMON_TEXT_SIZE] = {0};
+  char description[COMMON_TEXT_SIZE] = {0};
 
   for (u_int i = 0; i < get_current_list_pos(); ++i) {
-    plugin_element *elem = &list[i];
+    plugin_element *elem = &plugin_list[i];
 
     if (strstr(elem->plugin_name, "system/io.plug") != NULL)
       continue;
 
-    if (strcmp(name_comparator, elem->plugin_name) != 0) {
-      char temp[COMMON_TEXT_SIZE] = {0};
-      strcpy(temp, "\n");
-      strcat(temp, OS_COLOR_BLUE);
-      strcpy(name_comparator, elem->plugin_name);
-      strcat(temp, name_comparator);
-      strcat(temp, OS_NO_COLOR);
-      print_info_msg(temp, ":", YES);
+    char trunc_name[COMMON_TEXT_SIZE] = {0};
+    strcpy(trunc_name, strrchr(elem->plugin_name, '/') + 1);
 
-      memset(temp, 0, sizeof(temp));
+    if (strcmp(name_comparator, trunc_name) != 0) {
+      strcpy(name_comparator, OS_COLOR_BLUE);
+      strcat(name_comparator, trunc_name);
+      strcat(name_comparator, OS_NO_COLOR);
+      print_info_msg(name_comparator, ":", YES);
 
-      strcpy(temp, OS_COLOR_YELLOW);
-      print_fmt_msg(0, temp);
+      // due to color prefixes, copy again for comparison
+      strcpy(name_comparator, trunc_name);
 
-      memset(temp, 0, sizeof(temp));
-      strcat(temp, "type:");
-      print_fmt_msg(8, temp);
+      strcpy(description, OS_COLOR_YELLOW);
 
-      strcpy(temp, "command:");
-      print_fmt_msg(30, temp);
+      memset(description, 0, sizeof(description));
+      strcat(description, "type:");
+      print_fmt_msg(8, description);
 
-      strcpy(temp, "return");
-      print_fmt_msg(10, temp);
+      strcpy(description, "command:");
+      print_fmt_msg(30, description);
 
-      strcpy(temp, "args:");
-      print_fmt_msg(35, temp);
+      strcpy(description, "return");
+      print_fmt_msg(10, description);
 
-      strcpy(temp, "description:");
-      print_fmt_msg(50, temp);
+      strcpy(description, "args:");
+      print_fmt_msg(35, description);
 
-      strcpy(temp, OS_NO_COLOR);
-      strcat(temp, "\n");
-      print_msg(temp, 0);
+      strcpy(description, "description:");
+      print_fmt_msg(50, description);
+
+      strcpy(description, OS_NO_COLOR);
+      strcat(description, "\n");
+      print_msg(description, 0);
     }
 
     print_fmt_msg(8, elem->descriptor.type);

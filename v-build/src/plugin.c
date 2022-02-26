@@ -82,8 +82,8 @@ void *get_binary_function(const char *fname) {
 plugin_element *find_element_by_command(const char *command) {
   u_int cur_pos = get_current_list_pos();
   for (u_int i = 0; i < cur_pos; ++i) {
-    if (strcmp(list[i].descriptor.command, command) == 0) {
-      return &list[i];
+    if (strcmp(plugin_list[i].descriptor.command, command) == 0) {
+      return &plugin_list[i];
     }
   }
   return NULL;
@@ -107,7 +107,7 @@ bool is_plugin_command(const char *command) {
 bool is_plugin_already_loaded(const char *plugin_name) {
   u_int cur_pos = get_current_list_pos();
   for (u_int i = 0; i < cur_pos; ++i) {
-    if (strcmp(list[i].plugin_name, plugin_name) == 0) {
+    if (strcmp(plugin_list[i].plugin_name, plugin_name) == 0) {
       return true;
     }
   }

@@ -18,7 +18,7 @@ static void _parse_line(const char *line, plugin_descriptor *pd, int count,
                         ...);
 static size_t _get_offset(int value);
 
-plugin_element list[PLUGIN_LIST_SIZE] = {0};
+plugin_element plugin_list[PLUGIN_LIST_SIZE] = {0};
 
 int load_plugin_internal(const char *restrict plugin_name) {
   FILE *pf = fopen(plugin_name, "r");
@@ -50,8 +50,8 @@ int load_plugin_internal(const char *restrict plugin_name) {
 
     if (_is_eq(line, P_END)) {
       _ready_to_load = false;
-      strcpy(list[_pos].plugin_name, plugin_name);
-      memcpy(&list[_pos].descriptor, &p_desc, sizeof(p_desc));
+      strcpy(plugin_list[_pos].plugin_name, plugin_name);
+      memcpy(&plugin_list[_pos].descriptor, &p_desc, sizeof(p_desc));
       memset(&p_desc, 0, sizeof(p_desc));
       _pos++;
     }
@@ -108,7 +108,7 @@ static size_t _get_offset(int value) {
 }
 
 void erase_list() {
-  memset(list, 0, sizeof(list));
+  memset(plugin_list, 0, sizeof(plugin_list));
   _pos = 0;
 }
 

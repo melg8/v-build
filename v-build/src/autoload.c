@@ -51,12 +51,12 @@ void autoload_plugins() {
         _ready_to_load = false;
         continue;
       }
-      char plugin_path[COMMON_TEXT_SIZE];
-      strcpy(plugin_path, line);
-      plugin_path[strcspn(plugin_path, "\n")] = 0;
+      char plugin_name[COMMON_TEXT_SIZE];
+      strcpy(plugin_name, line);
+      plugin_name[strcspn(plugin_name, "\n")] = 0;
 
-      if (load_plugin(plugin_path) == -1) {
-        printf("%s: plugin loading error, exit.\n", plugin_path);
+      if (load_plugin(plugin_name) == -1) {
+        printf("%s: plugin loading error, exit.\n", plugin_name);
         exit(EXIT_FAILURE);
       }
     }

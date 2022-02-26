@@ -30,7 +30,7 @@ typedef struct plugin_element {
   plugin_descriptor descriptor;
 } plugin_element;
 
-extern plugin_element list[PLUGIN_LIST_SIZE];
+extern plugin_element plugin_list[PLUGIN_LIST_SIZE];
 
 int load_plugin_internal(const char *restrict plugin_name);
 u_int get_current_list_pos();
