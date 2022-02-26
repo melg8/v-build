@@ -25,7 +25,7 @@ mkdir ${V_BUILD_TREE_X86_64}
 
 pushd ${V_BUILD_TREE_X86_64} > /dev/null 2>&1
 
-mkdir -p packages tools lib64 etc var usr/{bin,lib,sbin}
+mkdir -p packages tools tmp lib64 etc var usr/{bin,lib,sbin}
 
 ln -s usr/bin bin
 ln -s usr/lib lib
