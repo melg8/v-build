@@ -24,44 +24,11 @@ void run_shell() {
     if (is_help_command(user_input)) {
       exec_help_command(user_input);
     } else if (is_subshell_command(user_input)) {
-      // run_subshell();
-      print_info_msg(COMPLETE, "subshell invoked", YES);
-    } else if (is_plugin_command(user_input)) {
-      try_to_exec_plugin(user_input);
-    } else if (is_extra_command(user_input)) {
-      exec_extra_command(user_input);
+      run_subshell();
     } else {
       print_err();
     }
   }
 
   unset_internal_conf();
-}
-
-void try_to_exec_plugin(const char *user_input) {
-  plugin_element *elem = find_element_by_command(user_input);
-
-  if (elem != NULL) {
-    run_plugin(elem);
-  }
-
-  add_cmd_to_history(user_input, elem);
-  reset_user_args();
-}
-
-void run_plugin(const plugin_element *elem) {
-  bool args_ok = false;
-  if (g_conf.is_column_args) {
-    args_ok = get_column_args(elem);
-  } else if (g_conf.is_line_args) {
-    args_ok = fill_line_args(elem);
-  }
-
-  if (args_ok) {
-    if (is_elem_binary(elem)) {
-      exec_bin(elem);
-    } else if (is_elem_script(elem)) {
-      exec_script(elem);
-    }
-  }
 }
