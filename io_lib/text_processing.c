@@ -80,7 +80,8 @@ void greetings() {
                         "\n"
                         " Welcome to V-Build!\n"
                         "\n"
-                        " Press help for start\n"
+                        "\"help\" for list of commands\n"
+                        "\"subshell\" for building process\n"
                         "\n"
                         "*******************************************\n\n");
   strcat(greetings_msg, OS_NO_COLOR);

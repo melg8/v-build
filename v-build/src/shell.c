@@ -9,6 +9,7 @@
 #include "line_args_parser.h"
 #include "script_exec.h"
 #include "shell_helper.h"
+#include "subshell.h"
 #include "v_build_global.h"
 
 void run_shell() {
@@ -22,6 +23,9 @@ void run_shell() {
 
     if (is_help_command(user_input)) {
       exec_help_command(user_input);
+    } else if (is_subshell_command(user_input)) {
+      // run_subshell();
+      print_info_msg(COMPLETE, "subshell invoked", YES);
     } else if (is_plugin_command(user_input)) {
       try_to_exec_plugin(user_input);
     } else if (is_extra_command(user_input)) {
