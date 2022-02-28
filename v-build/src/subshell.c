@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "build_menu.h"
 #include "io.h"
 
 static bool is_back_to_shell(const char *user_input) {
@@ -22,7 +23,7 @@ bool is_subshell_command(const char *cmd) {
 void run_subshell() {
 
   print_info_msg(INFO_MSG, "press \"back\" to move back into shell", YES);
-  print_info_msg(INFO_MSG, "press \"start\" for start building", YES);
+  print_info_msg(INFO_MSG, "press \"build\" for start building", YES);
 
   SHELL_LOOP {
     user_input = get_user_input(SUBSHELL);
@@ -33,6 +34,8 @@ void run_subshell() {
       try_to_exec_plugin(user_input);
     } else if (is_extra_command(user_input)) {
       exec_extra_command(user_input);
+    } else if (is_build_menu(user_input)) {
+      run_build_menu();
     } else if (is_back_to_shell(user_input)) {
       break;
     } else {

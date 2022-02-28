@@ -77,17 +77,8 @@ type = bin
 command = get_shell_input
 exec = system/libs/libio_lib.so.1.0.0
 ret_val = char*
-args = no
-desc = get user input, no args
---end
-
---begin
-type = bin
-command = get_subshell_input
-exec = system/libs/libio_lib.so.1.0.0
-ret_val = char*
-args = no
-desc = get user input(subshell), no args
+args = char*
+desc = get user input, with char* prefix text
 --end
 
 --begin

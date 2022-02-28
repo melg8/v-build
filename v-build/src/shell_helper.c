@@ -26,7 +26,7 @@ void *user_input = NULL;
 
 char history[COMMON_TEXT_SIZE * 10][COMMON_TEXT_SIZE] = {0};
 static size_t _history_count = 0;
-static int _shell_type = SHELL;
+static char shell_prefix[COMMON_TEXT_SIZE] = {};
 
 #define PRINT_CONFIG_PARAM(param, param_readable)                              \
   ({                                                                           \
@@ -41,17 +41,9 @@ static char *_get_user_command_internal() {
 
   char *value = NULL;
   if (g_conf.is_line_args) {
-    if (_shell_type == SHELL) {
-      value = get_command_from_line(get_shell_input());
-    } else if (_shell_type == SUBSHELL) {
-      value = get_command_from_line(get_subshell_input());
-    }
+    value = get_command_from_line(get_shell_input(shell_prefix));
   } else {
-    if (_shell_type == SHELL) {
-      value = get_shell_input();
-    } else if (_shell_type == SUBSHELL) {
-      value = get_subshell_input();
-    }
+    value = get_shell_input(shell_prefix);
   }
 
   return value;
@@ -71,8 +63,8 @@ void set_internal_conf() {
   pthread_rwlock_init(&rwlock, NULL);
 }
 
-char *get_user_input(int shell_type) {
-  _shell_type = shell_type;
+char *get_user_input(const char *prefix) {
+  strcpy(shell_prefix, prefix);
   pthread_create(&input_thread, NULL, _thread_input_internal, user_input);
   pthread_join(input_thread, &user_input);
   return ((char *)user_input);

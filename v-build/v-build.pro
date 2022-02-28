@@ -17,6 +17,7 @@ SOURCES += \
         src/autoload.c \
         src/bin_exec.c \
         src/bin_exec_internal.c \
+        src/build_menu.c \
         src/column_args_parser.c \
         src/io.c \
         src/line_args_parser.c \
@@ -33,6 +34,7 @@ HEADERS += \
         headers/autoload.h \
         headers/bin_exec.h \
         headers/bin_exec_internal.h \
+        headers/build_menu.h \
         headers/column_args_parser.h \
         headers/io.h \
         headers/line_args_parser.h \

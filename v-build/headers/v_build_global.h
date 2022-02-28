@@ -4,8 +4,8 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#define SHELL 0
-#define SUBSHELL 1
+#define SHELL "shell: "
+#define SUBSHELL "subshell: "
 
 #define ARROW_UP "UP"
 #define ARROW_DOWN "DOWN"

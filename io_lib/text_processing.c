@@ -175,14 +175,8 @@ bool is_help_command(const char *cmd) {
 }
 
 // release the string after use ( free )
-char *get_shell_input() {
-  printf("%s", SHELL_TITILE);
-  return get_input(NULL);
-}
-
-// release the string after use ( free )
-char *get_subshell_input() {
-  printf("%s", SUBSHELL_TITILE);
+char *get_shell_input(const char *prefix) {
+  printf("%s", prefix);
   return get_input(NULL);
 }
 
