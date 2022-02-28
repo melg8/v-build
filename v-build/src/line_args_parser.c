@@ -18,6 +18,7 @@ static void _reset_internal_values() {
   memset(_base_line, '\0', COMMON_TEXT_SIZE);
   memset(_raw_args, '\0', COMMON_TEXT_SIZE);
   memset(_final_args, '\0', ARGS_COUNT * COMMON_TEXT_SIZE);
+  _len = 0;
 }
 
 static void _remove_begin_spaces() {
@@ -65,7 +66,15 @@ char *get_command_from_line(const char *cmd_line) {
   _reset_internal_values();
 
   strcpy(_base_line, cmd_line);
-  _len = strcspn(_base_line, &delim);
+
+  for (size_t i = 0; i < strlen(_base_line); ++i) {
+    if (_base_line[i] == delim) {
+      break;
+    }
+    ++_len;
+  }
+
+  //_len = strcspn(_base_line, &delim);
 
   strncpy(_cmd, _base_line, _len);
 
