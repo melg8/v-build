@@ -19,7 +19,7 @@ void run_shell() {
   set_internal_conf();
 
   SHELL_LOOP {
-    user_input = get_user_input();
+    user_input = get_user_input(SHELL);
 
     if (is_help_command(user_input)) {
       exec_help_command(user_input);

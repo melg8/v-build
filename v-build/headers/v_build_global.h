@@ -4,6 +4,9 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
+#define SHELL 0
+#define SUBSHELL 1
+
 #define ARROW_UP "UP"
 #define ARROW_DOWN "DOWN"
 #define ARROW_LEFT "LEFT"

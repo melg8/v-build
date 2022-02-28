@@ -5,6 +5,13 @@
 
 #include "io.h"
 
+static bool is_back_to_shell(const char *user_input) {
+  if (strcmp(user_input, "back") == 0) {
+    return true;
+  }
+  return false;
+}
+
 bool is_subshell_command(const char *cmd) {
   if (strcmp(cmd, "subshell") == 0) {
     return true;
@@ -14,17 +21,26 @@ bool is_subshell_command(const char *cmd) {
 
 void run_subshell() {
 
-  SHELL_LOOP {
-    user_input = get_user_input();
+  print_info_msg(INFO_MSG, "press \"back\" to move back into shell", YES);
+  print_info_msg(INFO_MSG, "press \"start\" for start building", YES);
 
-    if (is_plugin_command(user_input)) {
+  SHELL_LOOP {
+    user_input = get_user_input(SUBSHELL);
+
+    if (is_help_command(user_input)) {
+      exec_help_command(user_input);
+    } else if (is_plugin_command(user_input)) {
       try_to_exec_plugin(user_input);
     } else if (is_extra_command(user_input)) {
       exec_extra_command(user_input);
+    } else if (is_back_to_shell(user_input)) {
+      break;
     } else {
       print_err();
     }
   }
+
+  free(user_input);
 }
 
 void try_to_exec_plugin(const char *user_input) {

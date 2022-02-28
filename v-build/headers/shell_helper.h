@@ -16,7 +16,7 @@ extern void *user_input;
 void set_internal_conf();
 void unset_internal_conf();
 
-char *get_user_input();
+char *get_user_input(int shell_type);
 void print_err();
 
 void exec_help_command(const char *cmd);

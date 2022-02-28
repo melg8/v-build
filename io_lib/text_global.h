@@ -4,7 +4,8 @@
 #include <stdlib.h>
 
 // main definitions
-#define SHELL_NAME "shell: "
+#define SHELL "shell: "
+#define SUBSHELL "subshell: "
 #define USER_COMMAND_LEN 256
 #define SLEEP_MSEC_COMMON 500
 #define SLEEP_MSEC_FAST 50
@@ -20,7 +21,8 @@
 #define OS_COLOR_BLUE "\x1B[34m"
 #define OS_NO_COLOR "\x1B[0m"
 
-#define SHELL_TITILE OS_COLOR_GREEN SHELL_NAME OS_NO_COLOR
+#define SHELL_TITILE OS_COLOR_GREEN SHELL OS_NO_COLOR
+#define SUBSHELL_TITILE OS_COLOR_BLUE SUBSHELL OS_NO_COLOR
 
 // msg titles
 #define INFO_MSG OS_COLOR_BLUE "info: " OS_NO_COLOR

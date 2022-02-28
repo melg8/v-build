@@ -83,6 +83,15 @@ desc = get user input, no args
 
 --begin
 type = bin
+command = get_subshell_input
+exec = system/libs/libio_lib.so.1.0.0
+ret_val = char*
+args = no
+desc = get user input(subshell), no args
+--end
+
+--begin
+type = bin
 command = get_input
 exec = system/libs/libio_lib.so.1.0.0
 ret_val = char*

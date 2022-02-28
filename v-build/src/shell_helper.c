@@ -25,7 +25,8 @@ pthread_rwlock_t rwlock;
 void *user_input = NULL;
 
 char history[COMMON_TEXT_SIZE * 10][COMMON_TEXT_SIZE] = {0};
-static size_t history_count = 0;
+static size_t _history_count = 0;
+static int _shell_type = SHELL;
 
 #define PRINT_CONFIG_PARAM(param, param_readable)                              \
   ({                                                                           \
@@ -40,9 +41,17 @@ static char *_get_user_command_internal() {
 
   char *value = NULL;
   if (g_conf.is_line_args) {
-    value = get_command_from_line(get_shell_input());
+    if (_shell_type == SHELL) {
+      value = get_command_from_line(get_shell_input());
+    } else if (_shell_type == SUBSHELL) {
+      value = get_command_from_line(get_subshell_input());
+    }
   } else {
-    value = get_shell_input();
+    if (_shell_type == SHELL) {
+      value = get_shell_input();
+    } else if (_shell_type == SUBSHELL) {
+      value = get_subshell_input();
+    }
   }
 
   return value;
@@ -62,7 +71,8 @@ void set_internal_conf() {
   pthread_rwlock_init(&rwlock, NULL);
 }
 
-char *get_user_input() {
+char *get_user_input(int shell_type) {
+  _shell_type = shell_type;
   pthread_create(&input_thread, NULL, _thread_input_internal, user_input);
   pthread_join(input_thread, &user_input);
   return ((char *)user_input);
@@ -296,7 +306,7 @@ void unset_internal_conf() {
 
 void add_cmd_to_history(const char *cmd, const plugin_element *elem) {
   if (elem == NULL) {
-    strcpy(history[history_count], cmd);
+    strcpy(history[_history_count], cmd);
   } else {
     char args[COMMON_TEXT_SIZE] = {0};
     strcpy(args, cmd);
@@ -305,14 +315,14 @@ void add_cmd_to_history(const char *cmd, const plugin_element *elem) {
       strcat(args, user_input_args[i]);
       strcat(args, " ");
     }
-    strcpy(history[history_count], args);
+    strcpy(history[_history_count], args);
   }
-  history_count++;
+  _history_count++;
 }
 
 void view_history() {
   char cnt[10] = {0};
-  for (size_t i = 0; i < history_count; ++i) {
+  for (size_t i = 0; i < _history_count; ++i) {
     sprintf(cnt, "%lu", i);
     char temp[COMMON_TEXT_SIZE];
     strcpy(temp, " ");

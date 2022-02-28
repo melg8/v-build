@@ -180,6 +180,12 @@ char *get_shell_input() {
   return get_input(NULL);
 }
 
+// release the string after use ( free )
+char *get_subshell_input() {
+  printf("%s", SUBSHELL_TITILE);
+  return get_input(NULL);
+}
+
 char *get_input(const char *input) {
   __fpurge(stdin);
   tcflush(0, TCIFLUSH);

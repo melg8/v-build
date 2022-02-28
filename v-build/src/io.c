@@ -11,6 +11,7 @@ void (*print_info_msg)();
 int (*ask_yes_no)();
 bool (*is_help_command)();
 char *(*get_shell_input)();
+char *(*get_subshell_input)();
 char *(*get_input)();
 // end io lib
 
@@ -23,6 +24,7 @@ void load_io() {
   ask_yes_no = get_binary_function("ask_yes_no");
   is_help_command = get_binary_function("is_help_command");
   get_shell_input = get_binary_function("get_shell_input");
+  get_subshell_input = get_binary_function("get_subshell_input");
   get_input = get_binary_function("get_input");
 
   greetings();
