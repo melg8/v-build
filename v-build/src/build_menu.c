@@ -101,6 +101,7 @@ void prepare_toolchain_x86_64() {
     run_internal("osx64_set_machine_name");
     run_internal("osx64_export_variables");
     run_internal("osx64_create_all_dirs");
+    run_internal("osx64_construct_tree");
     run_internal("osx64_check_variables");
 
     run_internal("osx64_check_host");
