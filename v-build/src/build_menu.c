@@ -103,8 +103,8 @@ void prepare_toolchain_x86_64() {
     run_internal("osx64_create_all_dirs");
     run_internal("osx64_construct_tree");
     run_internal("osx64_check_variables");
-
     run_internal("osx64_check_host");
+
     // check host before build
     print_info_msg(INFO_MSG,
                    "check your machine before building, everything is ok?\n"
