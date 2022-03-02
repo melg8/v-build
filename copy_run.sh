@@ -3,6 +3,7 @@
 cp ../v-build_build/io_lib/libio_lib.so.1.0.0 system/libs/libio_lib.so.1.0.0
 cp ../v-build_build/navigation_lib/libnavigation_lib.so.1.0.0 system/libs/libnavigation_lib.so.1.0.0
 cp ../v-build_build/osx64_lib/libosx64_lib.so.1.0.0 system/libs/libosx64_lib.so.1.0.0
+cp ../v-build_build/arm64_lib/libarm64_lib.so.1.0.0 system/libs/libarm64_lib.so.1.0.0
 
 rm -rf ../v-build_build/v-build/system
 mkdir ../v-build_build/v-build/system

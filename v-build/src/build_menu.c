@@ -107,7 +107,7 @@ void prepare_toolchain_x86_64() {
     run_internal("osx64_check_host");
     // check host before build
     print_info_msg(INFO_MSG,
-                   "check your machine before building, everything ok?\n"
+                   "check your machine before building, everything is ok?\n"
                    "1. Yes\n"
                    "2. No",
                    YES);

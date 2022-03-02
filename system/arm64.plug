@@ -1,0 +1,38 @@
+#   example
+#
+#   --begin
+#   type = bin | script
+#   command = function | script
+#   exec = path from system dir to exec file
+#   ret_val = void || int || bool || char* || text (script)
+#   args = arg1, arg2, argN || no
+#   desc = description
+#   --end
+
+--begin
+type = bin
+command = arm64_export_variables
+exec = system/libs/libarm64_lib.so.1.0.0
+ret_val = void
+args = no
+desc = export variables for building os ( ! for CURRENT directory ! )
+--end
+
+--begin
+type = bin
+command = arm64_export_linux_kernel
+exec = system/libs/libarm64_lib.so.1.0.0
+ret_val = void
+args = char*
+desc = export kernel directory ( absolute path )
+--end
+
+--begin
+type = script
+command = arm64_check_variables
+exec = system/scripts/arm64/common/check_export_vars.sh
+ret_val = void
+args = no
+desc = check assigned variables
+--end
+

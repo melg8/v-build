@@ -8,54 +8,40 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#define V_BUILD_PKG_DIR_NAME "/tree_arm64/packages"
-#define V_BUILD_PATCH_DIR_NAME "/patches"
-#define V_BUILD_ARCHIVE_DIR_NAME "/archives"
-#define V_BUILD_TGT_ARM64_NAME "-lfs-linux-gnu"
-#define V_BUILD_TREE_ARM64_NAME "/tree_arm64"
-#define V_BUILD_TOOLS_ARM64_NAME "/tree_arm64/tools"
+#define V_BUILD_ARM64_FLOAT_DEF "hard"
+#define V_BUILD_ARM64_FPU_DEF "vfpv4"
+#define V_BUILD_ARM64_HOST_DEF "x86_64-cross-linux-gnu"
+#define V_BUILD_ARM64_TGT_DEF "arm-linux-musleabihf"
+#define V_BUILD_ARM64_ARCH_DEF "arm"
+#define V_BUILD_ARM64_ARM_ARCH_DEF "armv8-a"
+
+#define V_BUILD_PKG_DIR_DEF "/tree_arm64/packages"
+#define V_BUILD_PATCH_DIR_DEF "/patches"
+#define V_BUILD_ARCHIVE_DIR_DEF "/archives"
+
+#define V_BUILD_TREE_ARM64_DEF "/tree_arm64"
+#define V_BUILD_TOOLS_ARM64_DEF "/tree_arm64/tools"
 
 #define COMMON_TEXT_SIZE 1024
 
 static char V_BUILD_DIR_PATH[COMMON_TEXT_SIZE] = {0};
 
-static int export_tgt(const char *v_build_dir) {
+static int export_tgt() {
   char V_BUILD_TGT_ARM64[COMMON_TEXT_SIZE] = {0};
-  char filename[COMMON_TEXT_SIZE] = {0};
 
-  char *line = malloc(COMMON_TEXT_SIZE);
-  size_t n;
-  ssize_t read;
-
-  strcpy(filename, v_build_dir);
-  strcat(filename, "/.machine_name");
-
-  FILE *machine_name = fopen(filename, "r");
-  if (machine_name == NULL) {
-    printf("machine name do not set\n");
-    return -1;
-  } else {
-    while ((read = getline(&line, &n, machine_name)) != -1) {
-      strcpy(V_BUILD_TGT_ARM64, line);
-      V_BUILD_TGT_ARM64[strcspn(V_BUILD_TGT_ARM64, "\n")] = 0;
-      strcat(V_BUILD_TGT_ARM64, V_BUILD_TGT_ARM64_NAME);
-      break;
-    }
-  }
-
+  strcpy(V_BUILD_TGT_ARM64, V_BUILD_ARM64_TGT_DEF);
   if (setenv("V_BUILD_TGT_ARM64", V_BUILD_TGT_ARM64, 1) != 0) {
     printf("setenv error: %s\n", strerror(errno));
     exit(EXIT_FAILURE);
   }
 
-  free(line);
   return 0;
 }
 
-static void export_var(const char *varname, const char *directory) {
+static void export_var(const char *varname, const char *varvalue) {
   char var[COMMON_TEXT_SIZE] = {0};
   strcpy(var, V_BUILD_DIR_PATH);
-  strcat(var, directory);
+  strcat(var, varvalue);
   if (setenv(varname, var, 1) != 0) {
     printf("setenv error: %s\n", strerror(errno));
     exit(EXIT_FAILURE);
@@ -76,16 +62,13 @@ void arm64_export_variables() {
     }
   }
 
-  if (export_tgt(V_BUILD_DIR_PATH) == -1) {
-    printf("return to shell\n");
-    return;
-  }
+  export_tgt();
 
-  export_var("V_BUILD_PKG_DIR", V_BUILD_PKG_DIR_NAME);
-  export_var("V_BUILD_PATCH_DIR", V_BUILD_PATCH_DIR_NAME);
-  export_var("V_BUILD_ARCHIVE_DIR", V_BUILD_ARCHIVE_DIR_NAME);
-  export_var("V_BUILD_TREE_ARM64", V_BUILD_TREE_ARM64_NAME);
-  export_var("V_BUILD_TOOLS_ARM64", V_BUILD_TOOLS_ARM64_NAME);
+  export_var("V_BUILD_PKG_DIR", V_BUILD_PKG_DIR_DEF);
+  export_var("V_BUILD_PATCH_DIR", V_BUILD_PATCH_DIR_DEF);
+  export_var("V_BUILD_ARCHIVE_DIR", V_BUILD_ARCHIVE_DIR_DEF);
+  export_var("V_BUILD_TREE_ARM64", V_BUILD_TREE_ARM64_DEF);
+  export_var("V_BUILD_TOOLS_ARM64", V_BUILD_TOOLS_ARM64_DEF);
 
   char temp[COMMON_TEXT_SIZE] = {0};
   strcpy(temp, getenv("V_BUILD_TOOLS_ARM64"));
