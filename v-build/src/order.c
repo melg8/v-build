@@ -76,7 +76,9 @@ static void _parse_order_list() {
       strcpy(temp, line);
       temp[strcspn(temp, "\n")] = 0;
 
-      strcpy(_command, get_command_from_line(temp));
+      char *temp_cmd = get_command_from_line(temp);
+      strcpy(_command, temp_cmd);
+      free(temp_cmd);
 
       if ((_element = find_element_by_command(_command)) == NULL) {
         char temp[COMMON_TEXT_SIZE] = "cannot find command \"";
