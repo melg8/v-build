@@ -29,6 +29,7 @@ void run_shell() {
     } else {
       print_err();
     }
+    free(user_input);
   }
 
   unset_internal_conf();

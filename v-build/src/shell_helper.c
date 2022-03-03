@@ -293,7 +293,6 @@ void exec_extra_command(const char *cmd) {
 }
 
 void unset_internal_conf() {
-  free(user_input);
   pthread_rwlock_destroy(&rwlock);
 }
 
