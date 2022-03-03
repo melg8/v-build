@@ -200,8 +200,8 @@ desc = change ownership of tree
 
 --begin
 type = script
-command = prepare_vkfs
-exec = system/scripts/osx64/root_deps/prepare_vkfs.sh
+command = mount_vkfs
+exec = system/scripts/osx64/root_deps/mount_vkfs.sh
 ret_val = void
 args = no
 desc = mount virtual kernel file system
@@ -218,20 +218,11 @@ desc = unmount virtual kernel file system
 
 --begin
 type = script
-command = chroot_tree_basic
-exec = system/scripts/osx64/root_deps/chroot_tree_basic.sh
+command = chroot_tree
+exec = system/scripts/osx64/root_deps/chroot_tree.sh
 ret_val = void
 args = no
-desc = chroot into tree for build basic system
---end
-
---begin
-type = script
-command = chroot_tree_main
-exec = system/scripts/osx64/root_deps/chroot_tree_main.sh
-ret_val = void
-args = no
-desc = chroot into tree without hashing
+desc = chroot into tree for build system
 --end
 
 --begin
