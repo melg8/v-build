@@ -31,6 +31,7 @@ int load_plugin_internal(const char *restrict plugin_name) {
     char err[COMMON_TEXT_SIZE] = " _load_plugin, ";
     strcat(err, strerror(errno));
     printf("error: %s\n", err);
+    free(line);
     return -1;
   }
 

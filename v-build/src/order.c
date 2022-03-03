@@ -49,6 +49,7 @@ static void _parse_order_list() {
     char err[COMMON_TEXT_SIZE] = " _parse_order_list, ";
     strcat(err, strerror(errno));
     printf("error: %s\n", err);
+    free(line);
     return;
   }
 

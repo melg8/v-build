@@ -33,6 +33,7 @@ static int export_tgt(const char *v_build_dir) {
   FILE *machine_name = fopen(filename, "r");
   if (machine_name == NULL) {
     printf("machine name do not set\n");
+    free(line);
     return -1;
   } else {
     while ((read = getline(&line, &n, machine_name)) != -1) {

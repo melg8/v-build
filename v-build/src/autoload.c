@@ -33,6 +33,7 @@ void autoload_plugins() {
     char err[COMMON_TEXT_SIZE] = " file autoload.config, ";
     strcat(err, strerror(errno));
     printf("error: %s\n", err);
+    free(line);
     return;
   }
 
