@@ -27,8 +27,8 @@ void autoload_plugins() {
   FILE *pf = fopen(autoload_path, "r");
   char *line = malloc(COMMON_TEXT_SIZE);
   strcpy(line, "nothing");
-  size_t n;
-  ssize_t read;
+  size_t n = 0;
+  ssize_t read = 0;
 
   if (pf == NULL) {
     char err[COMMON_TEXT_SIZE] = " file autoload.config, ";
