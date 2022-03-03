@@ -292,9 +292,7 @@ void exec_extra_command(const char *cmd) {
   }
 }
 
-void unset_internal_conf() {
-  pthread_rwlock_destroy(&rwlock);
-}
+void unset_internal_conf() { pthread_rwlock_destroy(&rwlock); }
 
 void add_cmd_to_history(const char *cmd, const plugin_element *elem) {
   if (elem == NULL) {
