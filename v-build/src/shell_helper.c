@@ -111,9 +111,6 @@ void exec_help_command(const char *cmd) {
     }
 
     load_plugin(plugin_name);
-    if (plugin_name) {
-      free(plugin_name);
-    }
     reset_user_args();
   }
 
