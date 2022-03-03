@@ -60,12 +60,12 @@ static bool _is_parse_line_ok() {
 
 char *get_command_from_line(const char *cmd_line) {
   size_t cmd_len = strlen(cmd_line);
-  char delim = ' ';
+  const char *delim = " ";
 
   _reset_internal_values();
 
   strcpy(_base_line, cmd_line);
-  _len = strcspn(_base_line, &delim);
+  _len = strcspn(_base_line, delim);
 
   strncpy(_cmd, _base_line, _len);
 
